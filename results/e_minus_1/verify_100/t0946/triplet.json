@@ -1,0 +1,46 @@
+{
+ "id": "t0946",
+ "family": "directional",
+ "m": "but with the car ahead of it instead of behind it",
+ "P_text": "parked car with a car behind it",
+ "Pp_text": "parked car with a car ahead of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "648c2618-482c-4b78-85bb-50b53a59c56b",
+  "t0": 315969625459971000,
+  "t1": 315969626960248000,
+  "related": [
+   "4ef3d5d4-2adb-49ff-a1ca-07a34fb2e0ab",
+   "61908cd5-ddaf-435f-afba-3b5841af4a05",
+   "736eb610-08bf-464a-aa09-9009a5cf8f9e",
+   "de957207-80ca-4669-b310-6533bcc0fec4"
+  ]
+ },
+ "target_example": {
+  "log": "19350c96-623d-4d77-af96-f8c23f00c358",
+  "track": "7e9ae4a3-f9b7-4d7f-bdc4-c479d029eae0",
+  "t0": 315972066459687000,
+  "t1": 315972080060290000,
+  "related": [
+   "325562c6-49e2-4664-af2f-0e8e0e0c076f",
+   "7aab04a0-c913-4c6f-b873-a15e818b5ad7",
+   "89075aa4-2ffa-4d19-8722-97ce849b1b9b"
+  ]
+ },
+ "negative_example": {
+  "log": "02a00399-3857-444e-8db3-a8f58489c394",
+  "track": "12e0f361-cd73-462e-80b3-4496aed9256d",
+  "t0": 315966070559696000,
+  "t1": 315966070860285000,
+  "related": [
+   "c526a11f-8e28-4719-8108-7069fd24d51f"
+  ]
+ },
+ "n_P": 1012,
+ "n_Pp": 975,
+ "jacc_track": 0.8121387283236994,
+ "jacc_ts": 0.749898549254337,
+ "n_near_miss": 0
+}

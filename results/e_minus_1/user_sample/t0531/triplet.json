@@ -1,0 +1,42 @@
+{
+ "id": "t0531",
+ "family": "directional",
+ "m": "but with the truck to the right of it instead of to the left of it",
+ "P_text": "pedestrian with a moving truck to its left",
+ "Pp_text": "pedestrian with a moving truck to its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "reference": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "a6272a79-4c34-42e5-8edb-88676d06de11",
+  "t0": 315970829259869000,
+  "t1": 315970831760114000,
+  "related": [
+   "71ee367e-b0e0-46ca-809d-f4bcda592845"
+  ]
+ },
+ "target_example": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "3a5920b5-bdfd-45c8-846f-a6df829febcc",
+  "t0": 315970670059361000,
+  "t1": 315970672859522000,
+  "related": [
+   "4e551323-3a78-4a82-bd23-0f25af59ea2c"
+  ]
+ },
+ "negative_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "22f92611-137b-41d0-b3ad-b3fd003a0007",
+  "t0": 315970820059816000,
+  "t1": 315970833659841000,
+  "related": [
+   "5347dd11-603b-4d59-8366-0bf9aab5015c",
+   "71ee367e-b0e0-46ca-809d-f4bcda592845"
+  ]
+ },
+ "n_P": 24,
+ "n_Pp": 23,
+ "jacc_track": 0.46875,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

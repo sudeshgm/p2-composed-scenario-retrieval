@@ -1,0 +1,43 @@
+{
+ "id": "t0412",
+ "family": "agent_class",
+ "m": "but with a truck instead of a car",
+ "P_text": "moving car with a parked vehicle behind it",
+ "Pp_text": "moving truck with a parked vehicle behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "1fd96346-209f-4cd1-967b-d19db0303e94",
+  "t0": 315968135460086000,
+  "t1": 315968135860208000,
+  "related": [
+   "b19a4b21-dec0-46b0-8572-fa667df2a59a"
+  ]
+ },
+ "target_example": {
+  "log": "02a00399-3857-444e-8db3-a8f58489c394",
+  "track": "48696110-cae2-40c5-a7ad-ac76d498b765",
+  "t0": 315966077059739000,
+  "t1": 315966078960135000,
+  "related": [
+   "990258db-565d-4d92-b163-98a1ecf47a39"
+  ]
+ },
+ "negative_example": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "62e65664-5497-4000-bb04-7ccd791bb5f0",
+  "t0": 315968126660165000,
+  "t1": 315968134260395000,
+  "related": [
+   "08b852bc-86ef-4a62-9cd6-35f2bfa02b93",
+   "0a3f7083-2774-453a-b2f8-70ecdd355da6",
+   "b19a4b21-dec0-46b0-8572-fa667df2a59a"
+  ]
+ },
+ "n_P": 361,
+ "n_Pp": 12,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 142
+}

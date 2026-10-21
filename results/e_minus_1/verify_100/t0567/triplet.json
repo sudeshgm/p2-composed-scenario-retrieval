@@ -1,0 +1,41 @@
+{
+ "id": "t0567",
+ "family": "agent_class",
+ "m": "but with a bus instead of a truck as the other agent",
+ "P_text": "parked car heading toward a moving truck",
+ "Pp_text": "parked car heading toward a moving bus",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "a70d36ea-5c4c-485a-aacb-4b115934af52",
+  "t0": 315970831060066000,
+  "t1": 315970831560384000,
+  "related": [
+   "71ee367e-b0e0-46ca-809d-f4bcda592845"
+  ]
+ },
+ "target_example": {
+  "log": "0c3bad78-9f1e-395d-a376-2eb7499229fd",
+  "track": "3e8f672f-8339-482b-bff1-50ce403c5734",
+  "t0": 315968454660138000,
+  "t1": 315968454760335000,
+  "related": [
+   "92145348-502f-4b99-991e-54c8a89e085f"
+  ]
+ },
+ "negative_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "f5792eba-5c73-423d-833b-b808b4a50eec",
+  "t0": 315970819660368000,
+  "t1": 315970820960256000,
+  "related": [
+   "5347dd11-603b-4d59-8366-0bf9aab5015c"
+  ]
+ },
+ "n_P": 20,
+ "n_Pp": 5,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 258
+}

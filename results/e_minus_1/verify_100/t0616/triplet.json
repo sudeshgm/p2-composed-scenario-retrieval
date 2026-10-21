@@ -1,0 +1,42 @@
+{
+ "id": "t0616",
+ "family": "directional",
+ "m": "but with the pedestrian to the right of it instead of to the left of it",
+ "P_text": "parked pedestrian with a parked pedestrian to its left",
+ "Pp_text": "parked pedestrian with a parked pedestrian to its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "reference": {
+  "log": "04994d08-156c-3018-9717-ba0e29be8153",
+  "track": "f3cb8c89-82f6-4497-b448-1b4294623935",
+  "t0": 315971486059794000,
+  "t1": 315971487959538000,
+  "related": [
+   "a23a836a-f2a1-4811-b949-65f16b3e797c"
+  ]
+ },
+ "target_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "c14fe1a4-ea24-4da3-8de9-7b5dc24d9b24",
+  "t0": 315969260059896000,
+  "t1": 315969261260252000,
+  "related": [
+   "02c91cdf-a072-4b21-a454-c77534e0bebd"
+  ]
+ },
+ "negative_example": {
+  "log": "04994d08-156c-3018-9717-ba0e29be8153",
+  "track": "081a301d-2878-43b8-a602-3c391fb568cc",
+  "t0": 315971493959993000,
+  "t1": 315971501559599000,
+  "related": [
+   "4454eb63-f861-48a5-bd65-827af259bb96",
+   "50f8a6d3-bc25-4859-bf82-ddacec1d5d90"
+  ]
+ },
+ "n_P": 78,
+ "n_Pp": 74,
+ "jacc_track": 0.6292134831460674,
+ "jacc_ts": 0.4594008404500474,
+ "n_near_miss": 0
+}

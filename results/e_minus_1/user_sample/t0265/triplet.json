@@ -1,0 +1,43 @@
+{
+ "id": "t0265",
+ "family": "relational",
+ "m": "but facing toward the other vehicle instead of near it",
+ "P_text": "car near a vehicle",
+ "Pp_text": "car facing toward a vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "3eeccfa8-9034-45cd-9766-837d6d468fb0",
+  "t0": 315969636460178000,
+  "t1": 315969637959791000,
+  "related": [
+   "1fd701e7-b43c-4197-b467-f31c92997787",
+   "adfd5c93-efa7-49d8-bf23-9c36c32c5a04"
+  ]
+ },
+ "target_example": {
+  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
+  "track": "10b5e11e-ecc0-4ed8-b803-b252e1fa764a",
+  "t0": 315976471760074000,
+  "t1": 315976473259698000,
+  "related": [
+   "681dce02-f528-4fda-8290-3c9c18d67319",
+   "fc9f838a-6862-44bd-a534-100eb80f4657"
+  ]
+ },
+ "negative_example": {
+  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
+  "track": "5815d66e-e51d-4d6a-b69a-f98f0909646a",
+  "t0": 315968568860116000,
+  "t1": 315968569060507000,
+  "related": [
+   "2564aee8-1e21-4e00-80a2-619433abc81d"
+  ]
+ },
+ "n_P": 1470,
+ "n_Pp": 1281,
+ "jacc_track": 0.8389355742296919,
+ "jacc_ts": 0.7530171814134669,
+ "n_near_miss": 40
+}

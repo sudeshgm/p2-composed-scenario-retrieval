@@ -1,0 +1,121 @@
+{
+ "n": 1000,
+ "family_counts": {
+  "relational": 200,
+  "directional": 200,
+  "agent_class": 200,
+  "state": 200,
+  "compositional": 200
+ },
+ "jaccard_track_all": {
+  "min": 0.0,
+  "p10": 0.0,
+  "p25": 0.0,
+  "median": 0.154,
+  "p75": 0.452,
+  "p90": 0.663,
+  "max": 0.967,
+  "mean": 0.247
+ },
+ "jaccard_ts_all": {
+  "min": 0.0,
+  "p10": 0.0,
+  "p25": 0.0,
+  "median": 0.033,
+  "p75": 0.181,
+  "p90": 0.453,
+  "max": 0.961,
+  "mean": 0.13
+ },
+ "frac_jaccard_track_eq_0": 0.259,
+ "target_size_tracks": {
+  "min": 1.0,
+  "p10": 1.0,
+  "p25": 3.0,
+  "median": 9.0,
+  "p75": 39.0,
+  "p90": 159.4,
+  "max": 1507.0,
+  "mean": 69.447
+ },
+ "negatives_per_query": {
+  "min": 1.0,
+  "p10": 2.0,
+  "p25": 4.0,
+  "median": 12.0,
+  "p75": 47.0,
+  "p90": 217.0,
+  "max": 1562.0,
+  "mean": 80.641
+ },
+ "near_miss_per_query": {
+  "min": 0.0,
+  "p10": 0.0,
+  "p25": 0.0,
+  "median": 4.0,
+  "p75": 29.0,
+  "p90": 183.2,
+  "max": 1437.0,
+  "mean": 70.953
+ },
+ "target_logs": {
+  "min": 1.0,
+  "p10": 1.0,
+  "p25": 2.0,
+  "median": 5.0,
+  "p75": 12.0,
+  "p90": 18.0,
+  "max": 20.0,
+  "mean": 7.214
+ },
+ "per_family": {
+  "relational": {
+   "mutations_generated": 7108,
+   "empty_target_rate": 0.159,
+   "identical_rate": 0.007,
+   "no_ref_outside_target_rate": 0.21,
+   "selected": 200,
+   "jacc_track_median": 0.333,
+   "target_size_median": 12.0
+  },
+  "directional": {
+   "mutations_generated": 1845,
+   "empty_target_rate": 0.035,
+   "identical_rate": 0.017,
+   "no_ref_outside_target_rate": 0.163,
+   "selected": 200,
+   "jacc_track_median": 0.5,
+   "target_size_median": 20.5
+  },
+  "agent_class": {
+   "mutations_generated": 11493,
+   "empty_target_rate": 0.368,
+   "identical_rate": 0.001,
+   "no_ref_outside_target_rate": 0.04,
+   "selected": 200,
+   "jacc_track_median": 0.0,
+   "target_size_median": 5.0
+  },
+  "state": {
+   "mutations_generated": 4940,
+   "empty_target_rate": 0.152,
+   "identical_rate": 0.0,
+   "no_ref_outside_target_rate": 0.072,
+   "selected": 200,
+   "jacc_track_median": 0.0,
+   "target_size_median": 10.0
+  },
+  "compositional": {
+   "mutations_generated": 20075,
+   "empty_target_rate": 0.46,
+   "identical_rate": 0.012,
+   "no_ref_outside_target_rate": 0.148,
+   "selected": 200,
+   "jacc_track_median": 0.167,
+   "target_size_median": 4.0
+  }
+ },
+ "all_mutations": 45461,
+ "empty_target_rate_all": 0.339,
+ "context_family": "unsupported: no weather/lighting/time-of-day columns in RefAV/AV2 annotations and no atomic function for them"
+}

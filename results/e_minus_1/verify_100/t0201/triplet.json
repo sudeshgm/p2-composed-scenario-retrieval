@@ -1,0 +1,42 @@
+{
+ "id": "t0201",
+ "family": "directional",
+ "m": "but with the vehicle to the right of it instead of to the left of it",
+ "P_text": "turning left car with a parked vehicle to its left",
+ "Pp_text": "turning left car with a parked vehicle to its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "reference": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "f3c71f50-4d5f-43a2-9070-de48ae474738",
+  "t0": 315971843759817000,
+  "t1": 315971847760338000,
+  "related": [
+   "f8a236ee-e460-4ef1-abe2-02f3f313bd07"
+  ]
+ },
+ "target_example": {
+  "log": "0fb7276f-ecb5-3e5b-87a8-cc74c709c715",
+  "track": "7f085e29-c607-49d9-8863-585314090802",
+  "t0": 315968087259396000,
+  "t1": 315968088660142000,
+  "related": [
+   "4f19c505-a573-4fcf-976b-74aae7aa8f7e"
+  ]
+ },
+ "negative_example": {
+  "log": "1f434d15-8745-3fba-9c3e-ccb026688397",
+  "track": "fcf57d8f-4445-4a38-af55-3a5286373bae",
+  "t0": 315972881759920000,
+  "t1": 315972883360382000,
+  "related": [
+   "004343aa-0b6b-4821-87e5-138189fc0e01",
+   "8520c1b0-cdf2-4606-8df3-d89beb8913a3"
+  ]
+ },
+ "n_P": 18,
+ "n_Pp": 14,
+ "jacc_track": 0.47368421052631576,
+ "jacc_ts": 0.29765395894428154,
+ "n_near_miss": 0
+}

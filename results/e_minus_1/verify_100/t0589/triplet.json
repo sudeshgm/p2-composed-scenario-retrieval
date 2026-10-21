@@ -1,0 +1,47 @@
+{
+ "id": "t0589",
+ "family": "compositional",
+ "m": "and also changing lanes",
+ "P_text": "accelerating vehicle with a parked car behind it",
+ "Pp_text": "vehicle that is accelerating and changing lanes with a parked car behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "dca90fdc-681f-4fd7-b296-19e82700b86c",
+  "t0": 315969907160079000,
+  "t1": 315969907460005000,
+  "related": [
+   "5d57d7a6-f89c-4e66-a37d-97d1b559ac32",
+   "6633d31b-92d5-46a1-b876-79cf349a10d1",
+   "aef67319-1cae-417f-a856-394d66251a49"
+  ]
+ },
+ "target_example": {
+  "log": "0c3bad78-9f1e-395d-a376-2eb7499229fd",
+  "track": "0a16349b-03c5-4ea4-9168-dd0caae43ecd",
+  "t0": 315968458160330000,
+  "t1": 315968459860339000,
+  "related": [
+   "474e6218-bda6-4bc9-b9ab-4ec5d9f0aac6",
+   "bc78c871-d902-4fb0-b7f0-bd30cae6bede"
+  ]
+ },
+ "negative_example": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "8a04afdc-2489-40b9-9f03-aace87e4362d",
+  "t0": 315969912260166000,
+  "t1": 315969917260055000,
+  "related": [
+   "1c2ea4e7-4bc8-4cca-9fa7-f6f29ab07acc",
+   "645fe165-eaff-41f4-abb9-50c9f46c9dd6",
+   "8203fd4c-e404-448d-a4fb-e5d4bbf51478",
+   "ebd1a5a8-b20a-4e94-b42b-08f14cc6f48d"
+  ]
+ },
+ "n_P": 155,
+ "n_Pp": 8,
+ "jacc_track": 0.052980132450331126,
+ "jacc_ts": 0.06503690036900368,
+ "n_near_miss": 37
+}

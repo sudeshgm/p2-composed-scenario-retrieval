@@ -1,0 +1,60 @@
+{
+ "id": "t0549",
+ "family": "compositional",
+ "m": "and also changing lanes",
+ "P_text": "moving ego vehicle with a vehicle to its left",
+ "Pp_text": "ego vehicle that is moving and changing lanes with a vehicle to its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "reference": {
+  "log": "0c3bad78-9f1e-395d-a376-2eb7499229fd",
+  "track": "a71f77d4-4520-457f-8c95-703aaf74bca3",
+  "t0": 315968451560055000,
+  "t1": 315968465560184000,
+  "related": [
+   "2cb965e5-16e3-4146-8ebc-b0f798c08eb6",
+   "5c89a2df-4da6-4fbe-acfc-f2c36766d17a",
+   "5ee00231-db84-4dc7-bfde-b6d79b572911",
+   "b3a3d3fa-8966-4684-9726-6ab58ec6dc49",
+   "b6a1ad3e-e4b2-4c39-a572-a5f4b3e7d23e",
+   "db1d7bb9-6e7f-4dd9-a819-7539b475bcf5"
+  ]
+ },
+ "target_example": {
+  "log": "0fb7276f-ecb5-3e5b-87a8-cc74c709c715",
+  "track": "4db8318e-322e-4781-aab7-5ccba7f362a0",
+  "t0": 315968078359944000,
+  "t1": 315968083360411000,
+  "related": [
+   "124fefbc-1632-4133-a040-c0e2934f2985",
+   "3536d608-b3f2-4379-8712-1bfb424fb595",
+   "4c7810bf-a42b-4bba-a4fe-78c4624b13ed",
+   "4f19c505-a573-4fcf-976b-74aae7aa8f7e",
+   "799cdcb7-ff99-4bdb-a30e-1a6fc6776759",
+   "7f085e29-c607-49d9-8863-585314090802",
+   "b2dfed5c-4c0e-4265-96e9-e01451d4782f",
+   "ff962df1-c50b-419f-a1a9-a59d132972e8"
+  ]
+ },
+ "negative_example": {
+  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
+  "track": "ego",
+  "t0": 315968553859883000,
+  "t1": 315968569359769000,
+  "related": [
+   "1d2f18ad-ca9c-4b93-80f9-d4d428aff9cc",
+   "1eee93b6-6066-4ef5-bbd6-7fabf5410e9c",
+   "443788c0-69dd-4b98-9427-2f35946914f8",
+   "58077b69-596d-4542-806e-3dced5649ee9",
+   "a9518fa0-1d7a-4e8f-9443-25cdb12a8154",
+   "b3157845-da76-4b4e-8972-b1c83886f5cf",
+   "c4d65944-b06c-416c-8bd0-a10017e69030",
+   "df91a01d-7207-42a3-b411-badfa009ae86"
+  ]
+ },
+ "n_P": 38,
+ "n_Pp": 2,
+ "jacc_track": 0.05555555555555555,
+ "jacc_ts": 0.03166617342408997,
+ "n_near_miss": 26
+}

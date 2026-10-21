@@ -1,0 +1,43 @@
+{
+ "id": "t0387",
+ "family": "agent_class",
+ "m": "but with a cyclist instead of a vehicle as the other agent",
+ "P_text": "accelerating car in the same lane as a vehicle",
+ "Pp_text": "accelerating car in the same lane as a cyclist",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "1c205a88-e655-4c27-a040-9e661fabb584",
+  "t0": 315971851459607000,
+  "t1": 315971851959926000,
+  "related": [
+   "d9bd12ef-61e9-48bf-a75c-149260abc2a0",
+   "e2977d61-edf3-4734-8f81-02fe712a2853",
+   "e47b8da1-daa1-4593-bae9-4e15d58e572f"
+  ]
+ },
+ "target_example": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "0e470e35-ac97-496e-adbb-1bf778dbdadf",
+  "t0": 315969910860061000,
+  "t1": 315969910860061000,
+  "related": [
+   "4d8b2da8-f934-4738-8257-b9a24a34966e"
+  ]
+ },
+ "negative_example": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "e22d96e7-5434-4fb2-b179-e164f1608b25",
+  "t0": 315971845060361000,
+  "t1": 315971845060361000,
+  "related": [
+   "1333a4e1-2619-4b90-95ed-715e3a16f839"
+  ]
+ },
+ "n_P": 108,
+ "n_Pp": 1,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 11
+}

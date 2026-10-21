@@ -1,0 +1,44 @@
+{
+ "id": "t0398",
+ "family": "state",
+ "m": "but accelerating instead of braking",
+ "P_text": "braking car in the same lane as a moving car",
+ "Pp_text": "accelerating car in the same lane as a moving car",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "0bae3b5e-417d-3b03-abaa-806b433233b8",
+  "track": "7dc0091c-f8e9-4c99-8924-2bc2491eecf4",
+  "t0": 315969532559937000,
+  "t1": 315969532960059000,
+  "related": [
+   "d3d66fcc-6a28-4f86-9be4-6d1f012f726a"
+  ]
+ },
+ "target_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "548b392e-50e6-432c-8ec0-e7b77d1e3082",
+  "t0": 315969248859920000,
+  "t1": 315969249960079000,
+  "related": [
+   "0780ca4f-505b-46d4-950c-a7cd732b92f8",
+   "0cfa09d3-5a2d-4f40-b572-480bc10fb0f9",
+   "cbd96cd4-319a-41fd-ab96-35adbaf7a2b8"
+  ]
+ },
+ "negative_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "cd61708c-5bb9-4d00-9f90-b4f069fa066d",
+  "t0": 315970823260096000,
+  "t1": 315970825260021000,
+  "related": [
+   "641aaaac-8bb3-48f7-b661-7156f753d877",
+   "a43e08cd-eb47-4bbf-8bbf-aeddcc6d7bb0"
+  ]
+ },
+ "n_P": 46,
+ "n_Pp": 88,
+ "jacc_track": 0.168141592920354,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

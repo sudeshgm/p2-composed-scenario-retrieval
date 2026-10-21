@@ -1,0 +1,53 @@
+{
+ "id": "t0224",
+ "family": "compositional",
+ "m": "and also parked",
+ "P_text": "pedestrian facing toward a moving vehicle",
+ "Pp_text": "parked pedestrian facing toward a moving vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "04994d08-156c-3018-9717-ba0e29be8153",
+  "track": "32342ae4-62ab-40e8-9123-d7f7c1affabd",
+  "t0": 315971488659577000,
+  "t1": 315971493559872000,
+  "related": [
+   "3b42dad6-b8b9-4da3-a872-315b51126510",
+   "3c3a6fbb-c47a-4a0a-9acf-0a1bcf8b5738",
+   "3e55a2c0-4063-4af6-ae16-9f04aae0bbde",
+   "a28f18ec-b8b5-41a1-87b6-3d0988ab415e",
+   "a778736f-ec3d-4aaa-8f55-cf88caa78998",
+   "b33fd152-1010-4ca1-a931-e65bb3602ef0",
+   "ego"
+  ]
+ },
+ "target_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "c628ef3d-bf4d-4b80-b88e-2b3feb615ff3",
+  "t0": 315969257659858000,
+  "t1": 315969261260252000,
+  "related": [
+   "0a176a08-5852-485b-a4a5-2ac3a3c34a94",
+   "661cb117-5260-4324-ba04-b5abca71d4c7",
+   "d22a9ff2-27ee-4171-951c-ea5f62289ab8",
+   "d9fc057a-19a1-42e6-b4bb-8a89c182bbaa",
+   "e7840725-4b57-48aa-b08a-86cfb068fa1c",
+   "eca8230a-f622-41c5-a61d-391f7cb0597a",
+   "f4862b1c-14c0-4211-ae0b-2d3372f1369f"
+  ]
+ },
+ "negative_example": {
+  "log": "0fb7276f-ecb5-3e5b-87a8-cc74c709c715",
+  "track": "60b2dfcd-9409-48e0-8c8a-8eb9e918de61",
+  "t0": 315968079160175000,
+  "t1": 315968079260372000,
+  "related": [
+   "7f085e29-c607-49d9-8863-585314090802"
+  ]
+ },
+ "n_P": 174,
+ "n_Pp": 74,
+ "jacc_track": 0.4176470588235294,
+ "jacc_ts": 0.4554904831625183,
+ "n_near_miss": 26
+}

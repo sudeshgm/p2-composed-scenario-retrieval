@@ -1,0 +1,51 @@
+{
+ "id": "t0986",
+ "family": "directional",
+ "m": "but with the vehicle behind it instead of ahead of it",
+ "P_text": "parked truck with a moving vehicle ahead of it",
+ "Pp_text": "parked truck with a moving vehicle behind it",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
+  "track": "325cbf30-e1f6-4e28-aed5-ecba79195765",
+  "t0": 315976478660339000,
+  "t1": 315976480560086000,
+  "related": [
+   "69547605-7ff6-4c9e-b85b-d5a24576dbef"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "a5055b81-ff6b-48c5-8e86-02f773ed7e3b",
+  "t0": 315967856960208000,
+  "t1": 315967860660106000,
+  "related": [
+   "02d18c5c-ddf0-45b7-986c-390262a1b86f",
+   "246a28df-665b-4de1-8503-824e7a787bb7",
+   "52e7dadf-3f4e-4f18-a787-6c5a92fde219",
+   "76edbcc7-980d-4b5c-a143-dd00af0dd0a4"
+  ]
+ },
+ "negative_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "f734ccc9-c0d1-4e3b-8460-fcaa390fc23f",
+  "t0": 315967864860322000,
+  "t1": 315967872459845000,
+  "related": [
+   "03d8a7ba-303f-46aa-8d8a-b608433aa7b0",
+   "221b6b8b-3935-48ea-bfb4-ac12f550ca0c",
+   "572e5515-3b82-4fff-b25c-33c66cab5a04",
+   "5d281c2c-e0d7-4cd2-8cce-b30f363d746a",
+   "89733648-4147-4d80-8172-1e4c6701da18",
+   "b1e8ce15-356b-4e0a-9257-3c58ea720322",
+   "dca1ab07-7107-46d6-9c7a-34b6e5255173",
+   "ea646853-534b-4ecf-b661-196c72a5d715"
+  ]
+ },
+ "n_P": 12,
+ "n_Pp": 11,
+ "jacc_track": 0.75,
+ "jacc_ts": 0.2478108581436077,
+ "n_near_miss": 0
+}

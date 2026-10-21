@@ -1,0 +1,48 @@
+{
+ "id": "t0209",
+ "family": "compositional",
+ "m": "and also moving",
+ "P_text": "car with a moving car to its left",
+ "Pp_text": "moving car with a moving car to its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "reference": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "eb9a2f9e-b464-429d-a669-31171573a1cf",
+  "t0": 315969626860051000,
+  "t1": 315969632259951000,
+  "related": [
+   "37014d6a-4875-4123-a058-b2cabf737f6d",
+   "5206dff5-a563-4a0d-b0d6-7f11bc5bdea4",
+   "5d75cf30-50df-4873-8273-b6ecbace92df",
+   "7fb0b49e-f600-4048-b732-4bdde2f8d2a9"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "62b8eb3a-d9e5-4eea-9d8a-25f7208f421e",
+  "t0": 315967865860277000,
+  "t1": 315967869059855000,
+  "related": [
+   "16c8863f-ab3a-4345-8aa8-91c015da4e35",
+   "4ac659f7-5786-40ff-a967-92b579045c3a"
+  ]
+ },
+ "negative_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "d86f3856-424e-414e-85f2-78a803122f7a",
+  "t0": 315970819160050000,
+  "t1": 315970822759788000,
+  "related": [
+   "641aaaac-8bb3-48f7-b661-7156f753d877",
+   "97277948-44a6-43f7-94ce-bad8518f78cf",
+   "a064483f-3d5d-4946-85ef-9cecc3558359",
+   "cd61708c-5bb9-4d00-9f90-b4f069fa066d"
+  ]
+ },
+ "n_P": 784,
+ "n_Pp": 317,
+ "jacc_track": 0.41130091984231276,
+ "jacc_ts": 0.3738818912011683,
+ "n_near_miss": 452
+}

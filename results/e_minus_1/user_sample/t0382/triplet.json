@@ -1,0 +1,48 @@
+{
+ "id": "t0382",
+ "family": "agent_class",
+ "m": "but with a car instead of a bus as the other agent",
+ "P_text": "parked car near a parked bus",
+ "Pp_text": "parked car near a parked car",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "1f04a123-9f34-4efa-9b19-954551a50347",
+  "t0": 315966720859934000,
+  "t1": 315966733660295000,
+  "related": [
+   "5c91498f-6392-49ba-84f0-7968f4cf2d4f"
+  ]
+ },
+ "target_example": {
+  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
+  "track": "1a55167c-1e7c-4c54-b6e0-7196b383b412",
+  "t0": 315968567759948000,
+  "t1": 315968569359769000,
+  "related": [
+   "4d3d96cb-34bc-4200-b338-1e29012cff98",
+   "4e3fba9c-42a5-427f-9b68-6dc8a86e31a9",
+   "53c0f323-879f-44b0-a83d-39835f93c435",
+   "61c67feb-ab4e-48f3-b8d7-eeb9883df09c",
+   "6dd404f2-f8db-4750-a353-c59039edd995",
+   "7ff6af50-8b89-4415-8560-c726b1a36bdb",
+   "f006de9b-020d-4046-88d1-736fd5af7e39",
+   "fbb7a988-f0c3-4008-9639-0c7aeb0d0fe9"
+  ]
+ },
+ "negative_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "48320bed-426b-4098-b545-36f5425222a2",
+  "t0": 315967860360180000,
+  "t1": 315967862259895000,
+  "related": [
+   "e21a44a0-0dc4-48f8-8f5c-0beaeee87801"
+  ]
+ },
+ "n_P": 11,
+ "n_Pp": 972,
+ "jacc_track": 0.009900990099009901,
+ "jacc_ts": 0.009567735387187295,
+ "n_near_miss": 3
+}

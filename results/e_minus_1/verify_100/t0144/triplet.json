@@ -1,0 +1,41 @@
+{
+ "id": "t0144",
+ "family": "compositional",
+ "m": "and also braking",
+ "P_text": "turning right vehicle facing toward a moving cyclist",
+ "Pp_text": "vehicle that is turning right and braking facing toward a moving cyclist",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "0e470e35-ac97-496e-adbb-1bf778dbdadf",
+  "t0": 315969909959617000,
+  "t1": 315969912560092000,
+  "related": [
+   "4d8b2da8-f934-4738-8257-b9a24a34966e"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "2fa0142d-b225-4d13-a822-0a1f723fa3d0",
+  "t0": 315967870059811000,
+  "t1": 315967870359737000,
+  "related": [
+   "1a11872a-12ea-4b64-bd6c-04d866cb448a"
+  ]
+ },
+ "negative_example": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "0e470e35-ac97-496e-adbb-1bf778dbdadf",
+  "t0": 315969909959617000,
+  "t1": 315969912560092000,
+  "related": [
+   "4d8b2da8-f934-4738-8257-b9a24a34966e"
+  ]
+ },
+ "n_P": 2,
+ "n_Pp": 1,
+ "jacc_track": 0.5,
+ "jacc_ts": 0.12903225806451613,
+ "n_near_miss": 1
+}

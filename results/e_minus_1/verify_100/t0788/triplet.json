@@ -1,0 +1,41 @@
+{
+ "id": "t0788",
+ "family": "state",
+ "m": "but braking instead of accelerating",
+ "P_text": "accelerating car near a parked pedestrian",
+ "Pp_text": "braking car near a parked pedestrian",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "0ba18c98-d211-4a31-81b8-5d3e63a3ab8a",
+  "t0": 315968134460125000,
+  "t1": 315968135860208000,
+  "related": [
+   "bbc98aa4-1fdb-48d8-a5f5-5eeee7883501"
+  ]
+ },
+ "target_example": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "f696fa0d-9a42-4178-be7c-3ddff054c418",
+  "t0": 315969917559981000,
+  "t1": 315969917659513000,
+  "related": [
+   "0b686a61-494f-4f18-bc25-3b2fdf0785ef"
+  ]
+ },
+ "negative_example": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "3bda22b1-6dce-420a-83a5-32b6c162b1dd",
+  "t0": 315968125859933000,
+  "t1": 315968127060275000,
+  "related": [
+   "bbc98aa4-1fdb-48d8-a5f5-5eeee7883501"
+  ]
+ },
+ "n_P": 28,
+ "n_Pp": 17,
+ "jacc_track": 0.18421052631578946,
+ "jacc_ts": 0.0,
+ "n_near_miss": 91
+}

@@ -1,0 +1,42 @@
+{
+ "id": "t0754",
+ "family": "compositional",
+ "m": "and also parked",
+ "P_text": "vehicle following a moving car",
+ "Pp_text": "parked vehicle following a moving car",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "6574f8af-8980-411b-a2f2-d4e9acf408d5",
+  "t0": 315970671760031000,
+  "t1": 315970680159802000,
+  "related": [
+   "c37fc9cc-561d-4faa-bb64-a828e3d64bbe"
+  ]
+ },
+ "target_example": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "bf3e5198-2ea9-4f71-bd49-0a6a5f837eee",
+  "t0": 315969628459846000,
+  "t1": 315969628560042000,
+  "related": [
+   "c3b59edc-a545-4e26-affa-29795d7040d7"
+  ]
+ },
+ "negative_example": {
+  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
+  "track": "e1c1c17e-2ba7-4956-ac73-440cf4c048cb",
+  "t0": 315976478260217000,
+  "t1": 315976487259958000,
+  "related": [
+   "176bf460-9e77-48b8-a415-53a8ae6e50ab",
+   "cf20f94e-8d9f-416a-8a4c-f9ea302fe262"
+  ]
+ },
+ "n_P": 227,
+ "n_Pp": 41,
+ "jacc_track": 0.18385650224215247,
+ "jacc_ts": 0.07663500182681768,
+ "n_near_miss": 172
+}

@@ -1,0 +1,43 @@
+{
+ "id": "t0903",
+ "family": "state",
+ "m": "but braking instead of accelerating",
+ "P_text": "accelerating vehicle with a moving vehicle ahead of it",
+ "Pp_text": "braking vehicle with a moving vehicle ahead of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "70cdc6b1-3a95-4a25-81e3-0073642d7bd8",
+  "t0": 315966720260082000,
+  "t1": 315966721159841000,
+  "related": [
+   "fe4625e7-fdc7-438e-ac92-334413fac16a"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "dd9c8b1a-afef-4cd4-8078-f78946a479b6",
+  "t0": 315967861159742000,
+  "t1": 315967862959943000,
+  "related": [
+   "0f36f1c2-ba76-43b3-9dea-430f932bfa49",
+   "64395b46-251b-41a2-a8ba-871f9661bbbe",
+   "c14c6c6a-0bc8-4579-b83b-2df9e3842869"
+  ]
+ },
+ "negative_example": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "ego",
+  "t0": 315971849860464000,
+  "t1": 315971852560433000,
+  "related": [
+   "1333a4e1-2619-4b90-95ed-715e3a16f839"
+  ]
+ },
+ "n_P": 161,
+ "n_Pp": 137,
+ "jacc_track": 0.20833333333333334,
+ "jacc_ts": 0.0,
+ "n_near_miss": 284
+}

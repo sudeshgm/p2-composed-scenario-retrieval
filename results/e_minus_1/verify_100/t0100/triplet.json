@@ -1,0 +1,42 @@
+{
+ "id": "t0100",
+ "family": "relational",
+ "m": "but facing toward the other pedestrian instead of near it",
+ "P_text": "parked car near a parked pedestrian",
+ "Pp_text": "parked car facing toward a parked pedestrian",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "201fe83b-7dd7-38f4-9d26-7b4a668638a9",
+  "track": "0915a829-1ed3-4068-90e5-6fe23e1e22bc",
+  "t0": 315969628859846000,
+  "t1": 315969629459682000,
+  "related": [
+   "501cd3ce-d2cf-4df3-96ce-e7fb44806d2d"
+  ]
+ },
+ "target_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "11fb35d6-60a1-43ff-b294-07f5e2c87a41",
+  "t0": 315970819360443000,
+  "t1": 315970834659801000,
+  "related": [
+   "2464f60a-665e-487a-afad-c2bf4d91ca52",
+   "5682e7a2-440d-420e-9cf1-bb21e10c6965"
+  ]
+ },
+ "negative_example": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "12c4bd7f-4178-4e7c-9ab5-49185cf287ef",
+  "t0": 315971853559733000,
+  "t1": 315971854059380000,
+  "related": [
+   "48925ffb-0965-4a30-a8c0-f64ed01d4685"
+  ]
+ },
+ "n_P": 98,
+ "n_Pp": 82,
+ "jacc_track": 0.2898550724637681,
+ "jacc_ts": 0.32674873556637085,
+ "n_near_miss": 9
+}
