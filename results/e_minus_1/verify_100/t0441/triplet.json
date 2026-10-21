@@ -1,0 +1,44 @@
+{
+ "id": "t0441",
+ "family": "directional",
+ "m": "but with the car to the right of it instead of to the left of it",
+ "P_text": "changing lanes vehicle with a parked car to its left",
+ "Pp_text": "changing lanes vehicle with a parked car to its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "reference": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "1805608b-8a04-4316-9475-41a39fc37e8c",
+  "t0": 315968124459850000,
+  "t1": 315968124459850000,
+  "related": [
+   "b19a4b21-dec0-46b0-8572-fa667df2a59a"
+  ]
+ },
+ "target_example": {
+  "log": "0bae3b5e-417d-3b03-abaa-806b433233b8",
+  "track": "9ecbabad-9d20-4324-a430-e668ea7424b6",
+  "t0": 315969529759743000,
+  "t1": 315969533759640000,
+  "related": [
+   "49ec2c59-fb60-46f9-9deb-0a1ad95e07c0",
+   "f9014d04-32dc-4241-be98-70c9517e5d2d",
+   "ff486655-7472-4eb1-b5b2-8d389c636278"
+  ]
+ },
+ "negative_example": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "2b4a0ee7-ea09-411d-869e-103f3bf2dd81",
+  "t0": 315970681159760000,
+  "t1": 315970681159760000,
+  "related": [
+   "23852e8d-05d0-4a06-85e4-068e189df43e",
+   "ea8c59f6-8942-4f32-80c8-f6d90b69aaac"
+  ]
+ },
+ "n_P": 14,
+ "n_Pp": 16,
+ "jacc_track": 0.5263157894736842,
+ "jacc_ts": 0.2857142857142857,
+ "n_near_miss": 0
+}

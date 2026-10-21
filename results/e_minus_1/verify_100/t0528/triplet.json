@@ -1,0 +1,45 @@
+{
+ "id": "t0528",
+ "family": "state",
+ "m": "but accelerating instead of braking",
+ "P_text": "braking vehicle with a moving car to its right",
+ "Pp_text": "accelerating vehicle with a moving car to its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "reference": {
+  "log": "19350c96-623d-4d77-af96-f8c23f00c358",
+  "track": "4743ed1a-2a24-4121-bc80-43f09cf0a905",
+  "t0": 315972078960152000,
+  "t1": 315972079759717000,
+  "related": [
+   "a515aa26-7d6d-4393-b54a-a2810ab33c70"
+  ]
+ },
+ "target_example": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "c37fc9cc-561d-4faa-bb64-a828e3d64bbe",
+  "t0": 315970670459483000,
+  "t1": 315970671659834000,
+  "related": [
+   "6574f8af-8980-411b-a2f2-d4e9acf408d5"
+  ]
+ },
+ "negative_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "661cb117-5260-4324-ba04-b5abca71d4c7",
+  "t0": 315969247260106000,
+  "t1": 315969247459835000,
+  "related": [
+   "0a176a08-5852-485b-a4a5-2ac3a3c34a94",
+   "29ee9368-0a8f-441d-b1b2-dff8229710ee",
+   "7ef6c174-893d-4fca-830a-9345c6a93bb9",
+   "a6c2b94c-6557-43f7-88a8-01a06d2cebea",
+   "ecfc9b9d-dc2c-4753-afc3-c57dcafbd8ef"
+  ]
+ },
+ "n_P": 66,
+ "n_Pp": 94,
+ "jacc_track": 0.17557251908396945,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

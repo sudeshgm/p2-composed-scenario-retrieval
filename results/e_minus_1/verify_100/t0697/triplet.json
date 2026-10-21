@@ -1,0 +1,41 @@
+{
+ "id": "t0697",
+ "family": "agent_class",
+ "m": "but with a truck instead of a bus as the other agent",
+ "P_text": "parked vehicle with a bus to its left",
+ "Pp_text": "parked vehicle with a truck to its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "reference": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "0a3f7083-2774-453a-b2f8-70ecdd355da6",
+  "t0": 315968133659893000,
+  "t1": 315968136560243000,
+  "related": [
+   "7f51a518-f4c2-49da-ad45-1c359db1d5e6"
+  ]
+ },
+ "target_example": {
+  "log": "0fb7276f-ecb5-3e5b-87a8-cc74c709c715",
+  "track": "4c7810bf-a42b-4bba-a4fe-78c4624b13ed",
+  "t0": 315968078259748000,
+  "t1": 315968093760143000,
+  "related": [
+   "4799e725-2c71-4ad4-8544-b14f065bc32e"
+  ]
+ },
+ "negative_example": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "3bd00945-5a78-4742-b8f7-82ff6ffbea60",
+  "t0": 315966718159974000,
+  "t1": 315966724559831000,
+  "related": [
+   "b2f9cd58-40b7-4bc2-bbfe-cd3c9cf51ace"
+  ]
+ },
+ "n_P": 20,
+ "n_Pp": 94,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 807
+}

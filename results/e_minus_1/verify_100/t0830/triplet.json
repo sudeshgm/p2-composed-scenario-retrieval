@@ -1,0 +1,46 @@
+{
+ "id": "t0830",
+ "family": "relational",
+ "m": "but following the other car instead of facing toward it",
+ "P_text": "ego vehicle facing toward a car",
+ "Pp_text": "ego vehicle following a car",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "26965d20-785c-47b5-9400-cfee7348b447",
+  "t0": 315966719459855000,
+  "t1": 315966725959910000,
+  "related": [
+   "796c390e-15e6-4acf-8626-3296e809c2e7"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "4c7fc61f-a02c-4ea3-b528-3834b623f552",
+  "t0": 315967868059900000,
+  "t1": 315967871960208000,
+  "related": [
+   "2fa0142d-b225-4d13-a822-0a1f723fa3d0"
+  ]
+ },
+ "negative_example": {
+  "log": "0bae3b5e-417d-3b03-abaa-806b433233b8",
+  "track": "91cecebf-21b4-4593-b217-b404b3e8c1f4",
+  "t0": 315969526959549000,
+  "t1": 315969539960542000,
+  "related": [
+   "42b2cb2b-c1aa-49f5-af29-56da34311f31",
+   "64431ea1-321d-47c7-b30d-d961dc8b8a12",
+   "6cad7168-3fbc-49fb-9e67-218e2dd32563",
+   "864dfacf-5e66-4073-94af-ecf4e137e765",
+   "d3d66fcc-6a28-4f86-9be4-6d1f012f726a",
+   "fa734ecb-0bbe-49ab-a4f0-cf409267c1da"
+  ]
+ },
+ "n_P": 40,
+ "n_Pp": 22,
+ "jacc_track": 0.5263157894736842,
+ "jacc_ts": 0.28500237304224013,
+ "n_near_miss": 16
+}

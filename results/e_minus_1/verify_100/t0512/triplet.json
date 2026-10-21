@@ -1,0 +1,41 @@
+{
+ "id": "t0512",
+ "family": "agent_class",
+ "m": "but with a truck instead of a bus as the other agent",
+ "P_text": "moving car following a moving bus",
+ "Pp_text": "moving car following a moving truck",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "3bda22b1-6dce-420a-83a5-32b6c162b1dd",
+  "t0": 315968126260043000,
+  "t1": 315968126660165000,
+  "related": [
+   "2864ca38-a954-4932-b17d-772e641f8141"
+  ]
+ },
+ "target_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "0c71d536-e8ba-4c48-8a3a-816104efbbe9",
+  "t0": 315970824660180000,
+  "t1": 315970827060215000,
+  "related": [
+   "5347dd11-603b-4d59-8366-0bf9aab5015c"
+  ]
+ },
+ "negative_example": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "70cdc6b1-3a95-4a25-81e3-0073642d7bd8",
+  "t0": 315966718159974000,
+  "t1": 315966719159930000,
+  "related": [
+   "fe4625e7-fdc7-438e-ac92-334413fac16a"
+  ]
+ },
+ "n_P": 4,
+ "n_Pp": 6,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 146
+}

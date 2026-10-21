@@ -1,0 +1,59 @@
+{
+ "id": "t0819",
+ "family": "compositional",
+ "m": "and also accelerating",
+ "P_text": "changing lanes vehicle with a vehicle ahead of it",
+ "Pp_text": "vehicle that is changing lanes and accelerating with a vehicle ahead of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "0fb7276f-ecb5-3e5b-87a8-cc74c709c715",
+  "track": "ego",
+  "t0": 315968078359944000,
+  "t1": 315968083860066000,
+  "related": [
+   "4799e725-2c71-4ad4-8544-b14f065bc32e",
+   "4c7810bf-a42b-4bba-a4fe-78c4624b13ed",
+   "4f19c505-a573-4fcf-976b-74aae7aa8f7e",
+   "7f085e29-c607-49d9-8863-585314090802",
+   "9e3da931-8c4c-43db-be02-14fb7689dd47",
+   "b2dfed5c-4c0e-4265-96e9-e01451d4782f",
+   "df9888dc-d817-43b5-a9fc-ba19a2ccf109",
+   "f7fdb7d7-cf7d-4bf8-98d5-89ca91cb63f7"
+  ]
+ },
+ "target_example": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "647ef54d-afa0-45f0-82ee-4946e4e06968",
+  "t0": 315968128259965000,
+  "t1": 315968131160316000,
+  "related": [
+   "0ba18c98-d211-4a31-81b8-5d3e63a3ab8a",
+   "3bda22b1-6dce-420a-83a5-32b6c162b1dd",
+   "45ec87bb-e18d-4950-ac4b-72a363a680c4",
+   "6388c973-f745-4e10-9d2c-6b88563b2d08",
+   "87d1b70e-6950-44d0-bd4f-bfda08f8d5e2",
+   "931a8720-78d2-454b-b448-faac2713ca7f",
+   "9a4c4df0-de0f-44ba-b6bd-03a0db196830",
+   "9e6f846e-fd34-45b3-ae8f-0e923b363f3f",
+   "b0808d71-bd77-4a36-ad00-cc53cf8ae976",
+   "b9aaa15d-bfa6-4db7-8e5c-8e381c7d5b32"
+  ]
+ },
+ "negative_example": {
+  "log": "0bae3b5e-417d-3b03-abaa-806b433233b8",
+  "track": "9ecbabad-9d20-4324-a430-e668ea7424b6",
+  "t0": 315969528059722000,
+  "t1": 315969533759640000,
+  "related": [
+   "49ec2c59-fb60-46f9-9deb-0a1ad95e07c0",
+   "f9014d04-32dc-4241-be98-70c9517e5d2d",
+   "ff486655-7472-4eb1-b5b2-8d389c636278"
+  ]
+ },
+ "n_P": 28,
+ "n_Pp": 10,
+ "jacc_track": 0.37037037037037035,
+ "jacc_ts": 0.13874147081122062,
+ "n_near_miss": 0
+}

@@ -1,0 +1,48 @@
+{
+ "id": "t0519",
+ "family": "compositional",
+ "m": "and also braking",
+ "P_text": "moving truck near a parked vehicle",
+ "Pp_text": "truck that is moving and braking near a parked vehicle",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = has_velocity(a, log_dir, min_velocity=2)\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "4e551323-3a78-4a82-bd23-0f25af59ea2c",
+  "t0": 315970679459770000,
+  "t1": 315970683559799000,
+  "related": [
+   "23852e8d-05d0-4a06-85e4-068e189df43e",
+   "80b40f89-d216-41ba-84f4-af38c41de1fc",
+   "ea8c59f6-8942-4f32-80c8-f6d90b69aaac"
+  ]
+ },
+ "target_example": {
+  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
+  "track": "1d79f478-048f-4c9e-963b-0ae0462d3954",
+  "t0": 315976474759988000,
+  "t1": 315976476059882000,
+  "related": [
+   "1a4ddfe5-b3a3-42e3-93b3-b15ca4c7d164",
+   "28407413-817f-4541-92de-2106f0cec22d",
+   "2a0f85b9-6007-41a7-9927-4d21425c9e37",
+   "3cf62cf7-d7a2-46d8-a959-e16977f83225",
+   "723a99c6-71b8-4278-9b63-a4846aa750f1",
+   "d795121a-3c3b-4425-93cb-8fc27d306055"
+  ]
+ },
+ "negative_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "4e994741-a65f-41e1-8926-3a07729f7f2f",
+  "t0": 315967868660415000,
+  "t1": 315967869359781000,
+  "related": [
+   "bf522984-cafa-4d38-9240-a4e3a05a2a2d"
+  ]
+ },
+ "n_P": 9,
+ "n_Pp": 4,
+ "jacc_track": 0.4444444444444444,
+ "jacc_ts": 0.07931570762052877,
+ "n_near_miss": 2
+}

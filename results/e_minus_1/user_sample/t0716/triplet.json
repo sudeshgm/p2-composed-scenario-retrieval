@@ -1,0 +1,42 @@
+{
+ "id": "t0716",
+ "family": "directional",
+ "m": "but with the vehicle to the left of it instead of to the right of it",
+ "P_text": "moving ego vehicle with a moving vehicle to its right",
+ "Pp_text": "moving ego vehicle with a moving vehicle to its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "reference": {
+  "log": "0bae3b5e-417d-3b03-abaa-806b433233b8",
+  "track": "ego",
+  "t0": 315969524359750000,
+  "t1": 315969530659521000,
+  "related": [
+   "864dfacf-5e66-4073-94af-ecf4e137e765"
+  ]
+ },
+ "target_example": {
+  "log": "0c3bad78-9f1e-395d-a376-2eb7499229fd",
+  "track": "a71f77d4-4520-457f-8c95-703aaf74bca3",
+  "t0": 315968452859944000,
+  "t1": 315968454760335000,
+  "related": [
+   "b3a3d3fa-8966-4684-9726-6ab58ec6dc49"
+  ]
+ },
+ "negative_example": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "ego",
+  "t0": 315969625459971000,
+  "t1": 315969640959667000,
+  "related": [
+   "506b8b77-4e3d-4134-86be-1617ae730299",
+   "53daadbd-cc84-4916-8216-358a361a6bf2"
+  ]
+ },
+ "n_P": 29,
+ "n_Pp": 34,
+ "jacc_track": 0.6388888888888888,
+ "jacc_ts": 0.2467819051121736,
+ "n_near_miss": 0
+}

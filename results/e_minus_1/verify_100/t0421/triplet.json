@@ -1,0 +1,41 @@
+{
+ "id": "t0421",
+ "family": "directional",
+ "m": "but with the vehicle to the left of it instead of to the right of it",
+ "P_text": "parked vehicle with a vehicle to its right",
+ "Pp_text": "parked vehicle with a vehicle to its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "reference": {
+  "log": "201fe83b-7dd7-38f4-9d26-7b4a668638a9",
+  "track": "30d93a98-6a03-4aee-a08a-12feb90cf6f5",
+  "t0": 315969626260078000,
+  "t1": 315969626260078000,
+  "related": [
+   "7a5c6230-8378-41d9-8960-f49add7b2cb6"
+  ]
+ },
+ "target_example": {
+  "log": "1f434d15-8745-3fba-9c3e-ccb026688397",
+  "track": "c39c152c-7b25-4cc1-afc7-f0080b0dca95",
+  "t0": 315972881459994000,
+  "t1": 315972885560035000,
+  "related": [
+   "0d813937-b6d2-4c08-862d-1f4248699f11"
+  ]
+ },
+ "negative_example": {
+  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
+  "track": "aa00711c-dc61-4b3b-a6c1-e442396794ab",
+  "t0": 315976479159992000,
+  "t1": 315976479360384000,
+  "related": [
+   "325cbf30-e1f6-4e28-aed5-ecba79195765"
+  ]
+ },
+ "n_P": 579,
+ "n_Pp": 910,
+ "jacc_track": 0.4050761421319797,
+ "jacc_ts": 0.2558257918552036,
+ "n_near_miss": 0
+}

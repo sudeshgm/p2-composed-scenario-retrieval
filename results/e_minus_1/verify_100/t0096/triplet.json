@@ -1,0 +1,49 @@
+{
+ "id": "t0096",
+ "family": "directional",
+ "m": "but with the vehicle to the right of it instead of to the left of it",
+ "P_text": "pedestrian with a parked vehicle to its left",
+ "Pp_text": "pedestrian with a parked vehicle to its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15), b_gate])",
+ "reference": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "9138e1da-247d-47a7-96d8-c37cd5e33034",
+  "t0": 315971843759817000,
+  "t1": 315971852360040000,
+  "related": [
+   "0dbf0bfc-b085-4847-bc6d-35bf7055a0c8",
+   "25d2333b-23d8-4632-aceb-352e69d1be83",
+   "6c223c8d-5c1a-474e-bba3-fe85a91383c8",
+   "79dfa97e-76e7-46da-9eb8-288e2b56e2ff",
+   "7e42ca38-886e-4349-9585-3b2f25403192",
+   "97858077-2a5d-42b4-80b1-751f0f6ab220",
+   "fbc960be-74da-4139-8d1c-c4d0a5c893dd"
+  ]
+ },
+ "target_example": {
+  "log": "04994d08-156c-3018-9717-ba0e29be8153",
+  "track": "4454eb63-f861-48a5-bd65-827af259bb96",
+  "t0": 315971488659577000,
+  "t1": 315971501559599000,
+  "related": [
+   "024a62e2-f5e3-4abc-ac9d-f19cd94e88c3",
+   "1236a19f-1e46-4ecc-ba88-3ae8aebf52c7",
+   "51778be6-f065-4dc4-a74e-749121001917"
+  ]
+ },
+ "negative_example": {
+  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
+  "track": "2d540385-0fd7-4009-86d5-5ba53f758e39",
+  "t0": 315970822360330000,
+  "t1": 315970825760339000,
+  "related": [
+   "2e65153a-dd19-4b5d-91d5-a9e4e5b5cb0e"
+  ]
+ },
+ "n_P": 180,
+ "n_Pp": 188,
+ "jacc_track": 0.5521739130434783,
+ "jacc_ts": 0.4068139097744361,
+ "n_near_miss": 0
+}

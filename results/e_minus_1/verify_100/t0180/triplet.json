@@ -1,0 +1,41 @@
+{
+ "id": "t0180",
+ "family": "relational",
+ "m": "but heading toward the other bus instead of near it",
+ "P_text": "changing lanes car near a moving bus",
+ "Pp_text": "changing lanes car heading toward a moving bus",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "7fdc1897-b7f4-4f72-bee4-74fa019b87c6",
+  "t0": 315969249459761000,
+  "t1": 315969253460277000,
+  "related": [
+   "f2f13134-b134-4381-82fc-dfbbe18aefca"
+  ]
+ },
+ "target_example": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "647ef54d-afa0-45f0-82ee-4946e4e06968",
+  "t0": 315968126360239000,
+  "t1": 315968126759697000,
+  "related": [
+   "2864ca38-a954-4932-b17d-772e641f8141"
+  ]
+ },
+ "negative_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "7fdc1897-b7f4-4f72-bee4-74fa019b87c6",
+  "t0": 315969249459761000,
+  "t1": 315969253460277000,
+  "related": [
+   "f2f13134-b134-4381-82fc-dfbbe18aefca"
+  ]
+ },
+ "n_P": 3,
+ "n_Pp": 2,
+ "jacc_track": 0.6666666666666666,
+ "jacc_ts": 0.08571428571428572,
+ "n_near_miss": 1
+}

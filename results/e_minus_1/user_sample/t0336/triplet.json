@@ -1,0 +1,44 @@
+{
+ "id": "t0336",
+ "family": "directional",
+ "m": "but with the car ahead of it instead of behind it",
+ "P_text": "moving pedestrian with a parked car behind it",
+ "Pp_text": "moving pedestrian with a parked car ahead of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25), b_gate])",
+ "reference": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "5c997e29-b26a-4b8d-99d2-bc7f5972b2c3",
+  "t0": 315971847760338000,
+  "t1": 315971849660072000,
+  "related": [
+   "9f4753ef-7d7f-40fb-b9af-e1e144ad933f"
+  ]
+ },
+ "target_example": {
+  "log": "0c3bad78-9f1e-395d-a376-2eb7499229fd",
+  "track": "657c933f-3965-4fcd-8413-3609bec9bf97",
+  "t0": 315968461060020000,
+  "t1": 315968463160140000,
+  "related": [
+   "5ee00231-db84-4dc7-bfde-b6d79b572911",
+   "db1d7bb9-6e7f-4dd9-a819-7539b475bcf5"
+  ]
+ },
+ "negative_example": {
+  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
+  "track": "5c997e29-b26a-4b8d-99d2-bc7f5972b2c3",
+  "t0": 315971847760338000,
+  "t1": 315971852560433000,
+  "related": [
+   "9f4753ef-7d7f-40fb-b9af-e1e144ad933f",
+   "b42cb4da-8539-4bb2-9d98-626d28fd6575",
+   "e96216ce-eed4-4324-b456-2310e333317e"
+  ]
+ },
+ "n_P": 7,
+ "n_Pp": 7,
+ "jacc_track": 0.75,
+ "jacc_ts": 0.5546875,
+ "n_near_miss": 0
+}

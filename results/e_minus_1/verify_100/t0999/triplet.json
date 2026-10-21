@@ -1,0 +1,35 @@
+{
+ "id": "t0999",
+ "family": "compositional",
+ "m": "and also braking",
+ "P_text": "moving bus",
+ "Pp_text": "bus that is moving and braking",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = has_velocity(a, log_dir, min_velocity=2)\nout = a",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = has_velocity(a, log_dir, min_velocity=2)\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nout = a",
+ "reference": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "f2f13134-b134-4381-82fc-dfbbe18aefca",
+  "t0": 315969245659638000,
+  "t1": 315969261260252000,
+  "related": []
+ },
+ "target_example": {
+  "log": "0bae3b5e-417d-3b03-abaa-806b433233b8",
+  "track": "bb0e7209-dfd8-469c-b343-dd8478f5b7ef",
+  "t0": 315969533159789000,
+  "t1": 315969537259883000,
+  "related": []
+ },
+ "negative_example": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "fe4625e7-fdc7-438e-ac92-334413fac16a",
+  "t0": 315966718159974000,
+  "t1": 315966733660295000,
+  "related": []
+ },
+ "n_P": 9,
+ "n_Pp": 5,
+ "jacc_track": 0.5,
+ "jacc_ts": 0.08914728682170543,
+ "n_near_miss": 2
+}

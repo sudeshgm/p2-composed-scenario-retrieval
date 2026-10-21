@@ -1,0 +1,41 @@
+{
+ "id": "t0103",
+ "family": "state",
+ "m": "but accelerating instead of moving",
+ "P_text": "moving car facing toward a moving cyclist",
+ "Pp_text": "accelerating car facing toward a moving cyclist",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "ca08410b-fc18-45a0-bbd9-6c5b9b8d2ef2",
+  "t0": 315970673059898000,
+  "t1": 315970680759653000,
+  "related": [
+   "3d917651-3cd1-4f2f-8cd2-143659ff23ab"
+  ]
+ },
+ "target_example": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "0e470e35-ac97-496e-adbb-1bf778dbdadf",
+  "t0": 315969914159924000,
+  "t1": 315969915659558000,
+  "related": [
+   "4d8b2da8-f934-4738-8257-b9a24a34966e"
+  ]
+ },
+ "negative_example": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "ea62f89e-add5-4845-969c-005c7f888c7b",
+  "t0": 315970670459483000,
+  "t1": 315970671559638000,
+  "related": [
+   "3d917651-3cd1-4f2f-8cd2-143659ff23ab"
+  ]
+ },
+ "n_P": 13,
+ "n_Pp": 1,
+ "jacc_track": 0.07692307692307693,
+ "jacc_ts": 0.09236947791164658,
+ "n_near_miss": 18
+}
