@@ -26,6 +26,17 @@ STATE_SWAP={'moving':['accelerating','braking','stationary'],'accelerating':['br
 NONDIR=['in_same_lane','heading_toward','following','near','facing_toward']
 FLIP={'dir_forward':'dir_backward','dir_backward':'dir_forward','dir_left':'dir_right','dir_right':'dir_left'}
 CLASS_SWAP={'CAR':['TRUCK','BUS'],'TRUCK':['CAR','BUS'],'BUS':['CAR','TRUCK'],'PEDESTRIAN':['BICYCLIST'],'BICYCLIST':['PEDESTRIAN'],'VEHICLE':['PEDESTRIAN','BICYCLIST']}
+LANE_RELS={'in_same_lane','following'}
+def is_veh(g): return g in ('VEHICLE','CAR','TRUCK','BUS','EGO')
+MOTION={'moving','accelerating','braking','turning_left','turning_right','changing_lanes'}
+def compatible(st):
+    st=set(st)
+    if {'turning_left','turning_right'}<=st or {'accelerating','braking'}<=st: return False
+    if 'stationary' in st and st&MOTION: return False
+    return True
+def valid(p):
+    if not compatible(p['a']['states']) or (p.get('b') and not compatible(p['b']['states'])): return False
+    return not (p.get('rel') in LANE_RELS and not (is_veh(p['a']['cat']) and is_veh(p['b']['cat'])))
 def is_ped(g): return g in ('PEDESTRIAN','BICYCLIST')
 def allowed_states(g): return sorted(PED_OK) if g=='PEDESTRIAN' else (['moving','stationary','accelerating','braking','turning_left','turning_right'] if g=='BICYCLIST' else VEH_STATES)
 def key(p): return json.dumps(p,sort_keys=True)
@@ -44,8 +55,8 @@ SRC_STATE={'moving':"has_velocity({x}, log_dir, min_velocity=2)",'stationary':"s
  'changing_lanes':"changing_lanes({x}, log_dir)",'near_intersection':"near_intersection({x}, log_dir)",'at_ped_crossing':"at_pedestrian_crossing({x}, log_dir)",'on_road':"on_road({x}, log_dir)"}
 SRC_REL={'in_same_lane':"in_same_lane(a, b, log_dir)",'heading_toward':"heading_toward(a, b, log_dir, max_distance=30)",'following':"following(a, b, log_dir)",
  'near':"near_objects(a, b, log_dir, distance_thresh=10)",'facing_toward':"facing_toward(a, b, log_dir, max_distance=30)",
- 'dir_forward':"has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25)",'dir_backward':"has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25)",
- 'dir_left':"has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15)",'dir_right':"has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15)"}
+ 'dir_forward':"has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5)",'dir_backward':"has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5)",
+ 'dir_left':"has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5)",'dir_right':"has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5)"}
 def src_obj(v,g,states):
     cats=GROUPS[g][0]
     if g=='VEHICLE': l=[f"{v} = get_objects_of_category(log_dir, category='VEHICLE')"]
@@ -62,8 +73,31 @@ def to_source(p):
     return "\n".join(l)
 # ---------- executor over tables ----------
 TABLES={}
+LAT=2.5
+def cap_dirs(T):
+    import pandas as pd
+    df=pd.read_feather(f"/workspace/data/p2_sm_logs/val/{T['log_id']}/sm_annotations.feather")
+    df=df[df.track_uuid.isin(set(T['cats']))]
+    pos={(u,int(t)):(x,y,qw,qz,l,w) for u,t,x,y,qw,qz,l,w in zip(df.track_uuid,df.timestamp_ns,df.tx_m,df.ty_m,df.qw,df.qz,df.length_m,df.width_m)}
+    for r in ['dir_forward','dir_backward','dir_left','dir_right']:
+        new={}
+        for (a,b),tss in T['rel'][r].items():
+            keep=set()
+            for t in tss:
+                A=pos.get((a,t)); B=pos.get((b,t))
+                if A is None or B is None: continue
+                yaw=2*np.arctan2(A[3],A[2]); dx,dy=B[0]-A[0],B[1]-A[1]
+                lx=np.cos(yaw)*dx+np.sin(yaw)*dy; ly=-np.sin(yaw)*dx+np.cos(yaw)*dy
+                if a=='ego': hw,hl=1.0,4.877/2+1.422; back=4.877-hl
+                else: hw,hl=A[5]/2,A[4]/2; back=-hl
+                if r in ('dir_forward','dir_backward'): ok=-hw-LAT<ly<hw+LAT
+                else: ok=back-LAT<lx<hl+LAT
+                if ok: keep.add(t)
+            if keep: new[(a,b)]=keep
+        T['rel'][r]=new
 def load():
-    for f in sorted(TAB.glob('*.pkl')): TABLES[f.stem]=pickle.load(open(f,'rb'))
+    for f in sorted(TAB.glob('*.pkl')):
+        T=pickle.load(open(f,'rb')); cap_dirs(T); TABLES[f.stem]=T
 def obj_set(T,g,states):
     cs=set(GROUPS[g][0]); d={}
     for u,c in T['cats'].items():
@@ -76,7 +110,7 @@ def obj_set(T,g,states):
         if ts is not None and not ts: continue
         d[u]=ts
     return d
-def execute(p):
+def execute(p,want_w=True):
     """returns {(log,uuid): set(ts)} and witnesses {(log,uuid): {b: set(ts)}}"""
     M={}; W={}
     for log,T in TABLES.items():
@@ -93,7 +127,8 @@ def execute(p):
             if A[a] is not None: s&=A[a]
             if B[b] is not None: s&=B[b]
             if s:
-                M.setdefault((log,a),set()).update(s); W.setdefault((log,a),{})[b]=s
+                M.setdefault((log,a),set()).update(s)
+                if want_w: W.setdefault((log,a),{})[b]=s
     return M,W
 def mutations(p):
     out=[]
@@ -101,7 +136,9 @@ def mutations(p):
     # relational
     if rel in NONDIR:
         for r in NONDIR:
-            if r!=rel: out.append(('relational',{**p,'rel':r},f"but {REL_TXT[r]} the other {GROUPS[p['b']['cat']][1]} instead of {REL_TXT[rel]} it"))
+            if r==rel or {r,rel}=={'heading_toward','facing_toward'}: continue   # fix 2
+            if r in LANE_RELS and not (is_veh(p['a']['cat']) and is_veh(p['b']['cat'])): continue  # fix 3
+            out.append(('relational',{**p,'rel':r},f"but {REL_TXT[r]} the other {GROUPS[p['b']['cat']][1]} instead of {REL_TXT[rel]} it"))
     if rel in FLIP:
         r=FLIP[rel]; side={'dir_forward':'ahead of','dir_backward':'behind','dir_left':'to the left of','dir_right':'to the right of'}
         out.append(('directional',{**p,'rel':r},f"but with the {GROUPS[p['b']['cat']][1]} {side[r]} it instead of {side[rel]} it"))
@@ -124,12 +161,11 @@ def mutations(p):
     if len(a['states'])<2:
         for s2 in allowed_states(a['cat']):
             if s2 in a['states'] or s2 in ('stationary','moving') and a['states']: continue
+            if not compatible(a['states']+[s2]): continue
             q=json.loads(key(p)); q['a']['states']=a['states']+[s2]
             out.append(('compositional',q,f"and also {STATE_TXT[s2]}"))
-    for s in (a['states'] if (rel or len(a['states'])>1) else []):
-        q=json.loads(key(p)); q['a']['states']=[x for x in a['states'] if x!=s]
-        out.append(('compositional',q,f"but not necessarily {STATE_TXT[s]}"))
-    return out
+
+    return [o for o in out if valid(o[1])]
 def base_programs():
     P=[]
     for g in ['VEHICLE','CAR','TRUCK','BUS','PEDESTRIAN','BICYCLIST']:
@@ -150,10 +186,8 @@ if __name__=='__main__':
     for T in TABLES.values(): T['all_ts']=T.get('all_ts') or {}
     cache={}
     def ex(p):
-        k=key(p)
-        if k not in cache: cache[k]=execute(p)
-        return cache[k]
-    base=base_programs(); random.shuffle(base)
+        return execute(p,want_w=False)
+    base=[p for p in base_programs() if valid(p)]; random.shuffle(base)
     cands=[]; stats=collections.Counter(); jac_all=[]
     for p in base:
         M,W=ex(p)
@@ -173,5 +207,5 @@ if __name__=='__main__':
                 else: rec['status']='ok'
             cands.append(rec)
     json.dump(stats,open(OUT/'gen_stats.json','w'),indent=1)
-    pickle.dump(dict(cands=cands,cache_keys=list(cache)),open('/workspace/data/p2_cache/cands.pkl','wb'))
+    pickle.dump(dict(cands=cands,cache_keys=[]),open('/workspace/data/p2_cache/cands.pkl','wb'))
     print(stats)

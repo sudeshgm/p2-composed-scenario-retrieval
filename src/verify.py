@@ -35,6 +35,74 @@ def kin(tr):
     v=np.gradient(xs,ts,axis=0); sp=np.linalg.norm(v,axis=1)
     a=np.gradient(np.convolve(sp,np.ones(k)/k,mode='same'),ts)
     return sp,a
+# ---------- independent map checks via AV2 map API (lane polygon membership) ----------
+from av2.map.map_api import ArgoverseStaticMap
+import shapely
+_MAP={}
+def amap(log):
+    if log not in _MAP:
+        avm=ArgoverseStaticMap.from_json(next((AV2/log/'map').glob('log_map_archive_*.json')))
+        lanes=avm.vector_lane_segments; ids=list(lanes)
+        polys=[shapely.Polygon(lanes[i].polygon_boundary[:,:2]) for i in ids]
+        pcs=[shapely.Polygon(pc.polygon[:,:2]).buffer(1.0) for pc in avm.vector_pedestrian_crossings.values()]
+        _MAP[log]=dict(lanes=lanes,ids=ids,tree=shapely.STRtree(polys),pcs=shapely.STRtree(pcs) if pcs else None)
+    return _MAP[log]
+_LC={}
+def lanes_track(log,u):
+    if (log,u) not in _LC: _LC[(log,u)]=lanes_at(log,tracks(log)[u]['xy'])
+    return _LC[(log,u)]
+def lanes_at(log,xy):
+    m=amap(log); return [set(m['ids'][j] for j in m['tree'].query(shapely.Point(*p),predicate='intersects')) for p in xy]
+def connected(log,ls):
+    m=amap(log); out=set(ls)
+    for l in ls:
+        L=m['lanes'][l]; out|=set(L.successors)|set(L.predecessors)
+    return out
+def map_state(log,u,s):
+    A=tracks(log)[u]
+    if s=='at_ped_crossing':
+        m=amap(log)
+        if m['pcs'] is None: return np.zeros(len(A['ts']),bool)
+        return np.array([len(m['pcs'].query(shapely.Point(*p),predicate='intersects'))>0 for p in A['xy']])
+    if s in ('turning_left','turning_right'):
+        y=np.unwrap(A['yaw']); ts=A['ts']/1e9; out=np.zeros(len(y),bool)
+        for i in range(len(y)):
+            j=np.searchsorted(ts,ts[i]+3.0); j=min(j,len(y)-1); k=np.searchsorted(ts,ts[i]-3.0)
+            d=y[j]-y[k]
+            out[i]= d>np.radians(45) if s=='turning_left' else d<-np.radians(45)
+        return out
+    if s=='changing_lanes':
+        L=lanes_track(log,u); out=np.zeros(len(L),bool); m=amap(log)
+        for i in range(1,len(L)):
+            for j in range(max(0,i-10),i):
+                for la in L[j]:
+                    ln=m['lanes'][la]
+                    if (ln.left_neighbor_id in L[i] or ln.right_neighbor_id in L[i]) and not (L[i]&connected(log,L[j])): out[i]=True
+        return out
+    return None
+def map_rel(log,u,rel,bgroup,bstates):
+    if rel not in ('in_same_lane','following'): return None
+    TT=tracks(log); A=TT[u]; cats=set(G.GROUPS[bgroup][0]); hit=np.zeros(len(A['ts']),bool)
+    LA=lanes_track(log,u)
+    for b,B in TT.items():
+        if b==u or B['cat'] not in cats: continue
+        bmask=np.ones(len(B['ts']),bool)
+        for s in bstates:
+            r=indep_state(B,s)
+            if r is None: return None
+            bmask&=r
+        com,ia,ib=np.intersect1d(A['ts'],B['ts'],return_indices=True)
+        if not len(com): continue
+        d=B['xy'][ib]-A['xy'][ia]
+        if (np.hypot(d[:,0],d[:,1])>30).all(): continue
+        LBall=lanes_track(log,b); LB=[LBall[j] for j in ib]
+        c,sn=np.cos(A['yaw'][ia]),np.sin(A['yaw'][ia]); lx=c*d[:,0]+sn*d[:,1]
+        for k,(i,j) in enumerate(zip(ia,ib)):
+            if not bmask[j] or np.hypot(*d[k])>30: continue
+            same=bool(LB[k] & connected(log,LA[i])) if LA[i] else False
+            if rel=='following': same = same and 0<lx[k]<=25+A['L']/2
+            if same: hit[i]=True
+    return hit
 # ---------- independent (non-RefAV) re-implementation of a subset of predicates ----------
 def indep_state(tr,s):
     sp,a=kin(tr)
@@ -60,10 +128,10 @@ def indep_rel(log,u,rel,bgroup,bstates):
         rad=(np.hypot(A['L'],A['W'])+np.hypot(B['L'],B['W']))/2
         if rel=='near': h=dist-rad<=10
         # same geometric definitions as RefAV (lateral_thresh=inf) but recomputed from raw city-frame boxes
-        elif rel=='dir_forward': h=(lx>A['L']/2)&(dist-rad<=25)
-        elif rel=='dir_backward': h=(lx<-A['L']/2)&(dist-rad<=25)
-        elif rel=='dir_left': h=(ly>A['W']/2)&(dist-rad<=15)
-        elif rel=='dir_right': h=(ly<-A['W']/2)&(dist-rad<=15)
+        elif rel=='dir_forward': h=(lx>A['L']/2)&(np.abs(ly)<A['W']/2+2.5)&(dist-rad<=25)
+        elif rel=='dir_backward': h=(lx<-A['L']/2)&(np.abs(ly)<A['W']/2+2.5)&(dist-rad<=25)
+        elif rel=='dir_left': h=(ly>A['W']/2)&(np.abs(lx)<A['L']/2+2.5)&(dist-rad<=15)
+        elif rel=='dir_right': h=(ly<-A['W']/2)&(np.abs(lx)<A['L']/2+2.5)&(dist-rad<=15)
         elif rel=='facing_toward': h=(np.abs(np.degrees(np.arctan2(ly,lx)))<=22.5)&(dist-rad<=30)
         h&=bmask[ib]&(dist<=30)
         hit[ia[h]]=True
@@ -75,13 +143,17 @@ def indep_pred(log,u,p):
     m=np.ones(len(A['ts']),bool)
     for s in p['a']['states']:
         r=indep_state(A,s)
+        if r is None: r=map_state(log,u,s)
         if r is None: return None
         m&=r
     if p.get('rel'):
         r=indep_rel(log,u,p['rel'],p['b']['cat'],p['b']['states'])
+        if r is None: r=map_rel(log,u,p['rel'],p['b']['cat'],p['b']['states'])
         if r is None: return None
         m&=r
     return m
+MAPPRED={'in_same_lane','following','at_ped_crossing','changing_lanes','turning_left','turning_right','on_road'}
+def uses_map(p): return bool((set(p['a']['states'])|{p.get('rel')})&MAPPRED)
 def win(m,t0=None,t1=None,ts=None):
     if ts is not None and t0 is not None: m=m[(ts>=t0)&(ts<=t1)]
     return int(m.sum())
@@ -97,7 +169,7 @@ def agent_judge(t):
     if r is not None and r.sum()==0: notes.append('indep: target example never satisfies P\' (indep impl)'); a=False
     # (c) negative
     ng=t['negative_example']; r=indep_pred(ng['log'],ng['track'],t['Pp'])
-    if r is None: c='yes(oracle-only)'; notes.append('c: mutated predicate is map/lane/turn-based; no independent check, RefAV oracle only')
+    if r is None: c='yes(oracle-only)'; notes.append('c: no independent check for this predicate (on_road), RefAV oracle only')
     elif r.sum()>=10: c='no'; notes.append(f'indep: negative satisfies P\' on {int(r.sum())} frames')
     else: c='yes'
     # (b) wording
@@ -161,6 +233,17 @@ if __name__=='__main__':
     for i,f in enumerate(fams):
         L=byf[f][:]; random.shuffle(L); n=per+(1 if i<extra else 0)
         v+=L[:n]; u+=L[n:n+20//len(fams)+(1 if i<20%len(fams) else 0)]
+    # map-check agreement with RefAV over all triplets whose P' uses a lane/map predicate
+    ag=collections.Counter()
+    for t in T:
+        if not uses_map(t['Pp']): continue
+        tg=t['target_example']; r=indep_pred(tg['log'],tg['track'],t['Pp'])
+        if r is None: ag['uncheckable']+=1; continue
+        ag['n']+=1; ag['target_agree']+= int(r.sum()>0)
+        ng=t['negative_example']; r=indep_pred(ng['log'],ng['track'],t['Pp'])
+        ag['negative_agree']+= int(r.sum()<10)
+    ag=dict(ag); ag['target_agreement']=ag.get('target_agree',0)/max(1,ag.get('n',0)); ag['negative_agreement']=ag.get('negative_agree',0)/max(1,ag.get('n',0))
+    json.dump(ag,open(OUT/'map_check_agreement.json','w'),indent=1); print('map agreement',ag,flush=True)
     rows=export(v,OUT/'verify_100',True)
     export(u,OUT/'user_sample',False)
     ok=[r for r in rows if r['AGENT_NOT_HUMAN_a']=='yes' and r['AGENT_NOT_HUMAN_b']=='yes' and r['AGENT_NOT_HUMAN_c'].startswith('yes')]
