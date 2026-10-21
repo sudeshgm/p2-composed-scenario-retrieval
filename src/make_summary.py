@@ -18,6 +18,7 @@ L=[f"# Exp −1: mutation-oracle reliability, post-fix run on {nlogs}/150 AV2 va
 "11. The 1.5 s minimum also applies to target and negative windows.",
 "12. Wording: pedestrians/cyclists are 'standing still', not 'parked'; 'speeding up (accelerating)' vs 'just moving at a steady speed'; 'the other X' only when classes match.",
 "13. No same-lane/following relation involving a pedestrian or cyclist.",
+"14. Plain-English wording (user feedback): m texts read like 'The same, but the truck is behind the car now, not in front of it.' (old template kept as `m_old`). user_sample items have plain.txt (old search / new search / why the right one should not fit), and BEV panels are labelled LEFT old match / MIDDLE should fit / RIGHT should not fit, with arrows on the key agents. Agent b-criterion also fails jargon or over-long m.",
 "7. Skipped and declared: `near_intersection` (too slow on CPU), `is_color` (needs camera images and a GPU model). The context family (weather/lighting) is unsupported because the annotations have no tags and there is no atomic function for it.\n",
 "## Auto-checks on 1000 triplets",
 "| family | mutations | empty-target rate | identical | median track-Jaccard | median target size | selected |","|---|---|---|---|---|---|---|"]
