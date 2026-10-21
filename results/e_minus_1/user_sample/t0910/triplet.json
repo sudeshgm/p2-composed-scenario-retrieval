@@ -1,0 +1,49 @@
+{
+ "id": "t0910",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also speeding up.",
+ "m_old": "and also speeding up (accelerating)",
+ "P_text": "A vehicle that is changing lanes and is pointed at the moving car",
+ "Pp_text": "A vehicle that is changing lanes and speeding up and is pointed at the moving car",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "bdb9d309-f14b-3ff6-ad1f-5d3f3f95a13e",
+  "track": "6bb3f37a-9437-49d8-8dbc-23df50aa1fff",
+  "t0": 315971073359638000,
+  "t1": 315971075859887000,
+  "related": [
+   "1ac497c4-1e55-4f8b-8a29-d5150ce5fcfb",
+   "c513b757-040b-4c36-8a24-450634098660",
+   "d5e02c60-01fa-4e0f-a138-be0ccf7e9e24",
+   "e2a779f6-e0cc-471f-9bdc-90a4aca67da3"
+  ]
+ },
+ "target_example": {
+  "log": "4e3fedbb-847c-3d5b-8a62-c9ff84550985",
+  "track": "d40a981a-ad40-4613-bcd7-d2d498ea4530",
+  "t0": 315968675459929000,
+  "t1": 315968677859988000,
+  "related": [
+   "1f58b006-fe9d-497f-a370-c391d85df7d9",
+   "6fc25559-9d9f-4842-8910-0573bd5ec830",
+   "c2235d2d-9d38-444a-91bd-31dfb4bfde4e",
+   "e4f7e677-44b1-4755-b429-4e066bc42127"
+  ]
+ },
+ "negative_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "7fdc1897-b7f4-4f72-bee4-74fa019b87c6",
+  "t0": 315969249459761000,
+  "t1": 315969253460277000,
+  "related": [
+   "340b1434-0495-4b5e-bb26-595371c0e9a6",
+   "6b5257b4-57ec-4eb9-a400-766a077b0c75"
+  ]
+ },
+ "n_P": 237,
+ "n_Pp": 72,
+ "jacc_track": 0.3037974683544304,
+ "jacc_ts": 0.11201840138010351,
+ "n_near_miss": 28
+}

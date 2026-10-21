@@ -1,0 +1,9 @@
+{
+ "dropped_lane_disagree": {
+  "state": 33,
+  "relational": 35,
+  "compositional": 23,
+  "agent_class": 19
+ },
+ "kept": 1000
+}

@@ -1,0 +1,40 @@
+{
+ "id": "t0018",
+ "family": "agent_class",
+ "m": "The same, but the other road user is a pedestrian, not a cyclist.",
+ "m_old": "but with a pedestrian instead of a cyclist as the other agent",
+ "P_text": "Our own car that is close to the moving cyclist",
+ "Pp_text": "Our own car that is close to the moving pedestrian",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "85d192e3-249a-4191-a653-ee5ebeef4bdd",
+  "t0": 315969911860040000,
+  "t1": 315969913759799000,
+  "related": [
+   "4d8b2da8-f934-4738-8257-b9a24a34966e"
+  ]
+ },
+ "target_example": {
+  "log": "5589de60-1727-3e3f-9423-33437fc5da4b",
+  "track": "ego",
+  "t0": 315967920359563000,
+  "t1": 315967922759620000,
+  "related": [
+   "950f17a7-5351-4c4e-a3d2-071050803c7f"
+  ]
+ },
+ "negative_example": {
+  "log": "185d3943-dd15-397a-8b2e-69cd86628fb7",
+  "track": "ego",
+  "t0": 315974091960022000,
+  "t1": 315974100059900000,
+  "related": []
+ },
+ "n_P": 22,
+ "n_Pp": 8,
+ "jacc_track": 0.07142857142857142,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

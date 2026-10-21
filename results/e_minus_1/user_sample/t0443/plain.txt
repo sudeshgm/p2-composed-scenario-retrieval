@@ -1,0 +1,3 @@
+Old search: A car that is changing lanes and has the parked vehicle behind it.
+New search: A bus that is changing lanes and has the parked vehicle behind it.
+Why the right one should not fit: It is a bus, as the new search asks, but the bus is not changing lanes.

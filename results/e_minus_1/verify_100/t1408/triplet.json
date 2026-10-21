@@ -1,0 +1,44 @@
+{
+ "id": "t1408",
+ "family": "agent_class",
+ "m": "The same situation, but with a bus doing it instead of a car.",
+ "m_old": "but with a bus instead of a car",
+ "P_text": "A car that is turning left and has the other car behind it",
+ "Pp_text": "A bus that is turning left and has the car behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "b213af37-7d89-342d-ae39-8a3c72159a01",
+  "track": "6de9d5ce-323d-4f75-ab39-032e90c360c2",
+  "t0": 315968649059832000,
+  "t1": 315968659559800000,
+  "related": [
+   "17421c59-ef88-4fdf-a57d-d0ca89b036db",
+   "5ab7c901-3fff-4967-89b6-be7ee8feb02c",
+   "997f9d14-025e-4e61-b0ea-553db879b6fa"
+  ]
+ },
+ "target_example": {
+  "log": "cd22abca-9150-3279-87a4-cb00ba517372",
+  "track": "ddc5298a-167a-4c0f-888c-50cda56ef213",
+  "t0": 315970406359909000,
+  "t1": 315970409560253000,
+  "related": [
+   "88ad4d84-a153-4050-8707-a1be69eb662c"
+  ]
+ },
+ "negative_example": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "61018a58-de4b-4e64-9de0-7425ed1a0992",
+  "t0": 315970486059561000,
+  "t1": 315970488459633000,
+  "related": [
+   "e1149883-a6cd-49c0-a1ce-28e507e8f609"
+  ]
+ },
+ "n_P": 150,
+ "n_Pp": 3,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

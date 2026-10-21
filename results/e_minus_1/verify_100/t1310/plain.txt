@@ -1,0 +1,3 @@
+Old search: A truck that is slowing down and has the parked vehicle in front of it.
+New search: A truck that is slowing down and changing lanes and has the parked vehicle in front of it.
+Why the right one should not fit: It fits the old search, but it is not changing lanes.

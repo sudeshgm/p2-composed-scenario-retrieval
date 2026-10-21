@@ -1,0 +1,42 @@
+{
+ "id": "t1090",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also slowing down.",
+ "m_old": "and also braking",
+ "P_text": "A vehicle that is changing lanes and is moving toward the pedestrian",
+ "Pp_text": "A vehicle that is changing lanes and slowing down and is moving toward the pedestrian",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "e0ea281b-6956-3605-b720-71b54ec87d25",
+  "track": "260b163a-a431-4a2a-ae37-5519a193ea81",
+  "t0": 315971667459999000,
+  "t1": 315971669359735000,
+  "related": [
+   "2303ce68-0726-4f4a-9e31-8320c43aeabf"
+  ]
+ },
+ "target_example": {
+  "log": "280269f9-6111-311d-b351-ce9f63f88c81",
+  "track": "4abae1e4-d133-4f04-ad1f-63d9ea739fda",
+  "t0": 315977576859881000,
+  "t1": 315977578459694000,
+  "related": [
+   "49ee03ff-6139-4515-8291-2569ddc4e09d"
+  ]
+ },
+ "negative_example": {
+  "log": "91aab547-1912-3b8e-8e7f-df3b202147bf",
+  "track": "d50a9ee8-ff2d-4531-95c3-4e966a743519",
+  "t0": 315968313859772000,
+  "t1": 315968315559765000,
+  "related": [
+   "69f4b5b2-546b-40c9-a3da-0efad7b666b3"
+  ]
+ },
+ "n_P": 111,
+ "n_Pp": 19,
+ "jacc_track": 0.17117117117117117,
+ "jacc_ts": 0.0805921052631579,
+ "n_near_miss": 20
+}

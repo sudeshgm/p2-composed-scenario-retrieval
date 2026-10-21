@@ -1,0 +1,42 @@
+{
+ "id": "t0509",
+ "family": "state",
+ "m": "The same, but our own car is speeding up rather than driving at a steady speed.",
+ "m_old": "but speeding up (accelerating) instead of just moving at a steady speed",
+ "P_text": "Our own car that is driving along and is pointed at the moving bus",
+ "Pp_text": "Our own car that is speeding up and is pointed at the moving bus",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "f3cd0d0d-8b71-3266-9732-d9f0d5778eb6",
+  "track": "bd491dad-578c-42e0-9fb2-4dec50ad5dbf",
+  "t0": 315968807859650000,
+  "t1": 315968814759865000,
+  "related": [
+   "becdf808-6f83-4c01-aa01-42eb5ed3d890"
+  ]
+ },
+ "target_example": {
+  "log": "d1395998-7e8a-417d-91e9-5ca6ec045ee1",
+  "track": "ego",
+  "t0": 315968268459844000,
+  "t1": 315968270559962000,
+  "related": [
+   "1bde1918-0e30-4cce-be34-930d59e6743e"
+  ]
+ },
+ "negative_example": {
+  "log": "f3cd0d0d-8b71-3266-9732-d9f0d5778eb6",
+  "track": "ego",
+  "t0": 315968807859650000,
+  "t1": 315968814759865000,
+  "related": [
+   "becdf808-6f83-4c01-aa01-42eb5ed3d890"
+  ]
+ },
+ "n_P": 24,
+ "n_Pp": 8,
+ "jacc_track": 0.3333333333333333,
+ "jacc_ts": 0.2826603325415677,
+ "n_near_miss": 1
+}

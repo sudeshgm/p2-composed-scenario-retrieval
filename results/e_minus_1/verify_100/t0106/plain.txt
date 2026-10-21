@@ -1,0 +1,3 @@
+Old search: A vehicle that is slowing down and is pointed at the other parked vehicle.
+New search: A vehicle that is slowing down and is close to the other parked vehicle.
+Why the right one should not fit: It fits the old search, but it is not close to the other vehicle.

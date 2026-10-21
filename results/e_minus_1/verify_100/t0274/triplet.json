@@ -1,0 +1,43 @@
+{
+ "id": "t0274",
+ "family": "state",
+ "m": "The same, but the car is driving along rather than parked.",
+ "m_old": "but moving instead of parked",
+ "P_text": "A car that is parked and has the moving cyclist in front of it",
+ "Pp_text": "A car that is driving along and has the moving cyclist in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "f9cbedec-7276-40bb-991c-ec1450da9423",
+  "t0": 315967856960208000,
+  "t1": 315967859660150000,
+  "related": [
+   "852ddc78-2aae-4244-9b4d-82e129ad3bb8",
+   "aa99bcb3-a568-4d02-90f5-75e840996b99"
+  ]
+ },
+ "target_example": {
+  "log": "24642607-2a51-384a-90a7-228067956d05",
+  "track": "10d45604-c4fc-47cc-988a-208779d266aa",
+  "t0": 315970915860267000,
+  "t1": 315970920860079000,
+  "related": [
+   "28a68a49-e65f-4ddb-a729-1a1f39fcdb11"
+  ]
+ },
+ "negative_example": {
+  "log": "24642607-2a51-384a-90a7-228067956d05",
+  "track": "14ca48b6-4dbd-4805-a05f-2e34a2a7451a",
+  "t0": 315970924560667000,
+  "t1": 315970927660086000,
+  "related": [
+   "28a68a49-e65f-4ddb-a729-1a1f39fcdb11"
+  ]
+ },
+ "n_P": 61,
+ "n_Pp": 18,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

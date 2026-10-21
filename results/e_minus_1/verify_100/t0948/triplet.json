@@ -1,0 +1,46 @@
+{
+ "id": "t0948",
+ "family": "agent_class",
+ "m": "The same, but the other road user is a pedestrian, not a cyclist.",
+ "m_old": "but with a pedestrian instead of a cyclist as the other agent",
+ "P_text": "A car that is changing lanes and is close to the cyclist",
+ "Pp_text": "A car that is changing lanes and is close to the pedestrian",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "24642607-2a51-384a-90a7-228067956d05",
+  "track": "062bcfec-e09f-4497-bc11-75229a952a66",
+  "t0": 315970915959799000,
+  "t1": 315970920360424000,
+  "related": [
+   "28a68a49-e65f-4ddb-a729-1a1f39fcdb11"
+  ]
+ },
+ "target_example": {
+  "log": "d46ff5df-95e8-32da-a0d7-87f7b976a959",
+  "track": "ed5fec68-4a39-4d91-acfa-8a0f319ced6e",
+  "t0": 315971493760158000,
+  "t1": 315971495559723000,
+  "related": [
+   "278375fb-40d3-49c7-bd03-43e9e48ad616",
+   "75d59b06-7ba5-45e7-86e4-7b86aae9b4ea"
+  ]
+ },
+ "negative_example": {
+  "log": "11ba4e81-c26f-3cd1-827d-b6913bcef64e",
+  "track": "5503f035-2d55-4bc6-a4ca-70068de09cc4",
+  "t0": 315966073459821000,
+  "t1": 315966076159762000,
+  "related": [
+   "151a0801-7b5f-40a1-b85c-b847b58cf2ac",
+   "264788cb-956e-41fa-bd97-923750f4e693",
+   "89d0f98c-78da-4c8e-bb08-89b554e23b0a",
+   "be227151-758a-443f-b337-6f79b4714d40"
+  ]
+ },
+ "n_P": 3,
+ "n_Pp": 119,
+ "jacc_track": 0.008264462809917356,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

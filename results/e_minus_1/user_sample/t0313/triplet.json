@@ -1,0 +1,42 @@
+{
+ "id": "t0313",
+ "family": "agent_class",
+ "m": "The same, but the other road user is a cyclist, not a vehicle.",
+ "m_old": "but with a cyclist instead of a vehicle as the other agent",
+ "P_text": "A pedestrian that is walking and has the vehicle in front of it",
+ "Pp_text": "A pedestrian that is walking and has the cyclist in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "7039e410-b5ab-35aa-96bc-2c4b89d3c5e3",
+  "track": "9c007998-c2d2-40b1-bb47-4bf0624d0517",
+  "t0": 315969201560281000,
+  "t1": 315969203959701000,
+  "related": [
+   "9f6f89e5-0c18-41dc-8bbf-52825fbfd16f"
+  ]
+ },
+ "target_example": {
+  "log": "214e388e-cbd7-3dde-a204-d2ec42298808",
+  "track": "2e4ac661-1de9-4d8c-8753-b288b5371ce9",
+  "t0": 315974486260195000,
+  "t1": 315974490759738000,
+  "related": [
+   "0dfaac7b-f781-49fb-9a2a-68a35ac07b92"
+  ]
+ },
+ "negative_example": {
+  "log": "e50e7698-de3d-355f-aca2-eddd09c09533",
+  "track": "c7b30777-1f7b-4589-b1e4-f6f70f89a8e4",
+  "t0": 315971191160166000,
+  "t1": 315971200760227000,
+  "related": [
+   "3983857b-135a-4242-97ab-98e34a9a23f0"
+  ]
+ },
+ "n_P": 20,
+ "n_Pp": 1,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 35
+}

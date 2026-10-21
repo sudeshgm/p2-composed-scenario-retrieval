@@ -1,0 +1,48 @@
+{
+ "id": "t0966",
+ "family": "relational",
+ "m": "The same, but the pedestrian is moving toward the vehicle, not just close to it.",
+ "m_old": "but heading toward the vehicle instead of near it",
+ "P_text": "A pedestrian that is standing still and is close to the moving vehicle",
+ "Pp_text": "A pedestrian that is standing still and is moving toward the moving vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "29a00842-ead2-3050-b587-c5ef507e4125",
+  "track": "3d905f47-e75a-4714-b445-4c6552c2ef6d",
+  "t0": 315966337359827000,
+  "t1": 315966340459909000,
+  "related": [
+   "afc6d6d7-fc10-435e-abd2-59833caacade",
+   "da467b7c-eaa0-4a0d-94dc-f77046390c69",
+   "f0fbce2e-5112-4baf-a4d4-d2e6d0e3a802"
+  ]
+ },
+ "target_example": {
+  "log": "b213af37-7d89-342d-ae39-8a3c72159a01",
+  "track": "65657bdd-a8cc-453b-9354-5c7ec5fe730f",
+  "t0": 315968656960026000,
+  "t1": 315968659259874000,
+  "related": [
+   "17421c59-ef88-4fdf-a57d-d0ca89b036db",
+   "5ab7c901-3fff-4967-89b6-be7ee8feb02c"
+  ]
+ },
+ "negative_example": {
+  "log": "7039e410-b5ab-35aa-96bc-2c4b89d3c5e3",
+  "track": "e2c26677-68e5-43a9-9d5d-3e1755e17398",
+  "t0": 315969199659852000,
+  "t1": 315969202059943000,
+  "related": [
+   "18603941-ed62-40be-82d1-83c99272f3cd",
+   "4749652f-1a14-468f-95f5-cbfad0afd310",
+   "8bcf075b-5a24-494d-96c9-f7564c779261",
+   "ego"
+  ]
+ },
+ "n_P": 674,
+ "n_Pp": 421,
+ "jacc_track": 0.5020576131687243,
+ "jacc_ts": 0.08561751732829237,
+ "n_near_miss": 283
+}

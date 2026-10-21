@@ -1,0 +1,3 @@
+Old search: A pedestrian that is standing still and has the parked vehicle behind it.
+New search: A pedestrian that is standing still and has the other standing pedestrian behind it.
+Why the right one should not fit: The other road user is a pedestrian, as the new search asks, but the pedestrian is not standing still.

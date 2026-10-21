@@ -1,0 +1,3 @@
+Old search: A car that is changing lanes and is close to the bus.
+New search: A car that is changing lanes and is pointed at the bus.
+Why the right one should not fit: It fits the old search, but it is not pointed at the bus.

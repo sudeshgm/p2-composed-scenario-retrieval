@@ -1,42 +1,43 @@
 {
  "id": "t0754",
- "family": "compositional",
- "m": "and also parked",
- "P_text": "vehicle following a moving car",
- "Pp_text": "parked vehicle following a moving car",
- "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
- "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "family": "state",
+ "m": "The same, but the truck is slowing down rather than speeding up.",
+ "m_old": "but braking instead of speeding up (accelerating)",
+ "P_text": "A truck that is speeding up and has the moving vehicle in front of it",
+ "Pp_text": "A truck that is slowing down and has the moving vehicle in front of it",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
  "reference": {
-  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
-  "track": "6574f8af-8980-411b-a2f2-d4e9acf408d5",
-  "t0": 315970671760031000,
-  "t1": 315970680159802000,
+  "log": "c8ec7be0-92aa-3222-946e-fbcf398c841e",
+  "track": "52cf9d28-dfa3-4ea0-a5ae-6b45dcf1fb61",
+  "t0": 315969292360202000,
+  "t1": 315969294459688000,
   "related": [
-   "c37fc9cc-561d-4faa-bb64-a828e3d64bbe"
+   "7a3d89d4-6b1b-42b6-b224-36bdfbd456ba",
+   "bf2352c3-832a-47d6-ad88-e919c0afd9ef"
   ]
  },
  "target_example": {
-  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
-  "track": "bf3e5198-2ea9-4f71-bd49-0a6a5f837eee",
-  "t0": 315969628459846000,
-  "t1": 315969628560042000,
+  "log": "9e9bcfb7-601d-3d80-bc12-ef7025174beb",
+  "track": "87a3d48a-8e83-4d19-85ae-e45e442710bf",
+  "t0": 315966303459513000,
+  "t1": 315966305359925000,
   "related": [
-   "c3b59edc-a545-4e26-affa-29795d7040d7"
+   "db5a354c-47a3-45ed-9fc0-cba7a7b0be9d"
   ]
  },
  "negative_example": {
-  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
-  "track": "e1c1c17e-2ba7-4956-ac73-440cf4c048cb",
-  "t0": 315976478260217000,
-  "t1": 315976487259958000,
+  "log": "5c0584a3-52a6-3029-b6ff-ca45a19d8aa6",
+  "track": "85b8e2ed-e10f-4cf4-9e56-4a558bedec2f",
+  "t0": 315967119759630000,
+  "t1": 315967122760173000,
   "related": [
-   "176bf460-9e77-48b8-a415-53a8ae6e50ab",
-   "cf20f94e-8d9f-416a-8a4c-f9ea302fe262"
+   "4d2018cf-035a-49b0-aabd-13e69e465357"
   ]
  },
- "n_P": 227,
- "n_Pp": 41,
- "jacc_track": 0.18385650224215247,
- "jacc_ts": 0.07663500182681768,
- "n_near_miss": 172
+ "n_P": 29,
+ "n_Pp": 35,
+ "jacc_track": 0.23076923076923078,
+ "jacc_ts": 0.0,
+ "n_near_miss": 26
 }

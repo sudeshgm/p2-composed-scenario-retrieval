@@ -1,0 +1,42 @@
+{
+ "id": "t0044",
+ "family": "state",
+ "m": "The same, but the vehicle is speeding up rather than slowing down.",
+ "m_old": "but speeding up (accelerating) instead of braking",
+ "P_text": "A vehicle that is slowing down and is close to the moving truck",
+ "Pp_text": "A vehicle that is speeding up and is close to the moving truck",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "e0ea281b-6956-3605-b720-71b54ec87d25",
+  "track": "f87f2e64-1e5e-46ad-8762-2d39790f229a",
+  "t0": 315971665659798000,
+  "t1": 315971667160074000,
+  "related": [
+   "757d4eeb-acfb-4348-bed0-52a33c666967"
+  ]
+ },
+ "target_example": {
+  "log": "a91d4c7b-bf55-3a0e-9eba-1a43577bcca8",
+  "track": "eb74db93-fd7a-4caf-9f9f-f1eb28102831",
+  "t0": 315970695160217000,
+  "t1": 315970699459972000,
+  "related": [
+   "d4773697-029a-45d5-b589-af213dca409b"
+  ]
+ },
+ "negative_example": {
+  "log": "2f2321d2-7912-3567-a789-25e46a145bda",
+  "track": "318fd0b1-877c-4b8f-95d1-1d952c68034d",
+  "t0": 315966455659741000,
+  "t1": 315966457359728000,
+  "related": [
+   "7b82efb4-6859-437e-9b29-258e26c9e214"
+  ]
+ },
+ "n_P": 92,
+ "n_Pp": 113,
+ "jacc_track": 0.10810810810810811,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

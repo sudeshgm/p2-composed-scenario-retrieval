@@ -1,0 +1,43 @@
+{
+ "id": "t1404",
+ "family": "state",
+ "m": "The same, but the vehicle is turning left rather than turning right.",
+ "m_old": "but turning left instead of turning right",
+ "P_text": "A vehicle that is turning right and has the bus behind it",
+ "Pp_text": "A vehicle that is turning left and has the bus behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='left')\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "e8667597-41d6-44b5-b98d-14d050a5d64a",
+  "t0": 315970485960031000,
+  "t1": 315970487759585000,
+  "related": [
+   "4c7d9878-9028-48a6-8e77-3fb96db1cd3e",
+   "61018a58-de4b-4e64-9de0-7425ed1a0992"
+  ]
+ },
+ "target_example": {
+  "log": "bdb9d309-f14b-3ff6-ad1f-5d3f3f95a13e",
+  "track": "5760e5d1-99ed-4c7b-9a43-0e354dbec1ed",
+  "t0": 315971066559612000,
+  "t1": 315971068259616000,
+  "related": [
+   "4c86e85e-df0d-42a9-800b-47611bc4451b"
+  ]
+ },
+ "negative_example": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "e752a6af-0f20-4c55-bf50-e1a5db6e224b",
+  "t0": 315970488959951000,
+  "t1": 315970490559775000,
+  "related": [
+   "f23e8920-8124-44bb-9369-cfd3839082be"
+  ]
+ },
+ "n_P": 9,
+ "n_Pp": 16,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

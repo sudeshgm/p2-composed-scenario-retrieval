@@ -1,0 +1,42 @@
+{
+ "id": "t0981",
+ "family": "relational",
+ "m": "The same, but our own car is pointed at the car - not driving right behind it, following it.",
+ "m_old": "but facing toward the car instead of following it",
+ "P_text": "Our own car that is changing lanes and is driving right behind the parked car, following it",
+ "Pp_text": "Our own car that is changing lanes and is pointed at the parked car",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "78f7cb5c-9d51-34f0-b356-9b3d83263c75",
+  "track": "ego",
+  "t0": 315972382459997000,
+  "t1": 315972384860068000,
+  "related": [
+   "663641b0-44e8-4dad-a64c-2c24eb0cf9f0"
+  ]
+ },
+ "target_example": {
+  "log": "7e4d67b3-c3cc-3288-afe5-043602ea3c70",
+  "track": "38089643-bd82-4e6e-9aef-21a2cadcdd28",
+  "t0": 315969982159662000,
+  "t1": 315969984760094000,
+  "related": [
+   "43055ba4-1308-42da-b9c1-fdb5a5628a95"
+  ]
+ },
+ "negative_example": {
+  "log": "78f7cb5c-9d51-34f0-b356-9b3d83263c75",
+  "track": "945b64bb-203a-485a-be7d-b8933e467fd2",
+  "t0": 315972382459997000,
+  "t1": 315972384860068000,
+  "related": [
+   "663641b0-44e8-4dad-a64c-2c24eb0cf9f0"
+  ]
+ },
+ "n_P": 4,
+ "n_Pp": 7,
+ "jacc_track": 0.2222222222222222,
+ "jacc_ts": 0.14106583072100312,
+ "n_near_miss": 0
+}

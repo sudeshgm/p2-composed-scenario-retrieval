@@ -1,0 +1,3 @@
+Old search: A pedestrian that is walking and has the vehicle in front of it.
+New search: A pedestrian that is walking and has the cyclist in front of it.
+Why the right one should not fit: The other road user is a cyclist, as the new search asks, but the pedestrian is not walking.

@@ -1,0 +1,3 @@
+Old search: A car that is turning left and is pointed at the vehicle.
+New search: A truck that is turning left and is pointed at the vehicle.
+Why the right one should not fit: It is a truck, as the new search asks, but the truck is not turning left.

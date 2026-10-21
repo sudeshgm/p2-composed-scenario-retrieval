@@ -1,61 +1,59 @@
-# Exp −1: mutation-oracle reliability (CPU only)
+# Exp −1: mutation-oracle reliability, post-fix run on 150/150 AV2 val logs (CPU only)
 
-**Status:** pipeline done. Results are from **19 of 150 AV2 val logs** (the RefAV precompute is slow on a shared 8-core CPU, about 7 min per log per worker). Precompute continues in the background, and the stage-2 driver (`src/run_stage2.sh`) regenerates everything when all 150 are done.
+## Fixes applied (vs first 19-log run)
+1. Directional relations: `lateral_thresh=2.5` m. This is applied as an exact per-(pair, timestamp) post-filter of RefAV's `has_objects_in_relative_direction` output, and it appears in the program source.
+2. The heading_toward ↔ facing_toward swap is dropped.
+3. `in_same_lane` and `following` are used only when both agents are vehicles.
+4. 'stationary' (RefAV: < 3 m displacement over the whole log) is worded as 'parked' in the m text and descriptions.
+5. Compositional mutations add a conjunct only (no drop). Contradictory conjuncts (left+right turn, accel+brake, parked+motion) are filtered out.
+6. Reference segments must be ≥ 1.5 s. Candidates skipped for this, per family: {"agent_class": 43, "compositional": 24, "relational": 80, "state": 60, "directional": 45}.
+8. Negatives are a different track from the reference, or the same track in a disjoint window.
+9. Hard negatives only: same RefAV category as the target, matching everything except the mutated predicate. For agent_class, the negative is of the target class and matches P′ minus one state/relation (no class-only negatives). Skips: {"no_valid_negative": 188, "short_target": 227}.
+10. Every same-lane/following relation in P or P′ must agree with the AV2 map lane-polygon check on the reference, target and negative windows; disagreeing items are dropped: {"dropped_lane_disagree": {"state": 33, "relational": 35, "compositional": 23, "agent_class": 19}, "kept": 1000}.
+11. The 1.5 s minimum also applies to target and negative windows.
+12. Wording: pedestrians/cyclists are 'standing still', not 'parked'; 'speeding up (accelerating)' vs 'just moving at a steady speed'; 'the other X' only when classes match.
+13. No same-lane/following relation involving a pedestrian or cyclist.
+14. Plain-English wording (user feedback): m texts read like 'The same, but the truck is behind the car now, not in front of it.' (old template kept as `m_old`). user_sample items have plain.txt (old search / new search / why the right one should not fit), and BEV panels are labelled LEFT old match / MIDDLE should fit / RIGHT should not fit, with arrows on the key agents. Agent b-criterion also fails jargon or over-long m.
+7. Skipped and declared: `near_intersection` (too slow on CPU), `is_color` (needs camera images and a GPU model). The context family (weather/lighting) is unsupported because the annotations have no tags and there is no atomic function for it.
 
-## Setup
-- Data: RefAV scenario-mining val annotations (1.1 GB). Ground-truth tracks for all objects are used, not detections. AV2 sensor-val maps and poses come to 343 MB; no images or LiDAR.
-- Oracle: RefAV atomic functions (`refAV/atomic_functions.py`), called unmodified. We patched only caching and speed: a serial pool, memoisation, an STRtree lane lookup, and a cuboid-distance lower bound that is exact for thresholds ≤ 30 m.
-- Unary results are computed for every agent. Relational results are computed per (a, b) pair, with a 30 m centre-distance neighbour gate. The gate is identical in P and P′ and appears in the program source.
-- Composition matches RefAV's `@composable_relational` semantics: a matches at t iff ∃b with rel(a,b,t), a∈A(t) and b∈B(t). We checked this against RefAV's own composed execution on a log: the results are identical up to the gate (1 frame out of 1,576).
-- Grammar: agent group {vehicle, car, truck, bus, pedestrian, cyclist, ego}, plus 0–2 states, plus an optional relation to a second group with states. Every mutation changes exactly **one** predicate.
-- Sources for P and P′ are emitted as RefAV programs (`P.py` / `P_prime.py`).
-- `near_intersection` was dropped (too slow on CPU). `is_color` was not used because it needs camera images and a GPU model.
+## Auto-checks on 1000 triplets
+| family | mutations | empty-target rate | identical | median track-Jaccard | median target size | selected |
+|---|---|---|---|---|---|---|
+| relational | 7752 | 5.9 % | 0.1 % | 0.386 | 74.5 | 176 |
+| directional | 2395 | 4.7 % | 0.3 % | 0.251 | 84.5 | 236 |
+| agent_class | 15057 | 18.7 % | 0.0 % | 0.0 | 40.0 | 218 |
+| state | 6799 | 9.7 % | 0.0 % | 0.032 | 65.0 | 197 |
+| compositional | 18153 | 31.5 % | 0.4 % | 0.143 | 35.0 | 173 |
 
-## Families (1000 triplets, balanced)
-| family | mutations generated | empty-target rate | identical P/P′ | no reference outside target | selected | median track-Jaccard(P,P′) | median target size (tracks) |
-|---|---|---|---|---|---|---|---|
-| relational (rel swap among same_lane/heading/following/near/facing) | 7108 | 15.9 % | 0.7 % | 21 % | 200 | 0.33 | 12 |
-| directional (ahead↔behind, left↔right) | 1845 | 3.5 % | 1.7 % | 16 % | 200 | 0.50 | 20.5 |
-| agent class (car/truck/bus, ped↔cyclist, vehicle→ped/cyclist) | 11493 | 36.8 % | 0.1 % | 4 % | 200 | 0.00 | 5 |
-| state (moving→accel/braking/parked, accel↔braking, left↔right turn, …) | 4940 | 15.2 % | 0.0 % | 7 % | 200 | 0.00 | 10 |
-| compositional (add a conjunct; drop a conjunct) | 20075 | 46.0 % | 1.2 % | 15 % | 200 | 0.17 | 4 |
-| context (weather/lighting) | — | — | — | — | 0 | — | — |
+All mutations: 50156. **Empty-target rate (post-fix): 19.5 %.**
+Track-Jaccard(P, P′): median 0.13, p90 0.536; 23.6 % are disjoint. Target size: median 55.0 tracks, p90 949.7. Negatives per query: median 26.0; near-miss median 1.0.
 
-The **context** family is **unsupported**. Neither the annotations nor AV2 have weather, lighting or time-of-day tags, and RefAV has no atomic function for them, even though some RefAV prompts mention snow.
+## Independent AV2 map-API check (lane polygon membership) vs RefAV, over all triplets whose P′ uses a lane, map or turn predicate
+- Checked: 307; uncheckable: 25
+- Target example satisfies P′ by the map check: **85.0 %**
+- Negative example fails P′ by the map check: **98.7 %**
+- The map check uses its own definitions: same lane = shared or successor/predecessor lane polygon; turning = |Δyaw| > 45° within ±3 s; lane change = moving to a left/right neighbour lane; crossing = inside a crossing polygon buffered by 1 m. Disagreement therefore mixes oracle errors with definition differences.
 
-All 45,461 mutations together: empty-target rate **33.9 %**. Over the 1000 selected triplets:
-- Track-level Jaccard(P, P′): median 0.15, p90 0.66, max 0.97. 25.9 % have Jaccard = 0 (disjoint).
-- Timestamp-level Jaccard: median 0.03.
-- Target size: median 9 tracks, p90 159. Answers are spread over a median of 5 logs.
-- Explicit negatives per query: median 12. Near-miss negatives (matches of sibling mutations not in P′): median 4.
-- Full numbers are in `auto_checks.json` and `gen_stats.json`.
+## Agent-judged verification of 100 (20 per family). This is NOT the human check
+**Agent precision: 87 %** (kill rule < 90 %). a = 89/100, b = 100/100, c = 98/100 (oracle-only c: 11).
+**Per-family agent precision (new verify_100):** relational 17/20 (85 %), directional 19/20 (95 %), agent_class 15/20 (75 %), state 20/20 (100 %), compositional 16/20 (80 %)
 
-Triplet definition:
-- reference = a P-match track and segment that is **not** in P′
-- target set = all P′ matches
-- negatives = P-matches not in P′
-- near-miss = tracks matched by sibling mutations of the same P but not by P′
+Agent-flagged items:
+- t1266 [relational] A car that is turning right and is moving toward the vehicle | m: The same, but the car is driving right behind the vehicle, following it - not moving toward it. | a=yes b=yes c=no | indep: negative satisfies P' on 17 frames
+- t0236 [relational] A vehicle that is parked and is driving in the same lane as the moving car | m: The same, but the vehicle is driving right behind the car, following it - not driving in the same lane as it. | a=no b=yes c=yes | indep: reference satisfies P' on 46 frames in its window
+- t0996 [relational] A truck that is driving along and is pointed at the car | m: The same, but the truck is driving in the same lane as the car - not pointed at it. | a=no b=yes c=yes | indep: reference satisfies P' on 56 frames in its window
+- t0142 [directional] Our own car that is turning right and has the moving vehicle behind it | m: The same, but the vehicle is in front of our own car now, not behind it. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t0353 [agent_class] A car that is changing lanes and is pointed at the other car | m: The same, but the other road user is a truck, not a car. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t1173 [agent_class] Our own car that is turning left and has the moving truck in front of it | m: The same, but the other road user is a bus, not a truck. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t1393 [agent_class] A bus that is changing lanes and has the standing pedestrian on its left | m: The same situation, but with a car doing it instead of a bus. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t0208 [agent_class] A vehicle that is changing lanes and has the parked truck on its right | m: The same, but the other road user is a car, not a truck. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t0948 [agent_class] A car that is changing lanes and is close to the cyclist | m: The same, but the other road user is a pedestrian, not a cyclist. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t1310 [compositional] A truck that is slowing down and has the parked vehicle in front of it | m: The same, but the truck is also changing lanes. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t0080 [compositional] A vehicle that has the other moving vehicle on its right | m: The same, but the vehicle is also changing lanes. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
+- t0035 [compositional] A bus that is driving along and is close to the moving car | m: The same, but the bus is also speeding up. | a=yes b=yes c=no | indep: negative satisfies P' on 14 frames
+- t0280 [compositional] A truck that has the moving car on its left | m: The same, but the truck is also changing lanes. | a=no b=yes c=yes | indep: target example never satisfies P' (indep impl)
 
-## Verification
-`verify_100/` holds 20 items per family. Each item has `P.py`, `P_prime.py`, `triplet.json` (reference, target and negative track IDs and timestamps) and `bev.png`. `verify_sheet.csv` has blank human columns a/b/c and separate `AGENT_NOT_HUMAN_*` columns.
-
-**Agent-judged precision: 96/100** (a 100/100, b 99/100, c 97/100). This passes the 90 % kill rule, but **this is not the human check**. The agent judge is:
-- (a) P′ ≠ P, and an independent numpy re-implementation (raw city-frame boxes) does not say the reference satisfies P′ or that the target fails it.
-- (b) A rule-based wording check.
-- (c) The independent re-check says the negative does not satisfy P′. For **48/100** the mutated predicate is lane-, map- or turn-based (in_same_lane, following, turning, changing_lanes, ped crossing). Those cannot be independently re-checked, so they rely on the RefAV oracle only.
-
-Failures: 3 directional (the negative does satisfy the flipped direction on 12–16 frames), and 1 agent-class with odd wording ("car in the same lane as a cyclist").
-
-`user_sample/` holds 20 different items (4 per family) with `user_sheet.csv` for the user's hand check.
-
-## Broken or weak mutation types
-1. **Directional (ahead↔behind, left↔right).** RefAV `has_objects_in_relative_direction` defaults to `lateral_thresh=inf`, so "ahead" includes diagonally ahead in any lane. Negatives can hold the flipped relation with *another* agent of the same class, and 3/20 failed. Fix: set lateral_thresh (for example 2–3 m), or define the negative as "the same witness b is no longer in that direction".
-2. **heading_toward vs facing_toward.** These are hard to tell apart in text. In an earlier 9-log run, 2/20 relational items failed the wording check. Exclude this pair.
-3. **Lane relations (in_same_lane / following) with pedestrians or cyclists** read oddly. Restrict them to vehicles.
-4. **"stationary" is RefAV's whole-log < 3 m displacement**, so it means "parked", not "stopped now". It is worded as "parked".
-5. **Compositional drop** produces P′ ⊇ P, so no reference exists outside the target. Effectively only "add conjunct" is used.
-6. Many reference windows are short (< 1 s), especially for accelerating and braking. Add a minimum-duration filter (≥ 1.5 s) before the human check.
-7. Appearance and context modifications (colour, weather) are out of scope for this CPU and trajectory-only build.
+The human columns in `verify_100/verify_sheet.csv` and `user_sample/user_sheet.csv` (20 items) are still blank and are needed for the real H1 decision.
 
 ## Reproduce
-`src/prep_logs.py` → `src/precompute.py w n` (shards) → `src/generate.py` → `src/export.py` → `src/verify.py` → `src/stats.py`
+`src/prep_logs.py` → `src/precompute.py w n` → `src/run_stage2.sh` (generate → export → verify → stats → summary → commit)

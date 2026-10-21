@@ -1,0 +1,47 @@
+{
+ "id": "t1292",
+ "family": "directional",
+ "m": "The same, but the car is behind our own car now, not in front of it.",
+ "m_old": "but with the car behind it instead of ahead of it",
+ "P_text": "Our own car that has the car in front of it",
+ "Pp_text": "Our own car that has the car behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "5589de60-1727-3e3f-9423-33437fc5da4b",
+  "track": "ego",
+  "t0": 315967926959883000,
+  "t1": 315967928659894000,
+  "related": [
+   "4b827a5e-8368-45e2-bf7a-56515e1437e2",
+   "8b2cb7d2-c924-4ff1-b3bd-cb747bfb8748"
+  ]
+ },
+ "target_example": {
+  "log": "95bf6003-7068-3a78-a0c0-9e470a06e60f",
+  "track": "5e356c5e-429b-4868-998a-fdb35fc83462",
+  "t0": 315966140659588000,
+  "t1": 315966151360107000,
+  "related": [
+   "c3caa95c-52ce-42e3-bce4-f2d005893fa6",
+   "c5b00ef1-f4c3-4718-a718-fc38759b51fa",
+   "e65540c0-ffbe-4024-a8ad-358f57d1b08e",
+   "efbaaa35-8f88-4e17-bf0b-a72d30d662b9"
+  ]
+ },
+ "negative_example": {
+  "log": "4c33fc38-5e59-34f8-96ba-4e5a404d3988",
+  "track": "f386be6e-a29a-4a0b-9841-04e5327eccc6",
+  "t0": 315971127159950000,
+  "t1": 315971129560017000,
+  "related": [
+   "a518073f-6839-4c26-9d2a-953e918f44a4",
+   "d1feef4f-8f87-4ca8-bcc1-ebd08807f5a9"
+  ]
+ },
+ "n_P": 272,
+ "n_Pp": 264,
+ "jacc_track": 0.8611111111111112,
+ "jacc_ts": 0.5114569702369351,
+ "n_near_miss": 0
+}

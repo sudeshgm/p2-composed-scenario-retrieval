@@ -1,0 +1,42 @@
+{
+ "id": "t0311",
+ "family": "relational",
+ "m": "The same, but the car is driving right behind the truck, following it - not moving toward it.",
+ "m_old": "but following the truck instead of heading toward it",
+ "P_text": "A car that is slowing down and is moving toward the truck",
+ "Pp_text": "A car that is slowing down and is driving right behind the truck, following it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "3b3570b4-7b0b-3268-a571-b0889dbf40b6",
+  "track": "bee06301-9d27-41bd-a139-f33d4fcf1bb6",
+  "t0": 315971919259962000,
+  "t1": 315971921360072000,
+  "related": [
+   "037ce8e5-b14f-47fe-a042-97499a39bae5"
+  ]
+ },
+ "target_example": {
+  "log": "29a00842-ead2-3050-b587-c5ef507e4125",
+  "track": "afc6d6d7-fc10-435e-abd2-59833caacade",
+  "t0": 315966339659677000,
+  "t1": 315966341659601000,
+  "related": [
+   "b1d5320f-91ac-42cb-9137-f67a110bb9ad"
+  ]
+ },
+ "negative_example": {
+  "log": "88f47a10-87b4-3ea8-a0c7-a07d825b647d",
+  "track": "456dd16e-b6b0-4939-9ffc-703f9f25b2ec",
+  "t0": 315967658160060000,
+  "t1": 315967660160000000,
+  "related": [
+   "561e6f5c-b0ba-41cf-8e87-4c7c293b2564"
+  ]
+ },
+ "n_P": 47,
+ "n_Pp": 11,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 113
+}

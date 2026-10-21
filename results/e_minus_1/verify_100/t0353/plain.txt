@@ -1,0 +1,3 @@
+Old search: A car that is changing lanes and is pointed at the other car.
+New search: A car that is changing lanes and is pointed at the truck.
+Why the right one should not fit: The other road user is a truck, as the new search asks, but the car is not changing lanes.

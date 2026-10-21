@@ -1,0 +1,45 @@
+{
+ "id": "t1142",
+ "family": "directional",
+ "m": "The same, but the vehicle is on the right of the cyclist now, not on the left of it.",
+ "m_old": "but with the vehicle to the right of it instead of to the left of it",
+ "P_text": "A cyclist that is riding along and has the moving vehicle on its left",
+ "Pp_text": "A cyclist that is riding along and has the moving vehicle on its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "c865c156-0f26-411c-a16c-be985333f675",
+  "track": "72aa0d60-3719-4af0-83ca-7189659e6b93",
+  "t0": 315979564960131000,
+  "t1": 315979569059479000,
+  "related": [
+   "75eaac38-efa2-4a57-ad9c-378326a7ca2e",
+   "76039ccd-124e-4941-822f-ab7d6159905a",
+   "7d31c776-4260-4123-b24c-efd59fc8829b"
+  ]
+ },
+ "target_example": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "a0dd6899-7847-4c29-a50b-cfca209aa68f",
+  "t0": 315969632060222000,
+  "t1": 315969635259828000,
+  "related": [
+   "940956f4-30bd-453b-90c7-37bbca303232"
+  ]
+ },
+ "negative_example": {
+  "log": "eec284b2-840a-3c75-aa42-04d2e309bbe1",
+  "track": "5a3fe155-5376-4b13-935f-2b06cc166125",
+  "t0": 315972311459612000,
+  "t1": 315972313159607000,
+  "related": [
+   "000fed34-a870-40e9-9656-596b9f9474f9",
+   "72694257-525a-499a-9c27-bb243d49a62e"
+  ]
+ },
+ "n_P": 28,
+ "n_Pp": 10,
+ "jacc_track": 0.1875,
+ "jacc_ts": 0.005649717514124294,
+ "n_near_miss": 0
+}

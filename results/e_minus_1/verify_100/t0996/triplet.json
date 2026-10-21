@@ -1,0 +1,49 @@
+{
+ "id": "t0996",
+ "family": "relational",
+ "m": "The same, but the truck is driving in the same lane as the car - not pointed at it.",
+ "m_old": "but in the same lane as the car instead of facing toward it",
+ "P_text": "A truck that is driving along and is pointed at the car",
+ "Pp_text": "A truck that is driving along and is driving in the same lane as the car",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "3bffdcff-c3a7-38b6-a0f2-64196d130958",
+  "track": "e0b52e85-1d31-40ec-85eb-c0675a611571",
+  "t0": 315975590859953000,
+  "t1": 315975596559887000,
+  "related": [
+   "14c4a1e5-f430-4e6e-b215-7f3f97fa2022",
+   "236af9fc-8953-4b98-9bd3-7002875186d8",
+   "23f72b4f-0098-495f-ad55-20b3d2c6a66f"
+  ]
+ },
+ "target_example": {
+  "log": "cd22abca-9150-3279-87a4-cb00ba517372",
+  "track": "4a2c14cb-0ade-447c-a60b-19732ef3e91e",
+  "t0": 315970407160164000,
+  "t1": 315970412059887000,
+  "related": [
+   "7127364d-4901-4efa-95e7-bbe227db4499"
+  ]
+ },
+ "negative_example": {
+  "log": "c2d44a70-9fd4-3298-ad0a-c4c9712e6f1e",
+  "track": "4234c14a-c940-4a11-b839-92207b8556b0",
+  "t0": 315976587559817000,
+  "t1": 315976598959706000,
+  "related": [
+   "0f60bde6-8cf8-4703-86ee-fdd4d25234da",
+   "114498f3-fec4-4aa2-84cd-de8d7de7f1b5",
+   "9d5ed38e-f6b6-4bd1-945e-943c1d856fc0",
+   "a9aed8e2-ffc9-43f7-baf7-248d21588aa8",
+   "edbe4427-d5fb-48c8-900b-aa63245340f8",
+   "f75d2fdf-2249-4cf2-b5d0-801d15b5876c"
+  ]
+ },
+ "n_P": 111,
+ "n_Pp": 73,
+ "jacc_track": 0.6576576576576577,
+ "jacc_ts": 0.4744428294573643,
+ "n_near_miss": 17
+}

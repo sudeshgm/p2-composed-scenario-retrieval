@@ -1,0 +1,43 @@
+{
+ "id": "t0080",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also changing lanes.",
+ "m_old": "and also changing lanes",
+ "P_text": "A vehicle that has the other moving vehicle on its right",
+ "Pp_text": "A vehicle that is changing lanes and has the other moving vehicle on its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "bdb9d309-f14b-3ff6-ad1f-5d3f3f95a13e",
+  "track": "a622394f-e550-4a8e-a491-856bcbc3154e",
+  "t0": 315971065959769000,
+  "t1": 315971068059886000,
+  "related": [
+   "823002d0-e7e7-4280-b3d4-6e373aa160a8"
+  ]
+ },
+ "target_example": {
+  "log": "544a8102-0ef5-3044-921e-dc0544370376",
+  "track": "acd91f59-156b-46ce-a02e-02bffb251379",
+  "t0": 315968327259529000,
+  "t1": 315968328859752000,
+  "related": [
+   "d086eb46-a316-4b52-b40a-c2f09e3ab50e"
+  ]
+ },
+ "negative_example": {
+  "log": "f3cd0d0d-8b71-3266-9732-d9f0d5778eb6",
+  "track": "c75574a8-7b88-481d-9012-42a665c10168",
+  "t0": 315968808559688000,
+  "t1": 315968810659813000,
+  "related": [
+   "4f79a0ca-a176-49d1-80c6-90d8699d96aa",
+   "5464baf9-1486-4c2b-b6ad-e92c59a026e2"
+  ]
+ },
+ "n_P": 1582,
+ "n_Pp": 61,
+ "jacc_track": 0.038558786346396964,
+ "jacc_ts": 0.022218810317599577,
+ "n_near_miss": 10
+}

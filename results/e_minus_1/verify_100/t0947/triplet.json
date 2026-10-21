@@ -1,0 +1,44 @@
+{
+ "id": "t0947",
+ "family": "directional",
+ "m": "The same, but the other car is behind the car now, not in front of it.",
+ "m_old": "but with the car behind it instead of ahead of it",
+ "P_text": "A car that is speeding up and has the other car in front of it",
+ "Pp_text": "A car that is speeding up and has the other car behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "de9cf513-a0cd-3389-bc79-3f9f6f261317",
+  "track": "f18d6a7d-6ec6-45d0-847c-7da7224e5cc0",
+  "t0": 315971616460367000,
+  "t1": 315971618460280000,
+  "related": [
+   "2241bc5d-3534-4a59-a3d0-1b94a332ce92"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "b1e8ce15-356b-4e0a-9257-3c58ea720322",
+  "t0": 315967869059855000,
+  "t1": 315967871660282000,
+  "related": [
+   "9b1df982-e6ad-4246-9718-c3a37b64990d",
+   "bf522984-cafa-4d38-9240-a4e3a05a2a2d"
+  ]
+ },
+ "negative_example": {
+  "log": "52971a8a-ed62-3bfd-bcd4-ca3308b594e0",
+  "track": "20bf1101-9d60-4d5f-8645-edebd7354f53",
+  "t0": 315968608059881000,
+  "t1": 315968609859440000,
+  "related": [
+   "131f4f26-834a-4d32-9d4f-fd34c3491be1",
+   "2741205a-9cb5-4122-a5e4-7c3f31507c54"
+  ]
+ },
+ "n_P": 847,
+ "n_Pp": 860,
+ "jacc_track": 0.6103773584905661,
+ "jacc_ts": 0.4987679155142067,
+ "n_near_miss": 0
+}

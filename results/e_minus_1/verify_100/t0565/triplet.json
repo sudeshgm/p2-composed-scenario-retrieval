@@ -1,0 +1,45 @@
+{
+ "id": "t0565",
+ "family": "compositional",
+ "m": "The same, but the car is also turning left.",
+ "m_old": "and also turning left",
+ "P_text": "A car that has the other parked car in front of it",
+ "Pp_text": "A car that is turning left and has the other parked car in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "d89f80be-76d0-3853-8daa-76605cf4ce5e",
+  "track": "3d1faaf4-163e-4229-aa94-39af549f7eee",
+  "t0": 315970790559937000,
+  "t1": 315970805859962000,
+  "related": [
+   "298c86b6-02ba-4b94-8111-3e8daed80163",
+   "491bd309-1620-425f-8f3f-e9cce1883948"
+  ]
+ },
+ "target_example": {
+  "log": "b213af37-7d89-342d-ae39-8a3c72159a01",
+  "track": "740ea064-3ab3-45a7-982f-ab9a070b35dd",
+  "t0": 315968648059867000,
+  "t1": 315968650560116000,
+  "related": [
+   "7225e708-df43-4c2b-8985-5a7cb87d20e3",
+   "a03d4bf4-a94a-4ff6-aaab-44080defd741"
+  ]
+ },
+ "negative_example": {
+  "log": "05fa5048-f355-3274-b565-c0ddc547b315",
+  "track": "7b0b7972-81e6-4918-a904-7e56800a0f65",
+  "t0": 315976483059681000,
+  "t1": 315976485760333000,
+  "related": [
+   "9762ce9d-7472-4c92-bf0d-b197954223e6",
+   "cf460bff-2b90-4279-b958-523180e19ccc"
+  ]
+ },
+ "n_P": 5372,
+ "n_Pp": 71,
+ "jacc_track": 0.01321667907669397,
+ "jacc_ts": 0.0037730406586982106,
+ "n_near_miss": 5206
+}

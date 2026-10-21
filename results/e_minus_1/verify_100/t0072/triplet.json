@@ -1,0 +1,43 @@
+{
+ "id": "t0072",
+ "family": "directional",
+ "m": "The same, but the car is in front of our own car now, not behind it.",
+ "m_old": "but with the car ahead of it instead of behind it",
+ "P_text": "Our own car that is slowing down and has the moving car behind it",
+ "Pp_text": "Our own car that is slowing down and has the moving car in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "7de2e535-81df-3d5f-a5ca-62e4b940eb54",
+  "track": "ego",
+  "t0": 315971805260282000,
+  "t1": 315971808159971000,
+  "related": [
+   "a249cbb5-3210-45b1-b3dd-6e4134a34f3e",
+   "d6baeabf-4d2d-4f7b-bae5-1f76d8fce9d1"
+  ]
+ },
+ "target_example": {
+  "log": "d5fa4d54-74ba-369c-a758-636441ad7f07",
+  "track": "ego",
+  "t0": 315977173459751000,
+  "t1": 315977175059561000,
+  "related": [
+   "cea440ba-d15b-4a17-aa30-f62c77254f9b"
+  ]
+ },
+ "negative_example": {
+  "log": "d89f80be-76d0-3853-8daa-76605cf4ce5e",
+  "track": "ego",
+  "t0": 315970790859862000,
+  "t1": 315970793259898000,
+  "related": [
+   "5a0ac2e3-9dba-4a7d-ba38-ec858cb35e25"
+  ]
+ },
+ "n_P": 144,
+ "n_Pp": 119,
+ "jacc_track": 0.5202312138728323,
+ "jacc_ts": 0.27411676271611124,
+ "n_near_miss": 0
+}

@@ -1,0 +1,3 @@
+Old search: Our own car that is driving along and is pointed at the bus.
+New search: Our own car that is slowing down and is pointed at the bus.
+Why the right one should not fit: It fits the old search, but it is driving along, not slowing down.

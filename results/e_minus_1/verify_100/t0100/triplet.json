@@ -1,42 +1,52 @@
 {
  "id": "t0100",
- "family": "relational",
- "m": "but facing toward the other pedestrian instead of near it",
- "P_text": "parked car near a parked pedestrian",
- "Pp_text": "parked car facing toward a parked pedestrian",
- "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
- "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also changing lanes.",
+ "m_old": "and also changing lanes",
+ "P_text": "A vehicle that is driving along and has the parked car in front of it",
+ "Pp_text": "A vehicle that is driving along and changing lanes and has the parked car in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
  "reference": {
-  "log": "201fe83b-7dd7-38f4-9d26-7b4a668638a9",
-  "track": "0915a829-1ed3-4068-90e5-6fe23e1e22bc",
-  "t0": 315969628859846000,
-  "t1": 315969629459682000,
+  "log": "472a240a-10cd-39cd-8681-558f7c7cf868",
+  "track": "c4fc387c-06e6-4a94-b69c-93741d4582a9",
+  "t0": 315968856760058000,
+  "t1": 315968860260327000,
   "related": [
-   "501cd3ce-d2cf-4df3-96ce-e7fb44806d2d"
+   "0daf460d-f9b1-497e-8dd4-20bf0356bb27",
+   "380091d5-13b7-486e-8496-b0a01e57ff43",
+   "5e45fc10-ee15-42f8-8427-d7763308aa47",
+   "655c5378-03cc-4d12-b83e-bfcb9a942fa8",
+   "ad7c6a33-4f7d-4171-ab9a-67926e22ade4",
+   "bb7e456d-efea-4b3c-82ad-125c99b0f94d"
   ]
  },
  "target_example": {
-  "log": "070bbf42-31d3-3aa9-aca4-c262afc9077d",
-  "track": "11fb35d6-60a1-43ff-b294-07f5e2c87a41",
-  "t0": 315970819360443000,
-  "t1": 315970834659801000,
+  "log": "5f8f4a26-59b1-3f70-bcab-b5e3e615d3bc",
+  "track": "fac6240b-df35-40cc-9fb8-65ef29f41a46",
+  "t0": 315966656560203000,
+  "t1": 315966659059786000,
   "related": [
-   "2464f60a-665e-487a-afad-c2bf4d91ca52",
-   "5682e7a2-440d-420e-9cf1-bb21e10c6965"
+   "1e9b8636-6ba2-469d-8728-8fc8432873c8",
+   "513a3d69-1295-46ae-8ecb-106e4dca0fd9",
+   "9a5f8d6f-55db-4391-8a74-2e03854c314d"
   ]
  },
  "negative_example": {
-  "log": "0aa4e8f5-2f9a-39a1-8f80-c2fdde4405a2",
-  "track": "12c4bd7f-4178-4e7c-9ab5-49185cf287ef",
-  "t0": 315971853559733000,
-  "t1": 315971854059380000,
+  "log": "d770f926-bca8-31de-9790-73fbb7b6a890",
+  "track": "1876651a-302c-44e3-bc13-cf8d7f226753",
+  "t0": 315967207259711000,
+  "t1": 315967209059908000,
   "related": [
-   "48925ffb-0965-4a30-a8c0-f64ed01d4685"
+   "607136a1-7efc-4be9-8ae2-a8e5c5978c52",
+   "a9a47ae7-ede3-47c5-92e9-2965ef397076",
+   "cace3db1-f86e-4edd-8d1d-59d3be02738f",
+   "ef6c4298-76d6-49d3-96bf-13babb842008"
   ]
  },
- "n_P": 98,
- "n_Pp": 82,
- "jacc_track": 0.2898550724637681,
- "jacc_ts": 0.32674873556637085,
- "n_near_miss": 9
+ "n_P": 1086,
+ "n_Pp": 86,
+ "jacc_track": 0.07918968692449356,
+ "jacc_ts": 0.045414847161572056,
+ "n_near_miss": 355
 }

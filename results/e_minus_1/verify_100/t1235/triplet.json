@@ -1,0 +1,49 @@
+{
+ "id": "t1235",
+ "family": "compositional",
+ "m": "The same, but the cyclist is also standing still.",
+ "m_old": "and also standing still",
+ "P_text": "A cyclist that has the vehicle behind it",
+ "Pp_text": "A cyclist that is standing still and has the vehicle behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "852ddc78-2aae-4244-9b4d-82e129ad3bb8",
+  "t0": 315967856960208000,
+  "t1": 315967860660106000,
+  "related": [
+   "55fc4ed9-456e-460d-a7b3-312c0ec0f4fb",
+   "66222774-9543-4cfc-af37-cfb023919207",
+   "a3eeeb11-ded0-469b-876f-252b5d761a45",
+   "a5055b81-ff6b-48c5-8e86-02f773ed7e3b",
+   "f9cbedec-7276-40bb-991c-ec1450da9423"
+  ]
+ },
+ "target_example": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "b53e87ac-b6d2-4318-a71b-719c86b675b1",
+  "t0": 315969910759865000,
+  "t1": 315969919960059000,
+  "related": [
+   "645fe165-eaff-41f4-abb9-50c9f46c9dd6",
+   "bb40a192-730e-4cb7-91e1-069a642fa8fd"
+  ]
+ },
+ "negative_example": {
+  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
+  "track": "a0dd6899-7847-4c29-a50b-cfca209aa68f",
+  "t0": 315969630459763000,
+  "t1": 315969632259951000,
+  "related": [
+   "15217189-89f7-4ab3-b04d-735f9557e954",
+   "4c720575-2313-4217-a680-101eca2792a4",
+   "96bbbab0-0d89-45ed-b39f-fae9f653cb7d"
+  ]
+ },
+ "n_P": 28,
+ "n_Pp": 4,
+ "jacc_track": 0.14285714285714285,
+ "jacc_ts": 0.21052631578947367,
+ "n_near_miss": 22
+}

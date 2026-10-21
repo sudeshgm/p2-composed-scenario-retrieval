@@ -1,0 +1,46 @@
+{
+ "id": "t0112",
+ "family": "directional",
+ "m": "The same, but the pedestrian is on the right of the car now, not on the left of it.",
+ "m_old": "but with the pedestrian to the right of it instead of to the left of it",
+ "P_text": "A car that is driving along and has the standing pedestrian on its left",
+ "Pp_text": "A car that is driving along and has the standing pedestrian on its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "6c932547-4c11-31d7-b8ef-0c16a13dbfc3",
+  "track": "a83bb5e4-c926-4911-8390-67ee30ec8271",
+  "t0": 315970060260087000,
+  "t1": 315970062159835000,
+  "related": [
+   "95eaabd6-264a-4bb5-946a-eb83f22c306a",
+   "e87c5f68-b465-4464-805f-585663fb4587"
+  ]
+ },
+ "target_example": {
+  "log": "f3cd0d0d-8b71-3266-9732-d9f0d5778eb6",
+  "track": "388208d8-12f1-46ad-912a-6ffccdf1dff3",
+  "t0": 315968814659668000,
+  "t1": 315968816759793000,
+  "related": [
+   "877a864c-e784-4ca5-9ff0-101f2ea4cffd",
+   "9a765b60-6c7e-49ca-8b0e-eae0139ff49e",
+   "b20e7801-6663-4888-822d-783ac625280f"
+  ]
+ },
+ "negative_example": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "f5e077f7-2ed2-4820-a921-0859d2775edd",
+  "t0": 315970483260038000,
+  "t1": 315970484859862000,
+  "related": [
+   "4e44dea2-21aa-442f-b44a-5d27176b4d51",
+   "e592154e-c624-4918-863b-0dee289ba954"
+  ]
+ },
+ "n_P": 411,
+ "n_Pp": 562,
+ "jacc_track": 0.19533169533169534,
+ "jacc_ts": 0.07571447045131256,
+ "n_near_miss": 0
+}

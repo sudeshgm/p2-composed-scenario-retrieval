@@ -1,0 +1,42 @@
+{
+ "id": "t0695",
+ "family": "compositional",
+ "m": "The same, but the pedestrian is also on a crosswalk.",
+ "m_old": "and also on a pedestrian crossing",
+ "P_text": "A pedestrian that is standing still and has the parked vehicle in front of it",
+ "Pp_text": "A pedestrian that is standing still and on a crosswalk and has the parked vehicle in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\na = at_pedestrian_crossing(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "52071780-5758-3ed4-8835-0d64ecdc5575",
+  "track": "416f5d85-e75b-4c21-aaf3-9e1b843e68cd",
+  "t0": 315974245160141000,
+  "t1": 315974257759641000,
+  "related": [
+   "e3e26b91-5640-4748-aff0-e50ad9b1dfea"
+  ]
+ },
+ "target_example": {
+  "log": "e13c06cb-cd01-380e-946f-6d92ac1af49d",
+  "track": "aceb1e41-bde2-4837-b993-41199eafeda1",
+  "t0": 315966604859799000,
+  "t1": 315966612159538000,
+  "related": [
+   "960bb1ac-24aa-4318-bb09-87ebbcb91298"
+  ]
+ },
+ "negative_example": {
+  "log": "dfc32963-1524-34f4-9f5e-0292f0f223ae",
+  "track": "c5eaa5f5-6450-4cdf-b3b5-736b0081a5a4",
+  "t0": 315970537859886000,
+  "t1": 315970543460227000,
+  "related": [
+   "ccc5123d-7e63-48f0-b047-ed80d892521d"
+  ]
+ },
+ "n_P": 415,
+ "n_Pp": 27,
+ "jacc_track": 0.06506024096385542,
+ "jacc_ts": 0.03695404481579947,
+ "n_near_miss": 51
+}

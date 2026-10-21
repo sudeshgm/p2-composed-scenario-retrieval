@@ -1,0 +1,49 @@
+{
+ "id": "t0793",
+ "family": "agent_class",
+ "m": "The same situation, but with a car doing it instead of a truck.",
+ "m_old": "but with a car instead of a truck",
+ "P_text": "A truck that is parked and is pointed at the parked vehicle",
+ "Pp_text": "A car that is parked and is pointed at the parked vehicle",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "e13c06cb-cd01-380e-946f-6d92ac1af49d",
+  "track": "ec5b5ba0-bceb-451f-be75-28435c1134c4",
+  "t0": 315966596860015000,
+  "t1": 315966612460127000,
+  "related": [
+   "1baf5626-7621-4052-83ee-7345d98ec903",
+   "928691dc-f0e0-45bf-9ab6-0693d8884c06"
+  ]
+ },
+ "target_example": {
+  "log": "b8489c02-60d0-3f44-a3b4-9de62830d666",
+  "track": "4ed60d2e-ae51-4b16-b627-3dbae6396535",
+  "t0": 315975139259546000,
+  "t1": 315975141159937000,
+  "related": [
+   "1a977a43-87c4-4044-b447-b9157e19f648",
+   "a45437ad-75cb-4787-857a-20c81603cccf"
+  ]
+ },
+ "negative_example": {
+  "log": "a060c4c1-b9fc-39c1-9d30-d93a124c9066",
+  "track": "b0526307-8fd4-4669-bd85-e5b66f00dc0d",
+  "t0": 315967745459775000,
+  "t1": 315967759359759000,
+  "related": [
+   "4441d59e-d2fe-475e-bc1c-7aae951c3f03",
+   "49f181e8-f711-428d-8b4b-fce45d7faf8b",
+   "5ece0aac-5639-44a2-a06f-28d94a711c7e",
+   "774578fa-fa66-41c2-bafc-bff24c7c744f",
+   "84f8214a-b22a-48bd-b0df-f4ee66b38497",
+   "f40ede60-6ab2-4ddf-b644-77b4796eedf5"
+  ]
+ },
+ "n_P": 76,
+ "n_Pp": 4858,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

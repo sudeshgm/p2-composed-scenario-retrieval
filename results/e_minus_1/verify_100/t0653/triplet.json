@@ -1,0 +1,51 @@
+{
+ "id": "t0653",
+ "family": "agent_class",
+ "m": "The same situation, but with a truck doing it instead of a car.",
+ "m_old": "but with a truck instead of a car",
+ "P_text": "A car that is speeding up and is pointed at the vehicle",
+ "Pp_text": "A truck that is speeding up and is pointed at the vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "1da4a0aa-22ae-3958-856d-05303de1f576",
+  "track": "d9b7a70f-7996-4650-80c7-1e594527b8f3",
+  "t0": 315971513060184000,
+  "t1": 315971515360074000,
+  "related": [
+   "0bcba302-e711-486c-9529-40a4da08fc6b",
+   "43e0a8ee-8c9a-4953-923b-1a3f3ac068bf",
+   "8c2769ea-01a1-431b-9c26-90975bb74dc7",
+   "c9366748-799a-4498-bf79-293f31b20119"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "4e994741-a65f-41e1-8926-3a07729f7f2f",
+  "t0": 315967868160096000,
+  "t1": 315967870059811000,
+  "related": [
+   "221b6b8b-3935-48ea-bfb4-ac12f550ca0c",
+   "572e5515-3b82-4fff-b25c-33c66cab5a04",
+   "64395b46-251b-41a2-a8ba-871f9661bbbe",
+   "ea646853-534b-4ecf-b661-196c72a5d715"
+  ]
+ },
+ "negative_example": {
+  "log": "25e5c600-36fe-3245-9cc0-40ef91620c22",
+  "track": "e5a945a4-1f33-4bce-abfb-c355ad843c0a",
+  "t0": 315966108060114000,
+  "t1": 315966112059990000,
+  "related": [
+   "95dc223a-7cf2-47c1-a16c-1ba8be293740",
+   "b1871ea7-8533-44bb-b47a-2b020da6131b",
+   "c4f1a0a1-1826-40d1-b530-83f4b01b5ab6",
+   "f07bbada-7ed5-4f09-b992-8420b2d48fd5"
+  ]
+ },
+ "n_P": 1067,
+ "n_Pp": 47,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

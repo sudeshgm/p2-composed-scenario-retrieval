@@ -1,0 +1,3 @@
+Old search: A vehicle that is speeding up and has the cyclist behind it.
+New search: A vehicle that is speeding up and has the pedestrian behind it.
+Why the right one should not fit: The other road user is a pedestrian, as the new search asks, but the vehicle is not speeding up.

@@ -1,0 +1,40 @@
+{
+ "id": "t0753",
+ "family": "agent_class",
+ "m": "The same situation, but with a pedestrian doing it instead of a cyclist.",
+ "m_old": "but with a pedestrian instead of a cyclist",
+ "P_text": "A cyclist that has the other cyclist on its right",
+ "Pp_text": "A pedestrian that has the cyclist on its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "e1d68dde-22a9-3918-a526-0850b21ff2eb",
+  "track": "c38e1a04-6ce2-4d7d-a0e2-06be4a7897d4",
+  "t0": 315969774959983000,
+  "t1": 315969781259695000,
+  "related": [
+   "69a96232-b8dd-45e7-a902-45e60538a858"
+  ]
+ },
+ "target_example": {
+  "log": "6c932547-4c11-31d7-b8ef-0c16a13dbfc3",
+  "track": "bdb1ebc3-0af5-40a3-8b60-e6686508946d",
+  "t0": 315970049559659000,
+  "t1": 315970052259648000,
+  "related": [
+   "0a0ea85d-1a32-482a-a74e-a50ec2bde0f1"
+  ]
+ },
+ "negative_example": {
+  "log": "29a00842-ead2-3050-b587-c5ef507e4125",
+  "track": "6226deaa-3653-4a5e-9a04-ca77db72d182",
+  "t0": 315966337359827000,
+  "t1": 315966340059788000,
+  "related": []
+ },
+ "n_P": 12,
+ "n_Pp": 25,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

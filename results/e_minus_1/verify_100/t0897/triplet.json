@@ -1,0 +1,45 @@
+{
+ "id": "t0897",
+ "family": "directional",
+ "m": "The same, but the vehicle is on the left of the truck now, not on the right of it.",
+ "m_old": "but with the vehicle to the left of it instead of to the right of it",
+ "P_text": "A truck that has the vehicle on its right",
+ "Pp_text": "A truck that has the vehicle on its left",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "7a2c222d-addc-30b2-aac6-596cb65a22e3",
+  "track": "cf5369bd-156d-49a4-97b0-f19305b64b31",
+  "t0": 315971818960301000,
+  "t1": 315971820660308000,
+  "related": [
+   "aed0dbde-3d4b-4db2-93eb-0cfb51a8cef4",
+   "ego"
+  ]
+ },
+ "target_example": {
+  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
+  "track": "06c352f5-7068-4b34-a112-88d82d7d9902",
+  "t0": 315968553859883000,
+  "t1": 315968556060218000,
+  "related": [
+   "0277fae2-6cc7-4415-842b-c1faa02f4c48",
+   "08e9931a-7052-4b6a-b3d3-5201cb09163e",
+   "d46d1bf2-edbc-4a98-9b4a-d559b0b190b5"
+  ]
+ },
+ "negative_example": {
+  "log": "c222c78d-b574-4b9d-82e1-96a4f3f8bb27",
+  "track": "aba81ad0-044b-48d8-a5d2-4cecb05bc064",
+  "t0": 315973867059451000,
+  "t1": 315973868659928000,
+  "related": [
+   "84016a31-c6ba-42d1-8b4a-8477042e9522"
+  ]
+ },
+ "n_P": 146,
+ "n_Pp": 239,
+ "jacc_track": 0.47509578544061304,
+ "jacc_ts": 0.29493545183714004,
+ "n_near_miss": 0
+}

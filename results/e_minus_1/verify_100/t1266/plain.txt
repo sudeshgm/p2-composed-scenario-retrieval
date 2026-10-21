@@ -1,0 +1,3 @@
+Old search: A car that is turning right and is moving toward the vehicle.
+New search: A car that is turning right and is driving right behind the vehicle, following it.
+Why the right one should not fit: It fits the old search, but it is not driving right behind the vehicle, following it.

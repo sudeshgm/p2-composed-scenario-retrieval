@@ -1,0 +1,50 @@
+{
+ "id": "t1466",
+ "family": "relational",
+ "m": "The same, but the vehicle is moving toward the cyclist, not just close to it.",
+ "m_old": "but heading toward the cyclist instead of near it",
+ "P_text": "A vehicle that is driving along and is close to the moving cyclist",
+ "Pp_text": "A vehicle that is driving along and is moving toward the moving cyclist",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "2e3f2ae7-9ab9-3aef-a3ce-a0a97a0cb1ab",
+  "track": "ego",
+  "t0": 315971958960251000,
+  "t1": 315971967759580000,
+  "related": [
+   "b88a515c-34ea-4b22-b537-fb913839c123"
+  ]
+ },
+ "target_example": {
+  "log": "e1d68dde-22a9-3918-a526-0850b21ff2eb",
+  "track": "b267a975-d932-4931-8d98-0c1866d9dd7b",
+  "t0": 315969774759590000,
+  "t1": 315969777360031000,
+  "related": [
+   "0fdbd547-a4df-4de3-9e7c-840dd3d36d29",
+   "13cabf47-df76-4745-89f8-6bc0b6eb5659",
+   "2ef2f061-0a50-47d1-83c4-035f595fb77a",
+   "346cf3b1-cdd1-47be-ac7c-c2f7ac39d37d",
+   "407f5240-1299-425d-9fc7-86403c2f8b12",
+   "54dfa011-ab9e-477b-895d-5d443fcb287c",
+   "8d4ca200-51c3-438c-a44f-6769222f429c",
+   "cd2a80b3-1526-40eb-ba17-1804b04a0a3c",
+   "db7869b6-236f-4430-a263-82178ad038b3"
+  ]
+ },
+ "negative_example": {
+  "log": "2e3f2ae7-9ab9-3aef-a3ce-a0a97a0cb1ab",
+  "track": "97b7be90-e8e1-4423-a5a7-c4af813f6c4f",
+  "t0": 315971957759890000,
+  "t1": 315971967759580000,
+  "related": [
+   "b88a515c-34ea-4b22-b537-fb913839c123"
+  ]
+ },
+ "n_P": 92,
+ "n_Pp": 55,
+ "jacc_track": 0.45544554455445546,
+ "jacc_ts": 0.006526966678117485,
+ "n_near_miss": 4
+}

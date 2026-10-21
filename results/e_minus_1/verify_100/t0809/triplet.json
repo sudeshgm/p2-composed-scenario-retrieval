@@ -1,0 +1,47 @@
+{
+ "id": "t0809",
+ "family": "state",
+ "m": "The same, but the vehicle is slowing down rather than speeding up.",
+ "m_old": "but braking instead of speeding up (accelerating)",
+ "P_text": "A vehicle that is speeding up and has the other vehicle in front of it",
+ "Pp_text": "A vehicle that is slowing down and has the other vehicle in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "e42aa296-0e5d-4733-87ec-131a82f917bc",
+  "track": "4ede6252-57c5-4e18-8b61-dd4554784ae6",
+  "t0": 315966263359700000,
+  "t1": 315966265760397000,
+  "related": [
+   "09696f5f-fa43-4945-9766-b931fcab0eef",
+   "df166796-47f4-4dab-84b4-2a8d6308d09d"
+  ]
+ },
+ "target_example": {
+  "log": "c8ec7be0-92aa-3222-946e-fbcf398c841e",
+  "track": "614d5a25-5717-408b-b457-f7339d6a195b",
+  "t0": 315969286959529000,
+  "t1": 315969288660221000,
+  "related": [
+   "05414040-e3f1-4b2a-acdf-0388452aa1a1",
+   "0790bdd9-6f42-489b-9f0a-d7e15714c331",
+   "6bf0e45b-06cb-42af-a4e6-4f9d529cfb7f",
+   "901a2572-7fab-4155-8784-dcd828f8dc2a",
+   "a36a70ab-c093-4082-bf19-62431a235bc6"
+  ]
+ },
+ "negative_example": {
+  "log": "e42aa296-0e5d-4733-87ec-131a82f917bc",
+  "track": "f60cad34-41d0-4bb3-8bf2-2a7204412dfb",
+  "t0": 315966257060042000,
+  "t1": 315966260359833000,
+  "related": [
+   "c66803ab-accc-40b7-be27-1d3397d61e18"
+  ]
+ },
+ "n_P": 1127,
+ "n_Pp": 1069,
+ "jacc_track": 0.23648648648648649,
+ "jacc_ts": 0.0,
+ "n_near_miss": 1690
+}

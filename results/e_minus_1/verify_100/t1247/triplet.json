@@ -1,0 +1,43 @@
+{
+ "id": "t1247",
+ "family": "directional",
+ "m": "The same, but the car is in front of our own car now, not behind it.",
+ "m_old": "but with the car ahead of it instead of behind it",
+ "P_text": "Our own car that has the parked car behind it",
+ "Pp_text": "Our own car that has the parked car in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "e72ef05c-8b94-3885-a34f-fff3b2b954b4",
+  "track": "ego",
+  "t0": 315972688959737000,
+  "t1": 315972704559974000,
+  "related": [
+   "a190c4f0-c1c3-4bd6-a699-18b8755dbf7b"
+  ]
+ },
+ "target_example": {
+  "log": "91aab547-1912-3b8e-8e7f-df3b202147bf",
+  "track": "ego",
+  "t0": 315968311459735000,
+  "t1": 315968316259797000,
+  "related": [
+   "a7f2c184-4113-4a58-9e82-4c47b04ce635",
+   "b9847f48-3fe7-443e-9d22-3b9732cdc180"
+  ]
+ },
+ "negative_example": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "ego",
+  "t0": 315970482960112000,
+  "t1": 315970490659972000,
+  "related": [
+   "b5a3c15a-290d-4301-b39b-f134bb28bd01"
+  ]
+ },
+ "n_P": 125,
+ "n_Pp": 140,
+ "jacc_track": 0.6459627329192547,
+ "jacc_ts": 0.3113138980860858,
+ "n_near_miss": 0
+}

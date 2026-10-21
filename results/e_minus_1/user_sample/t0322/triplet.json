@@ -1,0 +1,44 @@
+{
+ "id": "t0322",
+ "family": "directional",
+ "m": "The same, but the other car is on the right of the car now, not on the left of it.",
+ "m_old": "but with the car to the right of it instead of to the left of it",
+ "P_text": "A car that is turning right and has the other car on its left",
+ "Pp_text": "A car that is turning right and has the other car on its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "fa9bfe78-e73e-4056-9bd2-80fb43d89d8a",
+  "t0": 315969916159881000,
+  "t1": 315969917960103000,
+  "related": [
+   "645fe165-eaff-41f4-abb9-50c9f46c9dd6",
+   "bb40a192-730e-4cb7-91e1-069a642fa8fd",
+   "ebd1a5a8-b20a-4e94-b42b-08f14cc6f48d"
+  ]
+ },
+ "target_example": {
+  "log": "b5a7ff7e-d74a-3be6-b95d-3fc0042215f6",
+  "track": "165462fc-b985-46c7-a8e8-8a17d3cb8e36",
+  "t0": 315977333159630000,
+  "t1": 315977334760109000,
+  "related": [
+   "3497f297-6e98-4445-ba95-eaa69fe401e8"
+  ]
+ },
+ "negative_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "db8efb21-71f4-4f05-b771-9fc330614e1f",
+  "t0": 315967856960208000,
+  "t1": 315967859859880000,
+  "related": [
+   "2fa0142d-b225-4d13-a822-0a1f723fa3d0"
+  ]
+ },
+ "n_P": 191,
+ "n_Pp": 79,
+ "jacc_track": 0.34328358208955223,
+ "jacc_ts": 0.1460968836778772,
+ "n_near_miss": 0
+}

@@ -1,0 +1,47 @@
+{
+ "id": "t0951",
+ "family": "relational",
+ "m": "The same, but the truck is driving right behind the car, following it, not just close to it.",
+ "m_old": "but following the car instead of near it",
+ "P_text": "A truck that is turning right and is close to the parked car",
+ "Pp_text": "A truck that is turning right and is driving right behind the parked car, following it",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
+  "track": "8a04afdc-2489-40b9-9f03-aace87e4362d",
+  "t0": 315969912459895000,
+  "t1": 315969915260100000,
+  "related": [
+   "1c2ea4e7-4bc8-4cca-9fa7-f6f29ab07acc",
+   "8203fd4c-e404-448d-a4fb-e5d4bbf51478"
+  ]
+ },
+ "target_example": {
+  "log": "25e5c600-36fe-3245-9cc0-40ef91620c22",
+  "track": "e5a945a4-1f33-4bce-abfb-c355ad843c0a",
+  "t0": 315966104259967000,
+  "t1": 315966107460266000,
+  "related": [
+   "61a06de4-2fa5-470a-bdaf-b1cf8af4afd5",
+   "70f1e43b-f915-4df0-b65c-bd1e835c7ce0",
+   "a3c9f90b-8e74-4d87-b90d-f8b319dfd1b5",
+   "a8a60f00-ffb3-4981-a4e5-ad75463822d4",
+   "fdaea6b5-ffe8-4ebb-ab74-7af5c2140e02"
+  ]
+ },
+ "negative_example": {
+  "log": "b87683ae-14c5-321f-8af3-623e7bafc3a7",
+  "track": "eb65b3be-6264-483a-ac4e-031234a70f11",
+  "t0": 315972335659899000,
+  "t1": 315972345060980000,
+  "related": [
+   "88853bbe-e938-4773-9089-23c7ac102ce5"
+  ]
+ },
+ "n_P": 8,
+ "n_Pp": 1,
+ "jacc_track": 0.125,
+ "jacc_ts": 0.05670103092783505,
+ "n_near_miss": 2
+}

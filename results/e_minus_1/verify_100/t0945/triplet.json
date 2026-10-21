@@ -1,0 +1,42 @@
+{
+ "id": "t0945",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also speeding up.",
+ "m_old": "and also speeding up (accelerating)",
+ "P_text": "A vehicle that is driving along and is close to the moving truck",
+ "Pp_text": "A vehicle that is driving along and speeding up and is close to the moving truck",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\na = accelerating(a, log_dir, min_accel=1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "b19f3c1a-a84a-3a2d-8d1b-8a4ae201020b",
+  "track": "cdf3d865-1055-4990-a839-08d52403bcbf",
+  "t0": 315973286159690000,
+  "t1": 315973289060101000,
+  "related": [
+   "cfc0bb49-634f-4961-b9bb-d010069bd311"
+  ]
+ },
+ "target_example": {
+  "log": "c8ec7be0-92aa-3222-946e-fbcf398c841e",
+  "track": "19ba3e58-ed52-4e8e-9618-7d3a4847e2f2",
+  "t0": 315969294459688000,
+  "t1": 315969297060160000,
+  "related": [
+   "52cf9d28-dfa3-4ea0-a5ae-6b45dcf1fb61"
+  ]
+ },
+ "negative_example": {
+  "log": "e0ea281b-6956-3605-b720-71b54ec87d25",
+  "track": "00a3a727-3d8f-430d-8043-c68952aa47c5",
+  "t0": 315971661060084000,
+  "t1": 315971663160211000,
+  "related": [
+   "757d4eeb-acfb-4348-bed0-52a33c666967"
+  ]
+ },
+ "n_P": 493,
+ "n_Pp": 109,
+ "jacc_track": 0.2210953346855984,
+ "jacc_ts": 0.10850821538962095,
+ "n_near_miss": 67
+}

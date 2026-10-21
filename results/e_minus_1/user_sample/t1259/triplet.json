@@ -1,0 +1,42 @@
+{
+ "id": "t1259",
+ "family": "state",
+ "m": "The same, but our own car is turning left rather than changing lanes.",
+ "m_old": "but turning left instead of changing lanes",
+ "P_text": "Our own car that is changing lanes and has the pedestrian in front of it",
+ "Pp_text": "Our own car that is turning left and has the pedestrian in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "de56b100-508b-3479-81fe-735349f8e8de",
+  "track": "0e217666-05f1-463f-81ca-25663ef82227",
+  "t0": 315966305959902000,
+  "t1": 315966307659905000,
+  "related": [
+   "682c9ddb-53c0-4072-84fc-9c10fb9f61f0"
+  ]
+ },
+ "target_example": {
+  "log": "92b900b1-ac4a-3d41-b118-e42c66382c91",
+  "track": "4d2837eb-9bdb-4afb-a93e-ec1f74a6ec2f",
+  "t0": 315968953260245000,
+  "t1": 315968954860061000,
+  "related": [
+   "c5906e71-8034-4e36-877a-05ad0ed5ff91"
+  ]
+ },
+ "negative_example": {
+  "log": "78f7cb5c-9d51-34f0-b356-9b3d83263c75",
+  "track": "945b64bb-203a-485a-be7d-b8933e467fd2",
+  "t0": 315972394059575000,
+  "t1": 315972395559868000,
+  "related": [
+   "9fc18b6f-4533-428b-bbe5-713f87c89b0a"
+  ]
+ },
+ "n_P": 10,
+ "n_Pp": 12,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 23
+}

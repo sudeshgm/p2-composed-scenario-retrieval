@@ -1,0 +1,3 @@
+Old search: A car that is speeding up and has the truck on its right.
+New search: A car that is speeding up and has the bus on its right.
+Why the right one should not fit: The other road user is a bus, as the new search asks, but the car is not speeding up.

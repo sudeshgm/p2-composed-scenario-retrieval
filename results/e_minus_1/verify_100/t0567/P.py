@@ -1,6 +1,5 @@
-a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')
+a = get_objects_of_category(log_dir, category='PEDESTRIAN')
 a = stationary(a, log_dir)
 b = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])
-b = has_velocity(b, log_dir, min_velocity=2)
 b_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'
-out = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])
+out = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])

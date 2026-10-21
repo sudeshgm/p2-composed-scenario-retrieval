@@ -1,0 +1,46 @@
+{
+ "id": "t1393",
+ "family": "agent_class",
+ "m": "The same situation, but with a car doing it instead of a bus.",
+ "m_old": "but with a car instead of a bus",
+ "P_text": "A bus that is changing lanes and has the standing pedestrian on its left",
+ "Pp_text": "A car that is changing lanes and has the standing pedestrian on its left",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "f23e8920-8124-44bb-9369-cfd3839082be",
+  "t0": 315970485759638000,
+  "t1": 315970488660026000,
+  "related": [
+   "4e44dea2-21aa-442f-b44a-5d27176b4d51",
+   "e592154e-c624-4918-863b-0dee289ba954"
+  ]
+ },
+ "target_example": {
+  "log": "7039e410-b5ab-35aa-96bc-2c4b89d3c5e3",
+  "track": "8acd30dd-6e19-4316-a1fd-8968d4752434",
+  "t0": 315969200959758000,
+  "t1": 315969202860187000,
+  "related": [
+   "03105672-fb69-4916-9516-b9800e6ae70e",
+   "379a37d7-37d6-45ba-b47f-6ac62a9265c7",
+   "67b2dfc6-89c4-4634-98bc-8bd08c9892e6"
+  ]
+ },
+ "negative_example": {
+  "log": "7606de8d-486c-4916-9cbb-002ee966f834",
+  "track": "8ef64063-e5cf-44e8-b7e1-f730415f12d4",
+  "t0": 315978499260333000,
+  "t1": 315978515060013000,
+  "related": [
+   "54a2c6c6-7ef7-4cb4-bf94-f6b58020a167",
+   "fe2e0cb6-5ad6-4747-8dd8-bec48b2b9d17"
+  ]
+ },
+ "n_P": 2,
+ "n_Pp": 36,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

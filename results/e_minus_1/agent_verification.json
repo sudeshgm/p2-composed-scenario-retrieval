@@ -1,18 +1,18 @@
 {
  "n": 100,
- "agent_precision": 0.96,
+ "agent_precision": 0.87,
  "by_family": {
   "relational": {
    "n": 20,
-   "pass_": 20
+   "pass_": 17
   },
   "directional": {
    "n": 20,
-   "pass_": 17
+   "pass_": 19
   },
   "agent_class": {
    "n": 20,
-   "pass_": 19
+   "pass_": 15
   },
   "state": {
    "n": 20,
@@ -20,11 +20,11 @@
   },
   "compositional": {
    "n": 20,
-   "pass_": 20
+   "pass_": 16
   }
  },
- "a_yes": 100,
- "b_yes": 99,
- "c_yes": 97,
- "c_oracle_only": 48
+ "a_yes": 89,
+ "b_yes": 100,
+ "c_yes": 98,
+ "c_oracle_only": 11
 }

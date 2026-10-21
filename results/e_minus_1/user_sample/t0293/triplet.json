@@ -1,0 +1,51 @@
+{
+ "id": "t0293",
+ "family": "agent_class",
+ "m": "The same situation, but with a pedestrian doing it instead of a cyclist.",
+ "m_old": "but with a pedestrian instead of a cyclist",
+ "P_text": "A cyclist that is riding along and is close to the parked car",
+ "Pp_text": "A pedestrian that is walking and is close to the parked car",
+ "P_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "b6e967f6-92bc-3bf5-99c9-1b0c4649fd67",
+  "track": "09f5ceb1-ac58-48c1-87e3-bfb485024eb5",
+  "t0": 315966557059732000,
+  "t1": 315966559559985000,
+  "related": [
+   "16b22400-7a86-4eed-be82-a84440cdb237",
+   "1cef5d45-b57c-4d8d-b003-b75cf4fc2604",
+   "3640a861-2fe4-43e2-8fb6-f7f4d53ce97d",
+   "59f5f275-5e57-4657-be9f-5eca92251dee",
+   "9769d57a-efa6-4c33-8622-758895a719b9",
+   "9b267344-7e63-42f1-9f18-1e9eeb96dd10"
+  ]
+ },
+ "target_example": {
+  "log": "d46ff5df-95e8-32da-a0d7-87f7b976a959",
+  "track": "ee8baa02-7cef-4d5d-9ad6-362b8a6efe2f",
+  "t0": 315971483559971000,
+  "t1": 315971489060192000,
+  "related": [
+   "513afcd8-c5f0-4168-b420-38a1e9c97d11",
+   "9f2fc46f-6d99-473d-acdc-63b5ee0b62f3",
+   "cc7ad072-3934-4969-8eca-f526c75c8445",
+   "ea09ec41-6c14-45b1-b1c4-eee25350cec5"
+  ]
+ },
+ "negative_example": {
+  "log": "5f8f4a26-59b1-3f70-bcab-b5e3e615d3bc",
+  "track": "e770ec41-28b2-41ea-9157-b415f69d84b4",
+  "t0": 315966660759801000,
+  "t1": 315966671760107000,
+  "related": [
+   "54a9ae8b-7de7-42bb-86a0-c1d32f1d3216",
+   "66e792c3-ae49-4b8b-91a7-16080727f1d6"
+  ]
+ },
+ "n_P": 24,
+ "n_Pp": 42,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

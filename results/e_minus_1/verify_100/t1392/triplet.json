@@ -1,0 +1,46 @@
+{
+ "id": "t1392",
+ "family": "directional",
+ "m": "The same, but the other truck is on the right of the truck now, not on the left of it.",
+ "m_old": "but with the truck to the right of it instead of to the left of it",
+ "P_text": "A truck that is parked and has the other parked truck on its left",
+ "Pp_text": "A truck that is parked and has the other parked truck on its right",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = stationary(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "92b900b1-ac4a-3d41-b118-e42c66382c91",
+  "track": "b8e1f4f7-3c5b-476a-9492-d619817b006d",
+  "t0": 315968947460185000,
+  "t1": 315968954459939000,
+  "related": [
+   "39552677-be01-4651-800f-a3eabd860431",
+   "3a8d9373-9780-42c9-afe8-591b53c26c4e",
+   "a1b2ae7b-ca43-4491-8e0d-f0c9f5429998",
+   "bbe8d4fb-1b72-475e-96b8-eca8f4e0ac0c"
+  ]
+ },
+ "target_example": {
+  "log": "92b900b1-ac4a-3d41-b118-e42c66382c91",
+  "track": "3a8d9373-9780-42c9-afe8-591b53c26c4e",
+  "t0": 315968947460185000,
+  "t1": 315968954660332000,
+  "related": [
+   "39552677-be01-4651-800f-a3eabd860431",
+   "b8e1f4f7-3c5b-476a-9492-d619817b006d"
+  ]
+ },
+ "negative_example": {
+  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
+  "track": "443788c0-69dd-4b98-9427-2f35946914f8",
+  "t0": 315968553859883000,
+  "t1": 315968569359769000,
+  "related": [
+   "c9b8f566-2c2f-4b84-a0a0-db14a47fddad"
+  ]
+ },
+ "n_P": 20,
+ "n_Pp": 15,
+ "jacc_track": 0.4,
+ "jacc_ts": 0.36889763779527557,
+ "n_near_miss": 0
+}
