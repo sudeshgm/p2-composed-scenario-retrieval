@@ -3,7 +3,7 @@ import pickle, json, random, collections, csv, sys, os
 from pathlib import Path
 import numpy as np
 sys.path.insert(0,os.path.dirname(__file__))
-import generate as G
+import generate as G, plain as L
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 random.seed(1)
 OUT=Path('results/e_minus_1')
@@ -69,7 +69,7 @@ while len(trip)<NWANT:
         for x in sib[:3]:
             M3,_=G.execute(x['Pp']); near|={k for k in M3 if k not in M2 and G.TABLES[k[0]]['cats'][k[1]]==tcat}
         wit=lambda W,k,seg: sorted({b for b,s in W.get(k,{}).items() if any(seg[0]<=t<=seg[1] for t in s)})
-        trip.append(dict(id=f't{i:04d}',family=c['family'],m=c['m'],P=c['P'],Pp=c['Pp'],P_text=G.describe(c['P']),Pp_text=G.describe(c['Pp']),
+        trip.append(dict(id=f't{i:04d}',family=c['family'],m=L.m_text(c['family'],c['P'],c['Pp']),m_old=c['m'],P=c['P'],Pp=c['Pp'],P_text=L.desc(c['P']),Pp_text=L.desc(c['Pp']),
             P_src=G.to_source(c['P']),Pp_src=G.to_source(c['Pp']),
             reference=dict(log=rk[0],track=rk[1],t0=int(rs[0]),t1=int(rs[1]),related=wit(W,rk,rs)),
             target_set=[[l,u] for l,u in sorted(M2)], target_example=dict(log=tk[0],track=tk[1],t0=int(ts_[0]),t1=int(ts_[1]),related=wit(W2,tk,ts_)),

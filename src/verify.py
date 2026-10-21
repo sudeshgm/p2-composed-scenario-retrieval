@@ -181,26 +181,36 @@ def agent_judge(t):
             b='no'; notes.append('b: mutated scenario semantically odd for pedestrians/cyclists (lane-following relation)')
     if t['family']=='relational' and {t['P']['rel'],t['Pp']['rel']}<= {'heading_toward','facing_toward'}:
         b='no'; notes.append('b: heading-toward vs facing-toward distinction is not recognisable from text')
+    import plain as L
+    if any(j in t['m'] for j in L.JARGON) or len(t['m'].split())>30:
+        b='no'; notes.append('b: wording still jargon-heavy or too long')
     return ('yes' if a else 'no'), b, c, '; '.join(notes)
 def plot(t,path):
-    fig,ax=plt.subplots(1,3,figsize=(18,6))
-    for k,(name,ex) in enumerate([('reference (matches P, not P\')',t['reference']),('target example (matches P\')',t['target_example']),('negative example (matches P, not P\')',t['negative_example'])]):
-        TT=tracks(ex['log']); A=TT[ex['track']]; t0,t1=ex['t0']-2e9,ex['t1']+2e9
-        axx=ax[k]
+    """LEFT old match / MIDDLE should fit / RIGHT should not fit, arrows + labels on the key agents."""
+    import plain as L
+    fig,ax=plt.subplots(1,3,figsize=(19,7.2))
+    panels=[('LEFT: old match\n(fits the old search)',t['reference'],'tab:blue'),('MIDDLE: should fit\n(fits the new search)',t['target_example'],'tab:green'),('RIGHT: should NOT fit\n(fits old, not new)',t['negative_example'],'tab:red')]
+    for k,(name,ex,mc) in enumerate(panels):
+        TT=tracks(ex['log']); A=TT[ex['track']]; t0,t1=ex['t0']-2e9,ex['t1']+2e9; axx=ax[k]
         for u,B in TT.items():
             mm=(B['ts']>=t0)&(B['ts']<=t1)
             if not mm.any(): continue
-            col='k' if u=='ego' else ('tab:blue' if u==ex['track'] else ('tab:orange' if u in ex['related'] else '0.8'))
-            lw=2.5 if col!='0.8' else 0.8
-            axx.plot(B['xy'][mm,0],B['xy'][mm,1],'-',color=col,lw=lw,zorder=3 if col!='0.8' else 1)
-            axx.plot(B['xy'][mm,0][-1],B['xy'][mm,1][-1],'o' if col!='k' else 's',color=col,ms=5 if col!='0.8' else 2)
+            key=u==ex['track'] or u in ex['related']
+            col=mc if u==ex['track'] else ('tab:orange' if u in ex['related'] else ('k' if u=='ego' else '0.82'))
+            axx.plot(B['xy'][mm,0],B['xy'][mm,1],'-',color=col,lw=2.5 if key or u=='ego' else 0.8,zorder=3 if key else 1)
+            if key or u=='ego':
+                xy=B['xy'][mm]; e=xy[-1]; d=xy[-1]-xy[max(0,len(xy)-6)]
+                if np.hypot(*d)<0.3: yaw=B['yaw'][mm][-1]; d=np.array([np.cos(yaw),np.sin(yaw)])
+                d=d/max(1e-6,np.hypot(*d))*4
+                axx.annotate('',xy=e+d,xytext=e,arrowprops=dict(arrowstyle='-|>',color=col,lw=2.5,mutation_scale=22),zorder=6)
+                lab=('THIS ONE: ' if u==ex['track'] else ('our car' if u=='ego' else 'other: '))+(L.NOUN.get({'REGULAR_VEHICLE':'CAR','PEDESTRIAN':'PEDESTRIAN','BICYCLIST':'BICYCLIST','BUS':'BUS','BOX_TRUCK':'TRUCK','TRUCK':'TRUCK'}.get(B['cat'],'VEHICLE'),'vehicle') if u!='ego' or u==ex['track'] else '')
+                axx.annotate(lab,xy=e,xytext=e+np.array([3,3]),fontsize=9,color=col,weight='bold',zorder=7,bbox=dict(boxstyle='round,pad=0.2',fc='white',ec=col,alpha=.85))
         mm=(A['ts']>=ex['t0'])&(A['ts']<=ex['t1'])
-        axx.scatter(A['xy'][mm,0],A['xy'][mm,1],c=np.linspace(0,1,mm.sum()),cmap='viridis',s=12,zorder=5)
         c=A['xy'][mm].mean(0) if mm.any() else A['xy'].mean(0)
-        axx.set_xlim(c[0]-45,c[0]+45); axx.set_ylim(c[1]-45,c[1]+45); axx.set_aspect('equal')
-        axx.set_title(f"{name}\n{A['cat']} {ex['track'][:8]} @ {ex['log'][:8]}\n{(ex['t1']-ex['t0'])/1e9:.1f}s window (dots: matched frames, dark=early)",fontsize=9)
-    fig.suptitle(f"[{t['id']} | {t['family']}]  P: {t['P_text']}\nm: \"{t['m']}\"    P': {t['Pp_text']}\nblue=referred track, orange=related (witness) agents, black=ego, grey=others; circles=end position",fontsize=10)
-    fig.tight_layout(); fig.savefig(path,dpi=80); plt.close(fig)
+        axx.set_xlim(c[0]-40,c[0]+40); axx.set_ylim(c[1]-40,c[1]+40); axx.set_aspect('equal')
+        axx.set_title(f"{name}\n{(ex['t1']-ex['t0'])/1e9:.1f} s clip  ({ex['track'][:8]} @ {ex['log'][:8]})",fontsize=11,color=mc,weight='bold')
+    fig.suptitle(f"[{t['id']} | {t['family']}]  Old search: {t['P_text']}\nChange: \"{t['m']}\"\nArrows show where each key road user is going at the end of the clip; grey = other traffic, black = our car.",fontsize=11)
+    fig.tight_layout(rect=[0,0,1,0.84]); fig.savefig(path,dpi=80); plt.close(fig)
 def export(items,root,with_agent):
     if root.exists(): shutil.rmtree(root)
     root.mkdir(parents=True)
@@ -208,9 +218,11 @@ def export(items,root,with_agent):
     for t in items:
         d=root/t['id']; d.mkdir()
         plot(t,d/'bev.png')
-        keep={k:t[k] for k in ['id','family','m','P_text','Pp_text','P_src','Pp_src','reference','target_example','negative_example','n_P','n_Pp','jacc_track','jacc_ts']}
+        keep={k:t.get(k) for k in ['id','family','m','m_old','P_text','Pp_text','P_src','Pp_src','reference','target_example','negative_example','n_P','n_Pp','jacc_track','jacc_ts']}
         keep['n_near_miss']=len(t['near_miss_negatives'])
         json.dump(keep,open(d/'triplet.json','w'),indent=1)
+        import plain as L
+        open(d/'plain.txt','w').write(f"Old search: {t['P_text']}.\nNew search: {t['Pp_text']}.\nWhy the right one should not fit: {L.why_not(t)}\n")
         open(d/'P.py','w').write(t['P_src']); open(d/"P_prime.py",'w').write(t['Pp_src'])
         row=dict(id=t['id'],family=t['family'],P=t['P_text'],m=t['m'],P_prime=t['Pp_text'],
                  ref=f"{t['reference']['log']}/{t['reference']['track']}@{t['reference']['t0']}-{t['reference']['t1']}",
