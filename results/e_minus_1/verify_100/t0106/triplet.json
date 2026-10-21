@@ -1,0 +1,42 @@
+{
+ "id": "t0106",
+ "family": "relational",
+ "m": "The same, but the vehicle is close to the other vehicle - not pointed at it.",
+ "m_old": "but near the other vehicle instead of facing toward it",
+ "P_text": "A vehicle that is slowing down and is pointed at the other parked vehicle",
+ "Pp_text": "A vehicle that is slowing down and is close to the other parked vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "3bffdcff-c3a7-38b6-a0f2-64196d130958",
+  "track": "e1efd35d-e4cc-4b61-977a-2b55ae48c141",
+  "t0": 315975587159976000,
+  "t1": 315975589059732000,
+  "related": [
+   "925cf3d7-e79b-41e4-8cc4-1720e003b81f"
+  ]
+ },
+ "target_example": {
+  "log": "7de2e535-81df-3d5f-a5ca-62e4b940eb54",
+  "track": "ego",
+  "t0": 315971805260282000,
+  "t1": 315971807960254000,
+  "related": [
+   "5e6e62e9-4ed5-4013-b165-82b422bfc9e8"
+  ]
+ },
+ "negative_example": {
+  "log": "58e82365-03bc-3b2f-b55a-a4ad0e3e792d",
+  "track": "ego",
+  "t0": 315968800059879000,
+  "t1": 315968802059800000,
+  "related": [
+   "ed12b181-b2a9-44a4-96dc-c0077131be6b"
+  ]
+ },
+ "n_P": 620,
+ "n_Pp": 825,
+ "jacc_track": 0.5896589658965896,
+ "jacc_ts": 0.4464735516372796,
+ "n_near_miss": 3
+}

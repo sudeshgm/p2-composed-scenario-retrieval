@@ -1,0 +1,54 @@
+{
+ "id": "t0352",
+ "family": "directional",
+ "m": "The same, but the car is on the right of the vehicle now, not on the left of it.",
+ "m_old": "but with the car to the right of it instead of to the left of it",
+ "P_text": "A vehicle that is turning right and has the car on its left",
+ "Pp_text": "A vehicle that is turning right and has the car on its right",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "2f2321d2-7912-3567-a789-25e46a145bda",
+  "track": "8bd69a51-ca37-4c79-9ebe-078c79450702",
+  "t0": 315966449060154000,
+  "t1": 315966452560341000,
+  "related": [
+   "0ac80ca9-e881-4ca0-b5f6-d728ae219741",
+   "11491c21-338c-4f6f-a442-596036c698eb",
+   "274b2bb3-29e1-4d11-b5bf-ed44764c8bdd",
+   "318fd0b1-877c-4b8f-95d1-1d952c68034d",
+   "8b427d76-b6d2-40e4-9c2e-238d944c534b",
+   "a11d8fdc-5b1a-48f5-bfae-a39f43c7dcb6",
+   "adb6a511-42e6-4346-ba99-31f6914f09c3",
+   "d7151a99-d0a8-47f3-80d9-b013b104d42b",
+   "d74168c8-8537-4bbf-9374-30f9155d5b3b"
+  ]
+ },
+ "target_example": {
+  "log": "f292cc5c-7a90-360d-b62a-074c643bdf59",
+  "track": "aaddd0c9-9700-4b46-8f4c-1fe3269dab48",
+  "t0": 315968807360037000,
+  "t1": 315968812460096000,
+  "related": [
+   "0586e180-0d79-4efe-aa8d-862d4124da69",
+   "09eae1ab-c779-4c51-8155-02df2f704557",
+   "56de3513-ecbc-4806-8047-4350998e037b",
+   "b25276e7-3c91-4470-9737-c17653c2c4fe",
+   "c6d68347-e952-4d46-a01f-82ae67d76a62"
+  ]
+ },
+ "negative_example": {
+  "log": "280269f9-6111-311d-b351-ce9f63f88c81",
+  "track": "a968b3f8-66e8-4bc4-bb9d-81feee715b6d",
+  "t0": 315977572059767000,
+  "t1": 315977573859979000,
+  "related": [
+   "b77e6c3b-1978-42e4-8b9c-b1ee88773090"
+  ]
+ },
+ "n_P": 252,
+ "n_Pp": 104,
+ "jacc_track": 0.35361216730038025,
+ "jacc_ts": 0.15638045808417014,
+ "n_near_miss": 0
+}

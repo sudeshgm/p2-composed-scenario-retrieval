@@ -1,0 +1,51 @@
+{
+ "id": "t1019",
+ "family": "state",
+ "m": "The same, but our own car is speeding up rather than slowing down.",
+ "m_old": "but speeding up (accelerating) instead of braking",
+ "P_text": "Our own car that is slowing down and is pointed at the moving vehicle",
+ "Pp_text": "Our own car that is speeding up and is pointed at the moving vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "bd90cd1a-38b6-33b7-adec-ba7d4207a8c0",
+  "track": "ego",
+  "t0": 315970755159831000,
+  "t1": 315970757360139000,
+  "related": [
+   "4d850e64-8922-4101-b510-1c76c7bc0f47",
+   "5245aefd-0b61-4159-a1db-354134c58f00",
+   "8136b892-676c-44e3-8ba9-2dfe16502086",
+   "857d95ba-2ca6-4291-b421-8bb998c2e6d6",
+   "9964bdd2-5330-4468-8329-22426c589a10"
+  ]
+ },
+ "target_example": {
+  "log": "a33a44fb-6008-3dc2-b7c5-2d27b70741e8",
+  "track": "7d113bd9-c5d2-4300-a92b-235667454ab8",
+  "t0": 315967268060108000,
+  "t1": 315967270860311000,
+  "related": [
+   "462b1acd-8e9c-4b92-951e-ec949943ab82",
+   "82198666-b065-4ae1-b984-dc996f4746e4",
+   "b5d7cbb6-7eab-4546-a558-73963ac5aeba",
+   "cadfb79b-3153-4280-a0d2-06d2d2ece414",
+   "d50aaa9c-0f96-4a20-a717-7c32adf94b0a",
+   "ego"
+  ]
+ },
+ "negative_example": {
+  "log": "91aab547-1912-3b8e-8e7f-df3b202147bf",
+  "track": "ego",
+  "t0": 315968309560013000,
+  "t1": 315968312259963000,
+  "related": [
+   "71cf20f8-bbac-496c-9f6f-398b7f01941e"
+  ]
+ },
+ "n_P": 216,
+ "n_Pp": 185,
+ "jacc_track": 0.5482625482625483,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

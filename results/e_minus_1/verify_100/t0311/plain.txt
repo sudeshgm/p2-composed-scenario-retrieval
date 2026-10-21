@@ -1,0 +1,3 @@
+Old search: A car that is slowing down and is moving toward the truck.
+New search: A car that is slowing down and is driving right behind the truck, following it.
+Why the right one should not fit: It fits the old search, but it is not driving right behind the truck, following it.

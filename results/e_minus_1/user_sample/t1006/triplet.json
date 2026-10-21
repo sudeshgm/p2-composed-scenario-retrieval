@@ -1,0 +1,48 @@
+{
+ "id": "t1006",
+ "family": "relational",
+ "m": "The same, but the truck is driving right behind the car, following it - not moving toward it.",
+ "m_old": "but following the car instead of heading toward it",
+ "P_text": "A truck that is turning right and is moving toward the car",
+ "Pp_text": "A truck that is turning right and is driving right behind the car, following it",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "ded5ef6e-46ea-3a66-9180-18a6fa0a2db4",
+  "track": "15b2ccc7-0bcd-4d6f-bf64-c2e85ff1d414",
+  "t0": 315976263360037000,
+  "t1": 315976265159602000,
+  "related": [
+   "a25c33c3-71ee-4244-8229-376ab01e38fd",
+   "a78f87f4-d562-4318-8b11-b369ee73322e",
+   "b4b93962-b286-4b7c-8a5c-d106fc9e6b26"
+  ]
+ },
+ "target_example": {
+  "log": "185d3943-dd15-397a-8b2e-69cd86628fb7",
+  "track": "79ababdb-b386-4c30-b9e5-425047017be1",
+  "t0": 315974089960098000,
+  "t1": 315974095659943000,
+  "related": [
+   "604e54e1-b505-46c8-ab95-6073e3bd8b72"
+  ]
+ },
+ "negative_example": {
+  "log": "22052525-4f85-3fe8-9d7d-000a9fffce36",
+  "track": "4e551323-3a78-4a82-bd23-0f25af59ea2c",
+  "t0": 315970677059730000,
+  "t1": 315970681459686000,
+  "related": [
+   "23852e8d-05d0-4a06-85e4-068e189df43e",
+   "2b4a0ee7-ea09-411d-869e-103f3bf2dd81",
+   "4026204f-40a8-414a-817d-a83cd2c65c40",
+   "80b40f89-d216-41ba-84f4-af38c41de1fc",
+   "ea8c59f6-8942-4f32-80c8-f6d90b69aaac"
+  ]
+ },
+ "n_P": 9,
+ "n_Pp": 3,
+ "jacc_track": 0.3333333333333333,
+ "jacc_ts": 0.07865168539325842,
+ "n_near_miss": 1
+}

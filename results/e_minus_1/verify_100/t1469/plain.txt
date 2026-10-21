@@ -1,0 +1,3 @@
+Old search: A vehicle that is slowing down and is moving toward the other vehicle.
+New search: A vehicle that is speeding up and is moving toward the other vehicle.
+Why the right one should not fit: It fits the old search, but it is slowing down, not speeding up.

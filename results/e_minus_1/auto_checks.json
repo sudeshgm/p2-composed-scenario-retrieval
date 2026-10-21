@@ -1,121 +1,121 @@
 {
  "n": 1000,
  "family_counts": {
-  "relational": 200,
-  "directional": 200,
-  "agent_class": 200,
-  "state": 200,
-  "compositional": 200
+  "relational": 176,
+  "directional": 236,
+  "agent_class": 218,
+  "compositional": 173,
+  "state": 197
  },
  "jaccard_track_all": {
   "min": 0.0,
   "p10": 0.0,
-  "p25": 0.0,
-  "median": 0.154,
-  "p75": 0.452,
-  "p90": 0.663,
-  "max": 0.967,
-  "mean": 0.247
+  "p25": 0.009,
+  "median": 0.13,
+  "p75": 0.351,
+  "p90": 0.536,
+  "max": 0.983,
+  "mean": 0.205
  },
  "jaccard_ts_all": {
   "min": 0.0,
   "p10": 0.0,
   "p25": 0.0,
-  "median": 0.033,
-  "p75": 0.181,
-  "p90": 0.453,
-  "max": 0.961,
-  "mean": 0.13
+  "median": 0.042,
+  "p75": 0.164,
+  "p90": 0.347,
+  "max": 0.862,
+  "mean": 0.111
  },
- "frac_jaccard_track_eq_0": 0.259,
+ "frac_jaccard_track_eq_0": 0.236,
  "target_size_tracks": {
   "min": 1.0,
-  "p10": 1.0,
-  "p25": 3.0,
-  "median": 9.0,
-  "p75": 39.0,
-  "p90": 159.4,
-  "max": 1507.0,
-  "mean": 69.447
+  "p10": 5.0,
+  "p25": 16.0,
+  "median": 55.0,
+  "p75": 217.25,
+  "p90": 949.7,
+  "max": 8803.0,
+  "mean": 412.264
  },
  "negatives_per_query": {
   "min": 1.0,
   "p10": 2.0,
-  "p25": 4.0,
-  "median": 12.0,
-  "p75": 47.0,
-  "p90": 217.0,
-  "max": 1562.0,
-  "mean": 80.641
+  "p25": 6.0,
+  "median": 26.0,
+  "p75": 116.5,
+  "p90": 950.2,
+  "max": 9470.0,
+  "mean": 408.447
  },
  "near_miss_per_query": {
   "min": 0.0,
   "p10": 0.0,
   "p25": 0.0,
-  "median": 4.0,
-  "p75": 29.0,
-  "p90": 183.2,
-  "max": 1437.0,
-  "mean": 70.953
+  "median": 1.0,
+  "p75": 52.25,
+  "p90": 373.4,
+  "max": 9850.0,
+  "mean": 264.419
  },
  "target_logs": {
   "min": 1.0,
-  "p10": 1.0,
-  "p25": 2.0,
-  "median": 5.0,
-  "p75": 12.0,
-  "p90": 18.0,
-  "max": 20.0,
-  "mean": 7.214
+  "p10": 4.0,
+  "p25": 10.0,
+  "median": 30.0,
+  "p75": 79.25,
+  "p90": 130.1,
+  "max": 150.0,
+  "mean": 48.785
  },
  "per_family": {
   "relational": {
-   "mutations_generated": 7108,
-   "empty_target_rate": 0.159,
-   "identical_rate": 0.007,
-   "no_ref_outside_target_rate": 0.21,
-   "selected": 200,
-   "jacc_track_median": 0.333,
-   "target_size_median": 12.0
+   "mutations_generated": 7752,
+   "empty_target_rate": 0.059,
+   "identical_rate": 0.001,
+   "no_ref_outside_target_rate": 0.11,
+   "selected": 176,
+   "jacc_track_median": 0.386,
+   "target_size_median": 74.5
   },
   "directional": {
-   "mutations_generated": 1845,
-   "empty_target_rate": 0.035,
-   "identical_rate": 0.017,
-   "no_ref_outside_target_rate": 0.163,
-   "selected": 200,
-   "jacc_track_median": 0.5,
-   "target_size_median": 20.5
+   "mutations_generated": 2395,
+   "empty_target_rate": 0.047,
+   "identical_rate": 0.003,
+   "no_ref_outside_target_rate": 0.023,
+   "selected": 236,
+   "jacc_track_median": 0.251,
+   "target_size_median": 84.5
   },
   "agent_class": {
-   "mutations_generated": 11493,
-   "empty_target_rate": 0.368,
-   "identical_rate": 0.001,
-   "no_ref_outside_target_rate": 0.04,
-   "selected": 200,
+   "mutations_generated": 15057,
+   "empty_target_rate": 0.187,
+   "identical_rate": 0.0,
+   "no_ref_outside_target_rate": 0.017,
+   "selected": 218,
    "jacc_track_median": 0.0,
-   "target_size_median": 5.0
+   "target_size_median": 40.0
   },
   "state": {
-   "mutations_generated": 4940,
-   "empty_target_rate": 0.152,
+   "mutations_generated": 6799,
+   "empty_target_rate": 0.097,
    "identical_rate": 0.0,
-   "no_ref_outside_target_rate": 0.072,
-   "selected": 200,
-   "jacc_track_median": 0.0,
-   "target_size_median": 10.0
+   "no_ref_outside_target_rate": 0.051,
+   "selected": 197,
+   "jacc_track_median": 0.032,
+   "target_size_median": 65.0
   },
   "compositional": {
-   "mutations_generated": 20075,
-   "empty_target_rate": 0.46,
-   "identical_rate": 0.012,
-   "no_ref_outside_target_rate": 0.148,
-   "selected": 200,
-   "jacc_track_median": 0.167,
-   "target_size_median": 4.0
+   "mutations_generated": 18153,
+   "empty_target_rate": 0.315,
+   "identical_rate": 0.004,
+   "no_ref_outside_target_rate": 0.005,
+   "selected": 173,
+   "jacc_track_median": 0.143,
+   "target_size_median": 35.0
   }
  },
- "all_mutations": 45461,
- "empty_target_rate_all": 0.339,
+ "all_mutations": 50156,
+ "empty_target_rate_all": 0.195,
  "context_family": "unsupported: no weather/lighting/time-of-day columns in RefAV/AV2 annotations and no atomic function for them"
 }

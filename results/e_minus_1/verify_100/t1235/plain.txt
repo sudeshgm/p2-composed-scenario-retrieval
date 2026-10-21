@@ -1,0 +1,3 @@
+Old search: A cyclist that has the vehicle behind it.
+New search: A cyclist that is standing still and has the vehicle behind it.
+Why the right one should not fit: It fits the old search, but it is not standing still.

@@ -1,0 +1,42 @@
+{
+ "id": "t1347",
+ "family": "directional",
+ "m": "The same, but the pedestrian is behind our own car now, not in front of it.",
+ "m_old": "but with the pedestrian behind it instead of ahead of it",
+ "P_text": "Our own car that is driving along and has the pedestrian in front of it",
+ "Pp_text": "Our own car that is driving along and has the pedestrian behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "78683234-e6f1-3e4e-af52-6f839254e4c0",
+  "track": "ego",
+  "t0": 315966755660001000,
+  "t1": 315966757659920000,
+  "related": [
+   "33803a57-77ff-4a4b-b3e2-c523b7139708"
+  ]
+ },
+ "target_example": {
+  "log": "9f871fb4-3b8e-34b3-9161-ed961e71a6da",
+  "track": "ego",
+  "t0": 315971840559891000,
+  "t1": 315971842060160000,
+  "related": [
+   "e8b5e7ee-66a7-4730-b2c4-19bdc1fccca2"
+  ]
+ },
+ "negative_example": {
+  "log": "04994d08-156c-3018-9717-ba0e29be8153",
+  "track": "3b42dad6-b8b9-4da3-a872-315b51126510",
+  "t0": 315971497559736000,
+  "t1": 315971501559599000,
+  "related": [
+   "081a301d-2878-43b8-a602-3c391fb568cc"
+  ]
+ },
+ "n_P": 85,
+ "n_Pp": 60,
+ "jacc_track": 0.3425925925925926,
+ "jacc_ts": 0.056111616621170764,
+ "n_near_miss": 0
+}

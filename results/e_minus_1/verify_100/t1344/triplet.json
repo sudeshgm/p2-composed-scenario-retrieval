@@ -1,0 +1,47 @@
+{
+ "id": "t1344",
+ "family": "state",
+ "m": "The same, but the car is speeding up rather than slowing down.",
+ "m_old": "but speeding up (accelerating) instead of braking",
+ "P_text": "A car that is slowing down and is close to the other car",
+ "Pp_text": "A car that is speeding up and is close to the other car",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "6f128f23-ee40-3ea9-8c50-c9cdb9d3e8b6",
+  "track": "7f9b4cfa-5f5f-48f4-8488-e9225a62202c",
+  "t0": 315967386659591000,
+  "t1": 315967388260063000,
+  "related": [
+   "1a1586b7-5d9b-4312-8b9d-878c609e0093",
+   "5a8463da-7300-463b-b4e3-11af700dcd61",
+   "c68d3a3b-f3c6-419d-a006-ac44af10e527"
+  ]
+ },
+ "target_example": {
+  "log": "858d739b-a0ba-35aa-bafc-4f7988bcad17",
+  "track": "df0c4b46-e173-4b73-969b-02b81884015c",
+  "t0": 315969293160009000,
+  "t1": 315969295759772000,
+  "related": [
+   "2b8b1347-dccb-498f-a579-e0c68bff51c1",
+   "6821266f-a49b-44aa-8362-5adb2dfd94b4",
+   "ed939793-4727-4fa4-b68a-14b641a46f35"
+  ]
+ },
+ "negative_example": {
+  "log": "78f7cb5c-9d51-34f0-b356-9b3d83263c75",
+  "track": "fcc87c92-085e-4837-82c8-55bad4946e70",
+  "t0": 315972384560143000,
+  "t1": 315972386359700000,
+  "related": [
+   "7a9d0c68-0653-433a-a3da-a4f175c5fd7c",
+   "886b700d-ad1d-4577-9d2f-ddc4f456d1da"
+  ]
+ },
+ "n_P": 1005,
+ "n_Pp": 1111,
+ "jacc_track": 0.22880371660859466,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

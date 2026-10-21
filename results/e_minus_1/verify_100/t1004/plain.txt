@@ -1,0 +1,3 @@
+Old search: A car that is driving along and has the other parked car on its left.
+New search: A car that is speeding up and has the other parked car on its left.
+Why the right one should not fit: It fits the old search, but it is driving along, not speeding up.

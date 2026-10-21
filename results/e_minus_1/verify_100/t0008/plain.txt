@@ -1,0 +1,3 @@
+Old search: A vehicle that is driving along and has the parked bus on its left.
+New search: A vehicle that is driving along and has the parked truck on its left.
+Why the right one should not fit: The other road user is a truck, as the new search asks, but the vehicle is not driving along.

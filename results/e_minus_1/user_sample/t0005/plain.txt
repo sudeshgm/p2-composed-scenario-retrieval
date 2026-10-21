@@ -1,0 +1,3 @@
+Old search: A car that is driving along and is pointed at the pedestrian.
+New search: A car that is driving along and changing lanes and is pointed at the pedestrian.
+Why the right one should not fit: It fits the old search, but it is not changing lanes.

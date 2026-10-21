@@ -1,0 +1,3 @@
+Old search: A cyclist that is riding along and is close to the parked car.
+New search: A pedestrian that is walking and is close to the parked car.
+Why the right one should not fit: It is a pedestrian, as the new search asks, but the pedestrian is not walking.

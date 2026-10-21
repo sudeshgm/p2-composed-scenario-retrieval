@@ -1,0 +1,3 @@
+Old search: Our own car that is turning right and is moving toward the parked car.
+New search: Our own car that is turning left and is moving toward the parked car.
+Why the right one should not fit: It fits the old search, but it is turning right, not turning left.

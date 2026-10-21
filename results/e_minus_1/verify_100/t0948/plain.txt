@@ -1,0 +1,3 @@
+Old search: A car that is changing lanes and is close to the cyclist.
+New search: A car that is changing lanes and is close to the pedestrian.
+Why the right one should not fit: The other road user is a pedestrian, as the new search asks, but the car is not changing lanes.

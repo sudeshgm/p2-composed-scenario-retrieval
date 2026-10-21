@@ -1,0 +1,56 @@
+{
+ "id": "t0524",
+ "family": "state",
+ "m": "The same, but our own car is turning left rather than turning right.",
+ "m_old": "but turning left instead of turning right",
+ "P_text": "Our own car that is turning right and is moving toward the parked car",
+ "Pp_text": "Our own car that is turning left and is moving toward the parked car",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "214e388e-cbd7-3dde-a204-d2ec42298808",
+  "track": "38576d5d-c464-4d79-b83f-19886759e2dd",
+  "t0": 315974479460121000,
+  "t1": 315974482259645000,
+  "related": [
+   "4e85eb32-9eaa-4d5d-ae2b-0a681a5c78ce",
+   "5c27d342-5c49-46be-8cc0-5e13d4664f6f",
+   "858311ef-591e-444f-85e9-61318ffd79e3",
+   "f9b1fea5-faa3-4af1-bf41-be7576a6613d"
+  ]
+ },
+ "target_example": {
+  "log": "3b3570b4-7b0b-3268-a571-b0889dbf40b6",
+  "track": "9d57813a-2d04-40e6-9694-20dfa13295dc",
+  "t0": 315971927560204000,
+  "t1": 315971930059755000,
+  "related": [
+   "523c16ff-fbae-4432-b04a-e951c83836bb",
+   "6e91f257-dd01-4913-9cfe-1899fe68236f"
+  ]
+ },
+ "negative_example": {
+  "log": "20bcd747-ef60-391a-9f4a-ae99f049c260",
+  "track": "c6a1e70d-6415-49e6-9b22-a787ea0e66b0",
+  "t0": 315974695359489000,
+  "t1": 315974697659990000,
+  "related": [
+   "0d198bc2-c09f-4f68-9ed6-e7d8808f18e9",
+   "2bc25da5-58ee-4c08-b3a7-330aee156eb6",
+   "36d2b281-132d-4517-a926-ec1b2325b656",
+   "49b32049-fedb-490d-8ca0-b48f12d16ff6",
+   "638d2535-1e53-4d58-b908-0c34830bb2ba",
+   "64bb9059-788b-4d48-b66e-4e97efba798f",
+   "74959d9d-8d75-4a86-9205-257c787d1738",
+   "a090f349-c8d8-4d1d-9486-284ef7136c20",
+   "bc779c0f-d7b5-40fe-8ae0-6f4bfb65691e",
+   "d59f214b-719e-4d90-9465-983bcc5ee550",
+   "d8b9379c-80b7-4d15-9684-ac48666ce993"
+  ]
+ },
+ "n_P": 20,
+ "n_Pp": 14,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

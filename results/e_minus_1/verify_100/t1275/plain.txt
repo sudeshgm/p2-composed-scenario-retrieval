@@ -1,0 +1,3 @@
+Old search: A bus that is moving toward the moving car.
+New search: A bus that is speeding up and is moving toward the moving car.
+Why the right one should not fit: It fits the old search, but it is not speeding up.

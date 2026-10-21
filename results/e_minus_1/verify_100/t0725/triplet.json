@@ -1,0 +1,42 @@
+{
+ "id": "t0725",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also speeding up.",
+ "m_old": "and also speeding up (accelerating)",
+ "P_text": "A vehicle that is turning right and is close to the truck",
+ "Pp_text": "A vehicle that is turning right and speeding up and is close to the truck",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = turning(a, log_dir, direction='right')\na = accelerating(a, log_dir, min_accel=1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "reference": {
+  "log": "02a00399-3857-444e-8db3-a8f58489c394",
+  "track": "8db7c504-aa35-4022-bd29-a8d7b1dbbb95",
+  "t0": 315966074759916000,
+  "t1": 315966076959558000,
+  "related": [
+   "48696110-cae2-40c5-a7ad-ac76d498b765"
+  ]
+ },
+ "target_example": {
+  "log": "7e4d67b3-c3cc-3288-afe5-043602ea3c70",
+  "track": "92bc568d-158f-431a-afa5-ad0f3d9daffc",
+  "t0": 315969978759679000,
+  "t1": 315969981060170000,
+  "related": [
+   "ae15f0dd-ba0c-44a6-8a15-64680ef54a8a"
+  ]
+ },
+ "negative_example": {
+  "log": "3bffdcff-c3a7-38b6-a0f2-64196d130958",
+  "track": "ff440c42-7da3-443c-8f1c-db71d7ec77f0",
+  "t0": 315975582860141000,
+  "t1": 315975587159976000,
+  "related": [
+   "1a498915-3499-4473-96e0-fb47c72f916b"
+  ]
+ },
+ "n_P": 35,
+ "n_Pp": 12,
+ "jacc_track": 0.34285714285714286,
+ "jacc_ts": 0.13142857142857142,
+ "n_near_miss": 4
+}

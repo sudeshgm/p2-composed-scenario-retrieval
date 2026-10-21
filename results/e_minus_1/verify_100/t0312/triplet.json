@@ -1,0 +1,42 @@
+{
+ "id": "t0312",
+ "family": "directional",
+ "m": "The same, but the bus is in front of the car now, not behind it.",
+ "m_old": "but with the bus ahead of it instead of behind it",
+ "P_text": "A car that is slowing down and has the bus behind it",
+ "Pp_text": "A car that is slowing down and has the bus in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "bdb9d309-f14b-3ff6-ad1f-5d3f3f95a13e",
+  "track": "9ccbea3b-a08b-4557-9d03-9cdc68c0a9d8",
+  "t0": 315971071459904000,
+  "t1": 315971073359638000,
+  "related": [
+   "f49d7d53-9c18-46e5-b177-f9c453474a09"
+  ]
+ },
+ "target_example": {
+  "log": "78683234-e6f1-3e4e-af52-6f839254e4c0",
+  "track": "3936a325-265e-4b84-b5db-30a295ccd1e1",
+  "t0": 315966754760238000,
+  "t1": 315966756659961000,
+  "related": [
+   "dbf0fda7-2031-4dff-8eb3-d4ba38962fe6"
+  ]
+ },
+ "negative_example": {
+  "log": "280269f9-6111-311d-b351-ce9f63f88c81",
+  "track": "b1beeabb-1a12-4019-8958-72493a266f84",
+  "t0": 315977578259965000,
+  "t1": 315977580560489000,
+  "related": [
+   "2fe7800f-10a4-4b28-883a-da2df6f07e7c"
+  ]
+ },
+ "n_P": 14,
+ "n_Pp": 20,
+ "jacc_track": 0.030303030303030304,
+ "jacc_ts": 0.006564551422319475,
+ "n_near_miss": 0
+}

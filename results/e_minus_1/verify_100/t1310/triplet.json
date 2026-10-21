@@ -1,0 +1,44 @@
+{
+ "id": "t1310",
+ "family": "compositional",
+ "m": "The same, but the truck is also changing lanes.",
+ "m_old": "and also changing lanes",
+ "P_text": "A truck that is slowing down and has the parked vehicle in front of it",
+ "Pp_text": "A truck that is slowing down and changing lanes and has the parked vehicle in front of it",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "214e388e-cbd7-3dde-a204-d2ec42298808",
+  "track": "8417336c-bba1-4a2b-8574-e9283111d93f",
+  "t0": 315974488859991000,
+  "t1": 315974493159800000,
+  "related": [
+   "cc60354b-2050-4574-8901-b422a26c16bc"
+  ]
+ },
+ "target_example": {
+  "log": "78f7cb5c-9d51-34f0-b356-9b3d83263c75",
+  "track": "7c666793-fd47-41a9-bc5b-f06d2781344f",
+  "t0": 315972391659501000,
+  "t1": 315972393559918000,
+  "related": [
+   "886b700d-ad1d-4577-9d2f-ddc4f456d1da"
+  ]
+ },
+ "negative_example": {
+  "log": "f3cd0d0d-8b71-3266-9732-d9f0d5778eb6",
+  "track": "57215ffd-49f9-436e-8bf6-cfa0180553b7",
+  "t0": 315968818059672000,
+  "t1": 315968820359525000,
+  "related": [
+   "a8842224-f59a-4105-9247-618f91ad0996",
+   "bad474a9-7392-4cef-9b8b-836c4ad37f70",
+   "e3509b86-b299-4fd2-bb84-28b08d8bf36b"
+  ]
+ },
+ "n_P": 19,
+ "n_Pp": 1,
+ "jacc_track": 0.05263157894736842,
+ "jacc_ts": 0.06116207951070336,
+ "n_near_miss": 1
+}

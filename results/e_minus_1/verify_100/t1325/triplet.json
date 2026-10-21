@@ -1,0 +1,48 @@
+{
+ "id": "t1325",
+ "family": "compositional",
+ "m": "The same, but the vehicle is also slowing down.",
+ "m_old": "and also braking",
+ "P_text": "A vehicle that is driving along and has the car in front of it",
+ "Pp_text": "A vehicle that is driving along and slowing down and has the car in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "52071780-5758-3ed4-8835-0d64ecdc5575",
+  "track": "5237c53f-8aca-4ae8-9339-9abb9828535c",
+  "t0": 315974246860160000,
+  "t1": 315974255260044000,
+  "related": [
+   "1408ca8d-4ade-4833-86bf-9a9d5c83c308",
+   "29ce3722-9505-44a7-8ba1-6548aa644ec8",
+   "7b204071-ad9a-400b-adee-696df8003db0",
+   "9d93e221-937d-454b-9da2-15a81f870d54"
+  ]
+ },
+ "target_example": {
+  "log": "a33a44fb-6008-3dc2-b7c5-2d27b70741e8",
+  "track": "bc3bae3c-20e2-43c6-a6df-52c7175b85dc",
+  "t0": 315967279059885000,
+  "t1": 315967281960284000,
+  "related": [
+   "326e6d94-3e07-4fc8-9765-353305bc0aef",
+   "5eb49c17-78a0-45bb-bf0c-37c6738a1d50",
+   "950d121e-e0bd-439d-818d-370df3c6b016",
+   "b8bf29c8-e8fc-4f5d-93fe-a04879f378e9"
+  ]
+ },
+ "negative_example": {
+  "log": "2f2321d2-7912-3567-a789-25e46a145bda",
+  "track": "26770e63-44e9-4c6c-9e55-71a989198c14",
+  "t0": 315966443560073000,
+  "t1": 315966453559633000,
+  "related": [
+   "ae38391d-ddab-4f91-8791-f1c9b5b972c4"
+  ]
+ },
+ "n_P": 2825,
+ "n_Pp": 940,
+ "jacc_track": 0.3327433628318584,
+ "jacc_ts": 0.09817420309482608,
+ "n_near_miss": 661
+}

@@ -1,0 +1,3 @@
+Old search: A bus that is close to the parked car.
+New search: A bus that is driving in the same lane as the parked car.
+Why the right one should not fit: It fits the old search, but it is not driving in the same lane as the car.

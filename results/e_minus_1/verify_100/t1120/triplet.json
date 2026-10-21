@@ -1,0 +1,45 @@
+{
+ "id": "t1120",
+ "family": "compositional",
+ "m": "The same, but the bus is also changing lanes.",
+ "m_old": "and also changing lanes",
+ "P_text": "A bus that has the pedestrian on its left",
+ "Pp_text": "A bus that is changing lanes and has the pedestrian on its left",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "b19f3c1a-a84a-3a2d-8d1b-8a4ae201020b",
+  "track": "d63d01eb-2099-415f-8319-ca5639a0f0f9",
+  "t0": 315973287360065000,
+  "t1": 315973299059915000,
+  "related": [
+   "1022852e-eecc-4eec-89d6-fcc3cd5db39f"
+  ]
+ },
+ "target_example": {
+  "log": "6aaf5b08-9f84-3a2e-8a32-2e50e5e11a3c",
+  "track": "f23e8920-8124-44bb-9369-cfd3839082be",
+  "t0": 315970485759638000,
+  "t1": 315970490659972000,
+  "related": [
+   "1757edf6-8225-4f1d-a611-3489db7b3599",
+   "4e44dea2-21aa-442f-b44a-5d27176b4d51",
+   "8a086c67-2b91-4471-afe6-e86676413cf9",
+   "e592154e-c624-4918-863b-0dee289ba954"
+  ]
+ },
+ "negative_example": {
+  "log": "27c03d98-6ac3-38a3-ba5e-102b184d01ef",
+  "track": "b68c8dcd-6d91-481b-80b3-80455ce21561",
+  "t0": 315975024459769000,
+  "t1": 315975026059567000,
+  "related": [
+   "18b035a6-c43c-4064-8e6d-01f21fbc999a"
+  ]
+ },
+ "n_P": 39,
+ "n_Pp": 2,
+ "jacc_track": 0.05128205128205128,
+ "jacc_ts": 0.03690036900369004,
+ "n_near_miss": 23
+}

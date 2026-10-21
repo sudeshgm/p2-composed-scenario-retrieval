@@ -1,0 +1,3 @@
+Old search: A truck that is parked and is pointed at the parked vehicle.
+New search: A car that is parked and is pointed at the parked vehicle.
+Why the right one should not fit: It is a car, as the new search asks, but the car is not parked.

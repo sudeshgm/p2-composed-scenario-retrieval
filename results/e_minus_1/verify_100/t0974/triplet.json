@@ -1,0 +1,51 @@
+{
+ "id": "t0974",
+ "family": "state",
+ "m": "The same, but the car is speeding up rather than driving at a steady speed.",
+ "m_old": "but speeding up (accelerating) instead of just moving at a steady speed",
+ "P_text": "A car that is driving along and is moving toward the other car",
+ "Pp_text": "A car that is speeding up and is moving toward the other car",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "1f434d15-8745-3fba-9c3e-ccb026688397",
+  "track": "31ef1844-4e92-4bb8-9d79-83e60a26a9eb",
+  "t0": 315972878259718000,
+  "t1": 315972881059872000,
+  "related": [
+   "3db1850c-00e8-4342-bd4e-579952608837",
+   "dfcf7107-b4d1-437e-8b38-4ecf3667896f",
+   "f4b7eea1-15d1-4958-be28-0e77a9786e16",
+   "ffd9fbd5-bb06-4150-84fd-8424b4d4914f"
+  ]
+ },
+ "target_example": {
+  "log": "e42aa296-0e5d-4733-87ec-131a82f917bc",
+  "track": "3210e98b-5286-4aa4-929a-b022e1cc5d59",
+  "t0": 315966257659893000,
+  "t1": 315966259759999000,
+  "related": [
+   "648b9e58-4ba5-4277-93dd-429b2e732a2f",
+   "84fcd4f8-7b3d-43ea-9cef-6d60f4fc46f3",
+   "a4aab244-d0fb-459e-84be-c4d65df27de8",
+   "b1016476-7b2b-4c9c-bee2-f8710a09ac10",
+   "c24388ab-78f8-43e4-b324-9ea3b5d19839",
+   "d99f0bf5-d164-437c-bc60-35e3009a7e7e",
+   "e284baf3-7fd2-406c-a844-cdde2b6a78a6"
+  ]
+ },
+ "negative_example": {
+  "log": "42f92807-0c5e-3397-bd45-9d5303b4db2a",
+  "track": "07ec928e-3ca4-4e65-8d85-58cf88dfec98",
+  "t0": 315976327259911000,
+  "t1": 315976328760196000,
+  "related": [
+   "d7e396bf-3411-440a-8cc8-cc17c744fa02"
+  ]
+ },
+ "n_P": 2194,
+ "n_Pp": 648,
+ "jacc_track": 0.28888888888888886,
+ "jacc_ts": 0.08501705250103349,
+ "n_near_miss": 2444
+}

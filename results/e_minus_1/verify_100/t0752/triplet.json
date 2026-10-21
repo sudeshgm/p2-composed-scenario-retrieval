@@ -1,47 +1,42 @@
 {
  "id": "t0752",
- "family": "agent_class",
- "m": "but with a cyclist instead of a vehicle",
- "P_text": "parked vehicle with a car behind it",
- "Pp_text": "parked cyclist with a car behind it",
- "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
- "Pp_src": "a = get_objects_of_category(log_dir, category='BICYCLIST')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25), b_gate])",
+ "family": "directional",
+ "m": "The same, but the cyclist is on the left of the car now, not on the right of it.",
+ "m_old": "but with the cyclist to the left of it instead of to the right of it",
+ "P_text": "A car that is slowing down and has the cyclist on its right",
+ "Pp_text": "A car that is slowing down and has the cyclist on its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='right', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = accelerating(a, log_dir, min_accel=-np.inf, max_accel=-1.0)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
  "reference": {
-  "log": "27be7d34-ecb4-377b-8477-ccfd7cf4d0bc",
-  "track": "b9f60483-020d-49ad-b446-f12c1716f6b1",
-  "t0": 315969625960289000,
-  "t1": 315969638560292000,
+  "log": "ba67827f-6b99-3d2a-96ab-7c829eb999bb",
+  "track": "cfdeb265-e333-437f-96a8-bd5bed70ec26",
+  "t0": 315969222059762000,
+  "t1": 315969225559973000,
   "related": [
-   "bf3e5198-2ea9-4f71-bd49-0a6a5f837eee",
-   "c3b59edc-a545-4e26-affa-29795d7040d7"
+   "96f44307-fcac-46aa-bb59-1de78a45e8f4"
   ]
  },
  "target_example": {
-  "log": "02678d04-cc9f-3148-9f95-1ba66347dff9",
-  "track": "b53e87ac-b6d2-4318-a71b-719c86b675b1",
-  "t0": 315969910759865000,
-  "t1": 315969919960059000,
+  "log": "fbee355f-8878-31fa-8ac8-b9a45a3f130a",
+  "track": "1dd8cfb1-0874-47c1-89d7-bbd473cb3c64",
+  "t0": 315967342459624000,
+  "t1": 315967344059434000,
   "related": [
-   "16b92758-5001-477b-b6f3-a9113b2f3be9",
-   "645fe165-eaff-41f4-abb9-50c9f46c9dd6",
-   "bb40a192-730e-4cb7-91e1-069a642fa8fd",
-   "fa9bfe78-e73e-4056-9bd2-80fb43d89d8a"
+   "02f0f303-2298-49e4-a70e-1905b8bb84f9"
   ]
  },
  "negative_example": {
-  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
-  "track": "5403f99e-dd33-49db-8da3-3aaf1ca2c00d",
-  "t0": 315968554660126000,
-  "t1": 315968555760293000,
+  "log": "24642607-2a51-384a-90a7-228067956d05",
+  "track": "10d45604-c4fc-47cc-988a-208779d266aa",
+  "t0": 315970923560041000,
+  "t1": 315970926760321000,
   "related": [
-   "14df89e9-a048-4386-9694-79cc7112aba2",
-   "239f1293-0611-4a3e-ab90-2dc1b168a33c",
-   "ab5a878f-755a-46d9-bc76-53615a00e69a"
+   "28a68a49-e65f-4ddb-a729-1a1f39fcdb11"
   ]
  },
- "n_P": 1056,
- "n_Pp": 1,
+ "n_P": 6,
+ "n_Pp": 4,
  "jacc_track": 0.0,
  "jacc_ts": 0.0,
- "n_near_miss": 253
+ "n_near_miss": 0
 }

@@ -1,0 +1,3 @@
+Old search: A bus that is pointed at the standing pedestrian.
+New search: A truck that is pointed at the standing pedestrian.
+Why the right one should not fit: It is a truck, as the new search asks, but it does not be pointed at the pedestrian.

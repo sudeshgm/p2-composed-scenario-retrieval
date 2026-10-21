@@ -1,0 +1,3 @@
+Old search: A car that is turning left and has the other car behind it.
+New search: A bus that is turning left and has the car behind it.
+Why the right one should not fit: It is a bus, as the new search asks, but the bus is not turning left.

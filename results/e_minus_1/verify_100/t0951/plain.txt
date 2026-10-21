@@ -1,0 +1,3 @@
+Old search: A truck that is turning right and is close to the parked car.
+New search: A truck that is turning right and is driving right behind the parked car, following it.
+Why the right one should not fit: It fits the old search, but it is not driving right behind the car, following it.

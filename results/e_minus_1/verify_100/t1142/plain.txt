@@ -1,0 +1,3 @@
+Old search: A cyclist that is riding along and has the moving vehicle on its left.
+New search: A cyclist that is riding along and has the moving vehicle on its right.
+Why the right one should not fit: It fits the old search, but the vehicle is on the left of it, not on the right of it.

@@ -1,0 +1,42 @@
+{
+ "id": "t0238",
+ "family": "agent_class",
+ "m": "The same situation, but with a pedestrian doing it instead of a vehicle.",
+ "m_old": "but with a pedestrian instead of a vehicle",
+ "P_text": "A vehicle that is parked and has the cyclist in front of it",
+ "Pp_text": "A pedestrian that is standing still and has the cyclist in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "95bf6003-7068-3a78-a0c0-9e470a06e60f",
+  "track": "00a994e9-ed18-4d4f-96b7-2f27575ac0c5",
+  "t0": 315966135860080000,
+  "t1": 315966139459878000,
+  "related": [
+   "f8f80758-0a68-4a94-827c-c7f0de66e503"
+  ]
+ },
+ "target_example": {
+  "log": "e50e7698-de3d-355f-aca2-eddd09c09533",
+  "track": "14657e6a-e82b-4ee3-b2b3-03f1faef0ce9",
+  "t0": 315971190559674000,
+  "t1": 315971195660282000,
+  "related": [
+   "3983857b-135a-4242-97ab-98e34a9a23f0"
+  ]
+ },
+ "negative_example": {
+  "log": "b87683ae-14c5-321f-8af3-623e7bafc3a7",
+  "track": "1bd11444-48ae-4a7d-8f89-9f9e592396ef",
+  "t0": 315972334360013000,
+  "t1": 315972336660523000,
+  "related": [
+   "2932a126-ee99-4efc-85cb-49464f460600"
+  ]
+ },
+ "n_P": 73,
+ "n_Pp": 11,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

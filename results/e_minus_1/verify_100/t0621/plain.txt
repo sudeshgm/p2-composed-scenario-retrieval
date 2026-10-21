@@ -1,0 +1,3 @@
+Old search: A vehicle that is parked and is pointed at the parked bus.
+New search: A vehicle that is parked and is close to the parked bus.
+Why the right one should not fit: It fits the old search, but it is not close to the bus.

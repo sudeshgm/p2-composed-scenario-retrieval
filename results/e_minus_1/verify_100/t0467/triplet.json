@@ -1,0 +1,42 @@
+{
+ "id": "t0467",
+ "family": "directional",
+ "m": "The same, but the truck is in front of the car now, not behind it.",
+ "m_old": "but with the truck ahead of it instead of behind it",
+ "P_text": "A car that is driving along and has the truck behind it",
+ "Pp_text": "A car that is driving along and has the truck in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = scenario_or([get_objects_of_category(log_dir, category='BOX_TRUCK'), get_objects_of_category(log_dir, category='TRUCK'), get_objects_of_category(log_dir, category='TRUCK_CAB')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "3de5b5d6-68c4-3c95-84ed-be7c83d829f8",
+  "track": "b04e47fc-d4db-4705-a73b-0d70aea0dab1",
+  "t0": 315968584960421000,
+  "t1": 315968589960244000,
+  "related": [
+   "87c96adb-affe-435c-894f-8c086dcd7e30"
+  ]
+ },
+ "target_example": {
+  "log": "335aabef-269e-3211-a99d-2c3a3a8f8475",
+  "track": "db2dc2ad-0603-4329-a6c0-a70df3a11d83",
+  "t0": 315975289559700000,
+  "t1": 315975291160166000,
+  "related": [
+   "0b5fc961-a062-42b9-a219-4d4fe946463f"
+  ]
+ },
+ "negative_example": {
+  "log": "544a8102-0ef5-3044-921e-dc0544370376",
+  "track": "d9befa28-42fd-4cbb-ae24-7dd9fa6e47fc",
+  "t0": 315968325459734000,
+  "t1": 315968332259558000,
+  "related": [
+   "688d7ea2-607b-4297-82af-68e46d6b89bf"
+  ]
+ },
+ "n_P": 213,
+ "n_Pp": 222,
+ "jacc_track": 0.17886178861788618,
+ "jacc_ts": 0.012875536480686695,
+ "n_near_miss": 0
+}

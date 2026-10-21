@@ -1,0 +1,45 @@
+{
+ "id": "t0142",
+ "family": "directional",
+ "m": "The same, but the vehicle is in front of our own car now, not behind it.",
+ "m_old": "but with the vehicle ahead of it instead of behind it",
+ "P_text": "Our own car that is turning right and has the moving vehicle behind it",
+ "Pp_text": "Our own car that is turning right and has the moving vehicle in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = turning(a, log_dir, direction='right')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "02a00399-3857-444e-8db3-a8f58489c394",
+  "track": "8db7c504-aa35-4022-bd29-a8d7b1dbbb95",
+  "t0": 315966072359880000,
+  "t1": 315966079260045000,
+  "related": [
+   "48696110-cae2-40c5-a7ad-ac76d498b765",
+   "ego",
+   "f92e9457-3390-4099-85fb-4e03bf094edd"
+  ]
+ },
+ "target_example": {
+  "log": "3bffdcff-c3a7-38b6-a0f2-64196d130958",
+  "track": "ego",
+  "t0": 315975589659583000,
+  "t1": 315975596559887000,
+  "related": [
+   "23f72b4f-0098-495f-ad55-20b3d2c6a66f",
+   "7999b5c9-e7ed-465d-a411-05c92f1cffa1"
+  ]
+ },
+ "negative_example": {
+  "log": "95bf6003-7068-3a78-a0c0-9e470a06e60f",
+  "track": "5e356c5e-429b-4868-998a-fdb35fc83462",
+  "t0": 315966135860080000,
+  "t1": 315966142560016000,
+  "related": [
+   "ego"
+  ]
+ },
+ "n_P": 50,
+ "n_Pp": 34,
+ "jacc_track": 0.5849056603773585,
+ "jacc_ts": 0.25727727139076745,
+ "n_near_miss": 0
+}

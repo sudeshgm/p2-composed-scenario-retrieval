@@ -1,0 +1,3 @@
+Old search: A truck that is parked and is pointed at the moving car.
+New search: A truck that is driving along and is pointed at the moving car.
+Why the right one should not fit: It fits the old search, but it is parked, not driving along.

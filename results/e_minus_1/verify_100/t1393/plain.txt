@@ -1,0 +1,3 @@
+Old search: A bus that is changing lanes and has the standing pedestrian on its left.
+New search: A car that is changing lanes and has the standing pedestrian on its left.
+Why the right one should not fit: It is a car, as the new search asks, but the car is not changing lanes.

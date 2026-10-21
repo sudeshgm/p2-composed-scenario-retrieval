@@ -1,0 +1,45 @@
+{
+ "id": "t0644",
+ "family": "state",
+ "m": "The same, but the vehicle is parked rather than driving along.",
+ "m_old": "but parked instead of moving",
+ "P_text": "A vehicle that is driving along and has the other moving vehicle on its left",
+ "Pp_text": "A vehicle that is parked and has the other moving vehicle on its left",
+ "P_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='left', within_distance=15, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "87ca3d9f-f317-3efb-b1cb-aaaf525227e5",
+  "track": "e02c7bd4-5127-45fe-8cbe-0861cbf93b85",
+  "t0": 315969171760119000,
+  "t1": 315969175759998000,
+  "related": [
+   "544bd291-1129-46b2-9be9-688e2c9fa313",
+   "8367ed6c-9a37-4fce-b150-ef0699c48adf",
+   "cb47f5f3-ad74-4f22-9dc1-a746f4ba18cf",
+   "f03b6b39-90c1-4075-b985-b54524d22e39"
+  ]
+ },
+ "target_example": {
+  "log": "1da4a0aa-22ae-3958-856d-05303de1f576",
+  "track": "3970f0ec-b795-4ae1-a64e-3bcf78b03421",
+  "t0": 315971508159805000,
+  "t1": 315971510060237000,
+  "related": [
+   "83197e4b-6621-4a63-a2c1-240a20b97c66"
+  ]
+ },
+ "negative_example": {
+  "log": "19f53e16-9f99-3035-9672-7e860f3b0048",
+  "track": "1659eba5-73ad-41e1-8a6e-60365416c3e1",
+  "t0": 315969248360265000,
+  "t1": 315969251559883000,
+  "related": [
+   "f23fc4f1-f389-4d71-b04a-8a4d712ec97b"
+  ]
+ },
+ "n_P": 2548,
+ "n_Pp": 2754,
+ "jacc_track": 0.0,
+ "jacc_ts": 0.0,
+ "n_near_miss": 1007
+}

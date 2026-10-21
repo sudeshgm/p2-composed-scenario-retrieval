@@ -1,0 +1,44 @@
+{
+ "id": "t0146",
+ "family": "relational",
+ "m": "The same, but the bus is moving toward the vehicle - not driving in the same lane as it.",
+ "m_old": "but heading toward the vehicle instead of in the same lane as it",
+ "P_text": "A bus that is parked and is driving in the same lane as the vehicle",
+ "Pp_text": "A bus that is parked and is moving toward the vehicle",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "7606de8d-486c-4916-9cbb-002ee966f834",
+  "track": "4082fe1b-9003-42ee-b07d-2d9e9c4f8cec",
+  "t0": 315978510660049000,
+  "t1": 315978515060013000,
+  "related": [
+   "34241230-1884-4273-ad96-7f6d939d35b3"
+  ]
+ },
+ "target_example": {
+  "log": "1da4a0aa-22ae-3958-856d-05303de1f576",
+  "track": "ea54961e-d46c-44c6-a67d-990d9c6e3f1b",
+  "t0": 315971509859834000,
+  "t1": 315971511459678000,
+  "related": [
+   "d177f8fe-006d-4ea9-b655-a9cd55245cb1"
+  ]
+ },
+ "negative_example": {
+  "log": "0c3bad78-9f1e-395d-a376-2eb7499229fd",
+  "track": "78ca9fd5-c911-4c43-938a-c8724f19393a",
+  "t0": 315968450360366000,
+  "t1": 315968465560184000,
+  "related": [
+   "28449af6-4c17-43ce-9623-d41bd4190a3c",
+   "5b677fd6-0feb-46a9-ac3e-6aff3b23e80c",
+   "adf1c764-c8e6-4147-aeae-c03a8cd25432"
+  ]
+ },
+ "n_P": 19,
+ "n_Pp": 27,
+ "jacc_track": 0.3939393939393939,
+ "jacc_ts": 0.04768928220255654,
+ "n_near_miss": 3
+}

@@ -1,0 +1,53 @@
+{
+ "id": "t1412",
+ "family": "directional",
+ "m": "The same, but the vehicle is in front of our own car now, not behind it.",
+ "m_old": "but with the vehicle ahead of it instead of behind it",
+ "P_text": "Our own car that has the vehicle behind it",
+ "Pp_text": "Our own car that has the vehicle in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "d46ff5df-95e8-32da-a0d7-87f7b976a959",
+  "track": "ego",
+  "t0": 315971482759721000,
+  "t1": 315971489459651000,
+  "related": [
+   "c9a5a958-f8b0-4a2b-bd5d-90826bb9c6ce",
+   "ed5fec68-4a39-4d91-acfa-8a0f319ced6e"
+  ]
+ },
+ "target_example": {
+  "log": "20bcd747-ef60-391a-9f4a-ae99f049c260",
+  "track": "ego",
+  "t0": 315974696259249000,
+  "t1": 315974699259781000,
+  "related": [
+   "36d2b281-132d-4517-a926-ec1b2325b656",
+   "49b32049-fedb-490d-8ca0-b48f12d16ff6",
+   "638d2535-1e53-4d58-b908-0c34830bb2ba",
+   "a090f349-c8d8-4d1d-9486-284ef7136c20",
+   "d59f214b-719e-4d90-9465-983bcc5ee550",
+   "d8b9379c-80b7-4d15-9684-ac48666ce993",
+   "e77413b7-e809-470c-840c-105b6cf42471"
+  ]
+ },
+ "negative_example": {
+  "log": "72cf3ca1-1a9e-3254-bca0-29c62521e454",
+  "track": "cbdb2c74-85be-4f9a-a2d0-1bc927588243",
+  "t0": 315975770859901000,
+  "t1": 315975786460113000,
+  "related": [
+   "19bd8ab3-3d40-4b68-97da-04b7d94575b5",
+   "7a943ec6-d000-4ae2-9636-a556d961a126",
+   "b950275a-b9ba-43b6-8dcc-506885f8b8bd",
+   "c43e2264-1a6c-45a9-a89c-9ffd0e711b2a",
+   "ego"
+  ]
+ },
+ "n_P": 285,
+ "n_Pp": 274,
+ "jacc_track": 0.8949152542372881,
+ "jacc_ts": 0.5458213944603629,
+ "n_near_miss": 0
+}

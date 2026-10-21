@@ -1,0 +1,44 @@
+{
+ "id": "t0721",
+ "family": "relational",
+ "m": "The same, but the car is driving right behind the other car, following it, not just close to it.",
+ "m_old": "but following the other car instead of near it",
+ "P_text": "A car that is parked and is close to the other moving car",
+ "Pp_text": "A car that is parked and is driving right behind the other moving car, following it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([following(a, b, log_dir), b_gate])",
+ "reference": {
+  "log": "e42aa296-0e5d-4733-87ec-131a82f917bc",
+  "track": "81df37a3-7895-4935-a726-669a5e2568ab",
+  "t0": 315966265460471000,
+  "t1": 315966269959948000,
+  "related": [
+   "c24388ab-78f8-43e4-b324-9ea3b5d19839"
+  ]
+ },
+ "target_example": {
+  "log": "25e5c600-36fe-3245-9cc0-40ef91620c22",
+  "track": "61a06de4-2fa5-470a-bdaf-b1cf8af4afd5",
+  "t0": 315966108259843000,
+  "t1": 315966115959674000,
+  "related": [
+   "58b1ffd9-2e5f-4531-b61b-d0aa42ac1869",
+   "5e2ed988-72f1-45d6-96be-63ea2585c947",
+   "fd6565f9-4c79-4d8e-9c80-1e8628744dda"
+  ]
+ },
+ "negative_example": {
+  "log": "20d47f81-46e8-3adf-a0ca-564fbb5c599d",
+  "track": "3356f53d-398b-4829-8d02-26bfd36a0d26",
+  "t0": 315968559959906000,
+  "t1": 315968563460137000,
+  "related": [
+   "54be6630-0405-4a93-9015-c0de6fa7cb48"
+  ]
+ },
+ "n_P": 3456,
+ "n_Pp": 412,
+ "jacc_track": 0.11085582998276852,
+ "jacc_ts": 0.06283857649767616,
+ "n_near_miss": 3347
+}

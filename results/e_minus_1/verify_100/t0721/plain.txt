@@ -1,0 +1,3 @@
+Old search: A car that is parked and is close to the other moving car.
+New search: A car that is parked and is driving right behind the other moving car, following it.
+Why the right one should not fit: It fits the old search, but it is not driving right behind the other car, following it.

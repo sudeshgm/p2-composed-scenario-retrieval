@@ -1,0 +1,42 @@
+{
+ "id": "t1357",
+ "family": "directional",
+ "m": "The same, but the cyclist is in front of the car now, not behind it.",
+ "m_old": "but with the cyclist ahead of it instead of behind it",
+ "P_text": "A car that is parked and has the cyclist behind it",
+ "Pp_text": "A car that is parked and has the cyclist in front of it",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='BICYCLIST')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='forward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "78683234-e6f1-3e4e-af52-6f839254e4c0",
+  "track": "282c5f3c-9e60-4170-ae04-d63f253812f9",
+  "t0": 315966758760077000,
+  "t1": 315966761659758000,
+  "related": [
+   "698d4afa-0f5b-44d0-b9f7-478a7714f4f8"
+  ]
+ },
+ "target_example": {
+  "log": "6c932547-4c11-31d7-b8ef-0c16a13dbfc3",
+  "track": "13d603fc-7ce7-4672-aa66-094b527644b5",
+  "t0": 315970056960247000,
+  "t1": 315970059459845000,
+  "related": [
+   "0a0ea85d-1a32-482a-a74e-a50ec2bde0f1"
+  ]
+ },
+ "negative_example": {
+  "log": "858d739b-a0ba-35aa-bafc-4f7988bcad17",
+  "track": "9e0af035-569c-4652-b514-cd8c75a4e9b8",
+  "t0": 315969298960032000,
+  "t1": 315969304359916000,
+  "related": [
+   "7736b250-d4a6-4438-8deb-3574033c44e8"
+  ]
+ },
+ "n_P": 61,
+ "n_Pp": 72,
+ "jacc_track": 0.14655172413793102,
+ "jacc_ts": 0.0,
+ "n_near_miss": 0
+}

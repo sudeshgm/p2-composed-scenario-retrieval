@@ -1,0 +1,49 @@
+{
+ "id": "t1410",
+ "family": "compositional",
+ "m": "The same, but our own car is also parked.",
+ "m_old": "and also parked",
+ "P_text": "Our own car that has the parked vehicle behind it",
+ "Pp_text": "Our own car that is parked and has the parked vehicle behind it",
+ "P_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='EGO_VEHICLE')\na = stationary(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([has_objects_in_relative_direction(a, b, log_dir, direction='backward', within_distance=25, lateral_thresh=2.5), b_gate])",
+ "reference": {
+  "log": "29a00842-ead2-3050-b587-c5ef507e4125",
+  "track": "ego",
+  "t0": 315966338859443000,
+  "t1": 315966347360112000,
+  "related": [
+   "2373ba35-749f-446b-b461-f236f0ae3f2e",
+   "a95afceb-769b-492c-8c34-6742219066a5",
+   "b1d5320f-91ac-42cb-9137-f67a110bb9ad",
+   "da9f7735-1e69-45a7-9380-93143ec6752f",
+   "eff17cc8-567b-4c96-9b8b-9322c8a77394"
+  ]
+ },
+ "target_example": {
+  "log": "e72ef05c-8b94-3885-a34f-fff3b2b954b4",
+  "track": "68f04637-176b-408c-9176-65f69cb9b595",
+  "t0": 315972688959737000,
+  "t1": 315972704559974000,
+  "related": [
+   "a190c4f0-c1c3-4bd6-a699-18b8755dbf7b",
+   "ego"
+  ]
+ },
+ "negative_example": {
+  "log": "7fab2350-7eaf-3b7e-a39d-6937a4c1bede",
+  "track": "ego",
+  "t0": 315966265959884000,
+  "t1": 315966268260401000,
+  "related": [
+   "3845efed-c230-4b7a-a05d-32a751a9adf6",
+   "400813eb-458d-45bc-ae11-7e9e50755bdb",
+   "5c6cf6f4-df78-422f-ae5e-b055e35bc53d"
+  ]
+ },
+ "n_P": 130,
+ "n_Pp": 2,
+ "jacc_track": 0.015384615384615385,
+ "jacc_ts": 0.03656690345871667,
+ "n_near_miss": 128
+}

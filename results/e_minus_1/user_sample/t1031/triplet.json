@@ -1,0 +1,44 @@
+{
+ "id": "t1031",
+ "family": "relational",
+ "m": "The same, but the car is moving toward the vehicle - not driving in the same lane as it.",
+ "m_old": "but heading toward the vehicle instead of in the same lane as it",
+ "P_text": "A car that is turning left and is driving in the same lane as the parked vehicle",
+ "Pp_text": "A car that is turning left and is moving toward the parked vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([in_same_lane(a, b, log_dir), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = turning(a, log_dir, direction='left')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = stationary(b, log_dir)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "d3ca0450-2167-38fb-b34b-449741cb38f3",
+  "track": "c1720f82-019f-47aa-a225-bd12e6609e8a",
+  "t0": 315968253959677000,
+  "t1": 315968256159361000,
+  "related": [
+   "891c5316-95a4-46c9-ba3d-461086aeaf55"
+  ]
+ },
+ "target_example": {
+  "log": "36aec72e-5086-376c-b109-295b128e77e1",
+  "track": "ae9d6c8d-7d6b-4477-8150-e9e7b54ea4ae",
+  "t0": 315971017959969000,
+  "t1": 315971019559813000,
+  "related": [
+   "8d93d234-b000-445b-87ac-5d3905f4ab27",
+   "8df7c0f7-ddcd-402c-a761-88ad6ef81d02"
+  ]
+ },
+ "negative_example": {
+  "log": "78da7b7e-8ddf-3c7d-8716-eaa890106dd3",
+  "track": "228236a7-299a-4cfd-9a8e-3bea5710ddb0",
+  "t0": 315974831760039000,
+  "t1": 315974833959698000,
+  "related": [
+   "dab6fbc7-37a0-4703-be2b-ee3a2251aed8",
+   "f993f778-0774-4aa3-bb21-d6b691c09fc6"
+  ]
+ },
+ "n_P": 28,
+ "n_Pp": 70,
+ "jacc_track": 0.11363636363636363,
+ "jacc_ts": 0.05378361475922452,
+ "n_near_miss": 74
+}

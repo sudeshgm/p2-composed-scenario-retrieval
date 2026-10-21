@@ -1,0 +1,47 @@
+{
+ "id": "t0045",
+ "family": "compositional",
+ "m": "The same, but the pedestrian is also on the road.",
+ "m_old": "and also on the road",
+ "P_text": "A pedestrian that is pointed at the moving vehicle",
+ "Pp_text": "A pedestrian that is on the road and is pointed at the moving vehicle",
+ "P_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='PEDESTRIAN')\na = on_road(a, log_dir)\nb = get_objects_of_category(log_dir, category='VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "5f8f4a26-59b1-3f70-bcab-b5e3e615d3bc",
+  "track": "463d5da5-f821-403f-ab13-f516afd882a9",
+  "t0": 315966669859704000,
+  "t1": 315966671760107000,
+  "related": [
+   "133232ea-2055-4d38-b2b6-09f5114da8df"
+  ]
+ },
+ "target_example": {
+  "log": "e0ea281b-6956-3605-b720-71b54ec87d25",
+  "track": "2303ce68-0726-4f4a-9e31-8320c43aeabf",
+  "t0": 315971661060084000,
+  "t1": 315971667059878000,
+  "related": [
+   "4745eedf-52d3-4092-a1df-d2bfaeb0baa5",
+   "737e885e-8702-400a-9576-c9fe0e475dfd",
+   "ego",
+   "ff2a5e1f-764e-4375-b540-553b5bee2cd4"
+  ]
+ },
+ "negative_example": {
+  "log": "11ba4e81-c26f-3cd1-827d-b6913bcef64e",
+  "track": "21f51ba2-6894-4973-9ccb-04da88684115",
+  "t0": 315966072759792000,
+  "t1": 315966076159762000,
+  "related": [
+   "12f05fb6-7a5b-49a8-b422-c5321e44d059",
+   "401397f2-0194-4e72-ba90-5521400e49c9",
+   "5503f035-2d55-4bc6-a4ca-70068de09cc4"
+  ]
+ },
+ "n_P": 1734,
+ "n_Pp": 232,
+ "jacc_track": 0.13379469434832755,
+ "jacc_ts": 0.07941176470588235,
+ "n_near_miss": 619
+}

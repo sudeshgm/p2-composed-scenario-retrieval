@@ -1,0 +1,3 @@
+Old search: A car that is slowing down and has the bus behind it.
+New search: A car that is slowing down and has the bus in front of it.
+Why the right one should not fit: It fits the old search, but the bus is behind it, not in front of it.

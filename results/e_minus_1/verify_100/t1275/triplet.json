@@ -1,0 +1,51 @@
+{
+ "id": "t1275",
+ "family": "compositional",
+ "m": "The same, but the bus is also speeding up.",
+ "m_old": "and also speeding up (accelerating)",
+ "P_text": "A bus that is moving toward the moving car",
+ "Pp_text": "A bus that is speeding up and is moving toward the moving car",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\na = accelerating(a, log_dir, min_accel=1.0)\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([heading_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "5589de60-1727-3e3f-9423-33437fc5da4b",
+  "track": "95553af6-1ff3-40f8-855f-161b305eae1d",
+  "t0": 315967931059947000,
+  "t1": 315967934259580000,
+  "related": [
+   "2f497ac2-5aa4-447e-8ea9-a9fa0a3a3795",
+   "6a47e486-65f2-43fd-8213-448a2b900614"
+  ]
+ },
+ "target_example": {
+  "log": "0b5142c1-420b-3fea-9e98-b87327ae22c6",
+  "track": "2864ca38-a954-4932-b17d-772e641f8141",
+  "t0": 315968124560046000,
+  "t1": 315968126360239000,
+  "related": [
+   "6388c973-f745-4e10-9d2c-6b88563b2d08",
+   "647ef54d-afa0-45f0-82ee-4946e4e06968"
+  ]
+ },
+ "negative_example": {
+  "log": "bdb9d309-f14b-3ff6-ad1f-5d3f3f95a13e",
+  "track": "f49d7d53-9c18-46e5-b177-f9c453474a09",
+  "t0": 315971062259826000,
+  "t1": 315971067059922000,
+  "related": [
+   "0c17c040-53a9-4afb-adff-5ce510d65ac3",
+   "1ac497c4-1e55-4f8b-8a29-d5150ce5fcfb",
+   "334744b2-0d38-4294-99dd-fc0695668c5a",
+   "6bb3f37a-9437-49d8-8dbc-23df50aa1fff",
+   "7416618a-9a0f-41e9-bbd1-f03ab6bd5ca9",
+   "c57f33cd-2ca5-4f33-aad6-44f16566f7f0",
+   "dc91f1e7-aa67-41d6-b3db-6bedbec60b02",
+   "fbeea1cf-183c-41eb-af07-84c96f7b93f4"
+  ]
+ },
+ "n_P": 69,
+ "n_Pp": 7,
+ "jacc_track": 0.10144927536231885,
+ "jacc_ts": 0.03842940685045948,
+ "n_near_miss": 13
+}

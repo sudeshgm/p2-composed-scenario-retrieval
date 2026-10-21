@@ -1,0 +1,42 @@
+{
+ "id": "t0481",
+ "family": "relational",
+ "m": "The same, but the car is pointed at the bus, not just close to it.",
+ "m_old": "but facing toward the bus instead of near it",
+ "P_text": "A car that is changing lanes and is close to the bus",
+ "Pp_text": "A car that is changing lanes and is pointed at the bus",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = changing_lanes(a, log_dir)\nb = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "f3cd0d0d-8b71-3266-9732-d9f0d5778eb6",
+  "track": "e0228970-e090-4b91-8ba7-4c8275270240",
+  "t0": 315968816859989000,
+  "t1": 315968818459794000,
+  "related": [
+   "becdf808-6f83-4c01-aa01-42eb5ed3d890"
+  ]
+ },
+ "target_example": {
+  "log": "bf382949-3515-3c16-b505-319442937a43",
+  "track": "d05500c9-c40f-4eda-a816-730436adacd9",
+  "t0": 315967933359815000,
+  "t1": 315967935359739000,
+  "related": [
+   "8a022320-4185-4422-ba5a-96724aca0285"
+  ]
+ },
+ "negative_example": {
+  "log": "f6cc0ebf-fc6a-3bf2-8bcb-76d8c43f194e",
+  "track": "1d8c630a-9a80-4a00-b5a8-eaf76a44c758",
+  "t0": 315966817560168000,
+  "t1": 315966821560024000,
+  "related": [
+   "92c28927-9de1-4fde-a877-b76d4dcf57cd"
+  ]
+ },
+ "n_P": 43,
+ "n_Pp": 25,
+ "jacc_track": 0.4782608695652174,
+ "jacc_ts": 0.1409921671018277,
+ "n_near_miss": 4
+}

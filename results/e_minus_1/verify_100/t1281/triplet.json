@@ -1,0 +1,49 @@
+{
+ "id": "t1281",
+ "family": "relational",
+ "m": "The same, but the bus is pointed at the car, not just close to it.",
+ "m_old": "but facing toward the car instead of near it",
+ "P_text": "A bus that is close to the moving car",
+ "Pp_text": "A bus that is pointed at the moving car",
+ "P_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([near_objects(a, b, log_dir, distance_thresh=10), b_gate])",
+ "Pp_src": "a = scenario_or([get_objects_of_category(log_dir, category='BUS'), get_objects_of_category(log_dir, category='SCHOOL_BUS'), get_objects_of_category(log_dir, category='ARTICULATED_BUS')])\nb = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\nb = has_velocity(b, log_dir, min_velocity=2)\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "182ba3f7-b89a-36cc-ae40-32a341b0d3e9",
+  "track": "5c91498f-6392-49ba-84f0-7968f4cf2d4f",
+  "t0": 315966729160153000,
+  "t1": 315966733660295000,
+  "related": [
+   "2c820d2d-2af9-4583-9b11-6cebb3f28a4c",
+   "c9736acc-f80d-4fc5-9e99-977ceb271ab7"
+  ]
+ },
+ "target_example": {
+  "log": "0b86f508-5df9-4a46-bc59-5b9536dbde9f",
+  "track": "6c7e5bd4-52f5-40f9-ab8d-03868d3ca06b",
+  "t0": 315967858260072000,
+  "t1": 315967868460022000,
+  "related": [
+   "0f36f1c2-ba76-43b3-9dea-430f932bfa49",
+   "246a28df-665b-4de1-8503-824e7a787bb7",
+   "64395b46-251b-41a2-a8ba-871f9661bbbe",
+   "76edbcc7-980d-4b5c-a143-dd00af0dd0a4",
+   "b718e8d1-0c7f-4dc5-930a-93d259d0ec35",
+   "c14c6c6a-0bc8-4579-b83b-2df9e3842869",
+   "dd9c8b1a-afef-4cd4-8078-f78946a479b6"
+  ]
+ },
+ "negative_example": {
+  "log": "95bf6003-7068-3a78-a0c0-9e470a06e60f",
+  "track": "9911eede-4755-4828-900d-9270a2518f17",
+  "t0": 315966141760429000,
+  "t1": 315966143960118000,
+  "related": [
+   "f3313a21-9a7d-488a-a033-fae5d58b4c7e"
+  ]
+ },
+ "n_P": 112,
+ "n_Pp": 98,
+ "jacc_track": 0.7213114754098361,
+ "jacc_ts": 0.37959529611187626,
+ "n_near_miss": 8
+}

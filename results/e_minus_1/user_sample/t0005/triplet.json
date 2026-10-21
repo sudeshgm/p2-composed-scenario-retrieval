@@ -1,0 +1,51 @@
+{
+ "id": "t0005",
+ "family": "compositional",
+ "m": "The same, but the car is also changing lanes.",
+ "m_old": "and also changing lanes",
+ "P_text": "A car that is driving along and is pointed at the pedestrian",
+ "Pp_text": "A car that is driving along and changing lanes and is pointed at the pedestrian",
+ "P_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "Pp_src": "a = get_objects_of_category(log_dir, category='REGULAR_VEHICLE')\na = has_velocity(a, log_dir, min_velocity=2)\na = changing_lanes(a, log_dir)\nb = get_objects_of_category(log_dir, category='PEDESTRIAN')\nb_gate = center_distance_gate(a, b, log_dir, max_center_dist=30)  # implicit 30 m centre-distance neighbour gate, identical in P and P'\nout = scenario_and([facing_toward(a, b, log_dir, max_distance=30), b_gate])",
+ "reference": {
+  "log": "47286726-5dd4-4e26-bd2d-5324f429e445",
+  "track": "3ebfe7b2-49d6-45d3-b978-c1df0f564a90",
+  "t0": 315972114360081000,
+  "t1": 315972125759730000,
+  "related": [
+   "1078863b-8d92-4db0-8a33-4dc5249cc470",
+   "47fa1c6c-fbb1-4098-98c5-74b9ee95476e",
+   "76227d53-6427-42a1-96ee-2284f4637a9c",
+   "87e11618-f0b5-4853-88f0-e7aaa2dccbff",
+   "9b2851e6-9192-406a-b81b-c429dfeb81d1",
+   "a75cd809-6531-4ffd-9dff-6659191ed138",
+   "ae6f9d2b-fc7d-4c2c-ae73-d0720dd82a36",
+   "dc631066-ab88-49cf-b9f8-8cacf48ac4c1",
+   "ee758a76-a124-4214-a042-01d37146d4e7"
+  ]
+ },
+ "target_example": {
+  "log": "185d3943-dd15-397a-8b2e-69cd86628fb7",
+  "track": "5b9ac39d-ab6f-4e6b-ae09-e983d448bdb9",
+  "t0": 315974090059619000,
+  "t1": 315974094060130000,
+  "related": [
+   "103868ff-cf62-444e-9474-426a09430199"
+  ]
+ },
+ "negative_example": {
+  "log": "4e3fedbb-847c-3d5b-8a62-c9ff84550985",
+  "track": "214d9136-f05a-457e-b133-82a74af2564e",
+  "t0": 315968668859611000,
+  "t1": 315968671359860000,
+  "related": [
+   "32633dd3-4621-4f69-adb9-c5028c8e4369",
+   "d6f4c798-e33b-4313-9bca-a8666ed75f9b"
+  ]
+ },
+ "n_P": 1176,
+ "n_Pp": 107,
+ "jacc_track": 0.09098639455782313,
+ "jacc_ts": 0.0628766502943533,
+ "n_near_miss": 422
+}
