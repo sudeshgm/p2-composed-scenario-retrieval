@@ -14,7 +14,7 @@ GROUPS={  # name -> (RefAV categories, noun)
  'BICYCLIST':(['BICYCLIST'],'cyclist'),
  'EGO':(['EGO_VEHICLE'],'ego vehicle'),
 }
-STATE_TXT={'moving':'moving','stationary':'parked','accelerating':'accelerating','braking':'braking','turning_left':'turning left',
+STATE_TXT={'moving':'moving','stationary':'parked','accelerating':'speeding up (accelerating)','braking':'braking','turning_left':'turning left',
  'turning_right':'turning right','changing_lanes':'changing lanes','near_intersection':'near an intersection','at_ped_crossing':'on a pedestrian crossing','on_road':'on the road'}
 REL_TXT={'in_same_lane':'in the same lane as','heading_toward':'heading toward','following':'following','near':'near',
  'facing_toward':'facing toward','dir_forward':'with {b} ahead of it','dir_backward':'with {b} behind it','dir_left':'with {b} to its left','dir_right':'with {b} to its right'}
@@ -40,11 +40,14 @@ def valid(p):
 def is_ped(g): return g in ('PEDESTRIAN','BICYCLIST')
 def allowed_states(g): return sorted(PED_OK) if g=='PEDESTRIAN' else (['moving','stationary','accelerating','braking','turning_left','turning_right'] if g=='BICYCLIST' else VEH_STATES)
 def key(p): return json.dumps(p,sort_keys=True)
+def stxt(s,g):  # fix 12: no 'parked pedestrian/cyclist'; accelerating distinct from moving
+    if s=='stationary' and is_ped(g): return 'standing still'
+    return STATE_TXT[s]
 def describe(p):
-    a=GROUPS[p['a']['cat']][1]; st=[STATE_TXT[s] for s in p['a']['states']]
+    a=GROUPS[p['a']['cat']][1]; st=[stxt(s,p['a']['cat']) for s in p['a']['states']]
     s=(' and '.join(st)+' ' if st else '')+a if len(st)==1 else a+(' that is '+' and '.join(st) if st else '')
     if p.get('rel'):
-        b=GROUPS[p['b']['cat']][1]; bs=' '.join(STATE_TXT[x] for x in p['b']['states'])
+        b=GROUPS[p['b']['cat']][1]; bs=' '.join(stxt(x,p['b']['cat']) for x in p['b']['states'])
         bb=('a '+(bs+' ' if bs else '')+b)
         r=REL_TXT[p['rel']]
         s+=' '+(r.format(b=bb) if '{b}' in r else r+' '+bb)
@@ -98,6 +101,11 @@ def cap_dirs(T):
 def load():
     for f in sorted(TAB.glob('*.pkl')):
         T=pickle.load(open(f,'rb')); cap_dirs(T); TABLES[f.stem]=T
+        if not T.get('all_ts'):  # timestamps seen per track (union of unary tables)
+            at={}
+            for d in T['unary'].values():
+                for u,ts in d.items(): at.setdefault(u,set()).update(ts)
+            T['all_ts']=at
 def obj_set(T,g,states):
     cs=set(GROUPS[g][0]); d={}
     for u,c in T['cats'].items():
@@ -117,8 +125,8 @@ def execute(p,want_w=True):
         A=obj_set(T,p['a']['cat'],p['a']['states'])
         if not p.get('rel'):
             for u,ts in A.items():
-                if ts is None: ts=T['all_ts'][u]
-                M[(log,u)]=ts
+                if ts is None: ts=T['all_ts'].get(u,set())
+                if ts: M[(log,u)]=ts
             continue
         B=obj_set(T,p['b']['cat'],p['b']['states'])
         for (a,b),ts in T['rel'][p['rel']].items():
@@ -138,7 +146,8 @@ def mutations(p):
         for r in NONDIR:
             if r==rel or {r,rel}=={'heading_toward','facing_toward'}: continue   # fix 2
             if r in LANE_RELS and not (is_veh(p['a']['cat']) and is_veh(p['b']['cat'])): continue  # fix 3
-            out.append(('relational',{**p,'rel':r},f"but {REL_TXT[r]} the other {GROUPS[p['b']['cat']][1]} instead of {REL_TXT[rel]} it"))
+            oth='the other' if p['a']['cat']==p['b']['cat'] else 'the'  # fix 12
+            out.append(('relational',{**p,'rel':r},f"but {REL_TXT[r]} {oth} {GROUPS[p['b']['cat']][1]} instead of {REL_TXT[rel]} it"))
     if rel in FLIP:
         r=FLIP[rel]; side={'dir_forward':'ahead of','dir_backward':'behind','dir_left':'to the left of','dir_right':'to the right of'}
         out.append(('directional',{**p,'rel':r},f"but with the {GROUPS[p['b']['cat']][1]} {side[r]} it instead of {side[rel]} it"))
@@ -156,14 +165,16 @@ def mutations(p):
         for s2 in STATE_SWAP.get(s,[]):
             if s2 in a['states'] or s2 not in allowed_states(a['cat']): continue
             q=json.loads(key(p)); q['a']['states'][i]=s2
-            out.append(('state',q,f"but {STATE_TXT[s2]} instead of {STATE_TXT[s]}"))
+            g=a['cat']; t1,t0=stxt(s2,g),stxt(s,g)
+            if s=='moving' and s2 in ('accelerating','braking'): t0='just moving at a steady speed'
+            out.append(('state',q,f"but {t1} instead of {t0}"))
     # compositional add / drop conjunct on a
     if len(a['states'])<2:
         for s2 in allowed_states(a['cat']):
             if s2 in a['states'] or s2 in ('stationary','moving') and a['states']: continue
             if not compatible(a['states']+[s2]): continue
             q=json.loads(key(p)); q['a']['states']=a['states']+[s2]
-            out.append(('compositional',q,f"and also {STATE_TXT[s2]}"))
+            out.append(('compositional',q,f"and also {stxt(s2,a['cat'])}"))
 
     return [o for o in out if valid(o[1])]
 def base_programs():
@@ -183,7 +194,7 @@ def base_programs():
     return P
 if __name__=='__main__':
     load(); print('logs',len(TABLES),flush=True)
-    for T in TABLES.values(): T['all_ts']=T.get('all_ts') or {}
+    
     cache={}
     def ex(p):
         return execute(p,want_w=False)
