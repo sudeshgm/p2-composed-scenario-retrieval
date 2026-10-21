@@ -224,7 +224,29 @@ def export(items,root,with_agent):
     with open(root/('verify_sheet.csv' if with_agent else 'user_sheet.csv'),'w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     return rows
+def lane_ok(t):
+    """fix 10: every same-lane relation must agree with the AV2 map lane-polygon check, else drop."""
+    def hold(ex,p):
+        if p.get('rel') not in G.LANE_RELS: return None
+        h=map_rel(ex['log'],ex['track'],p['rel'],p['b']['cat'],p['b']['states'])
+        if h is None: return 'unk'
+        ts=tracks(ex['log'])[ex['track']]['ts']; w=(ts>=ex['t0'])&(ts<=ex['t1'])
+        return bool(h[w].any())
+    chk=[(t['reference'],t['P'],True),(t['target_example'],t['Pp'],True),(t['negative_example'],t['P'],True),(t['negative_example'],t['Pp'],False)]
+    for ex,p,want in chk:
+        if t['family']=='agent_class' and ex is t['negative_example'] and p is t['P']: continue
+        r=hold(ex,p)
+        if r is None: continue
+        if r=='unk' or r!=want: return False
+    return True
 if __name__=='__main__':
+    n0=len(T); keep=[]; dropped=collections.Counter()
+    for t in T:
+        if len(keep)>=1000: break
+        if lane_ok(t): keep.append(t)
+        else: dropped[t['family']]+=1
+    T[:]=keep; json.dump(T,open(OUT/'triplets_1000.json','w'))
+    json.dump(dict(dropped_lane_disagree=dropped,kept=len(T)),open(OUT/'lane_filter.json','w'),indent=1); print('lane filter',dropped,len(T),flush=True)
     byf=collections.defaultdict(list)
     for t in T: byf[t['family']].append(t)
     fams=[f for f in FAMS if byf[f]]
