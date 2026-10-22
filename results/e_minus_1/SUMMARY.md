@@ -57,3 +57,4 @@ The human columns in `verify_100/verify_sheet.csv` and `user_sample/user_sheet.c
 
 ## Reproduce
 `src/prep_logs.py` → `src/precompute.py w n` → `src/run_stage2.sh` (generate → export → verify → stats → summary → commit)
+**Note:** triplets_1000.json was moved out of git to the release asset at https://github.com/sudeshgm/p2-composed-scenario-retrieval/releases/tag/e-minus-1-results. See VERDICT.md (KILL).
